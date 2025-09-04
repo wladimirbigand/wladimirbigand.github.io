@@ -1,314 +1,603 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr" data-bs-theme="dark">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Wladimir Bigand — Portfolio</title>
-  <meta name="description" content="Portfolio de Wladimir Bigand — projets, compétences, parcours et contact." />
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <!-- Bootstrap Icons -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
-  <!-- Fonts (optionnel) -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --accent: #6ee7b7; /* vert menthe */
-      --accent-2: #60a5fa; /* bleu */
-    }
-    html, body { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif; }
-    /* Background gradient */
-    body::before {
-      content: "";
-      position: fixed; inset: -10% -10% auto -10%; height: 60vh; z-index: -1;
-      background: radial-gradient(1000px 500px at 10% 10%, rgba(96,165,250,.25), transparent),
-                  radial-gradient(800px 400px at 90% 0%, rgba(110,231,183,.18), transparent);
-      filter: blur(40px);
-    }
-    /* Section spacing */
-    section { padding: 84px 0; }
-    .section-title { letter-spacing: .02em; font-weight: 800; }
-    /* Glass cards */
-    .glass { background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08); backdrop-filter: blur(8px); }
-    .card.hover-lift { transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease; border-color: rgba(255,255,255,.08); }
-    .card.hover-lift:hover { transform: translateY(-4px); box-shadow: 0 10px 30px rgba(0,0,0,.25); border-color: rgba(255,255,255,.18); }
-    /* Accent underline */
-    .underline { position: relative; display: inline-block; }
-    .underline::after { content: ""; position: absolute; left: 0; right: 0; bottom: -.3rem; height: .35rem; border-radius: .35rem; background: linear-gradient(90deg, var(--accent), var(--accent-2)); opacity: .7; }
-    /* Navbar brand highlight */
-    .brand-dot { color: var(--accent); }
-    /* Badge style */
-    .tech-badge { border: 1px dashed rgba(255,255,255,.25); background: rgba(255,255,255,.03); }
-    /* Timeline */
-    .timeline { border-left: 2px solid rgba(255,255,255,.2); padding-left: 1rem; }
-    .timeline .item::marker { content: none; }
-    .timeline .dot { width: .8rem; height: .8rem; border-radius: 999px; background: linear-gradient(90deg, var(--accent), var(--accent-2)); display: inline-block; margin-right: .5rem; }
-    /* Smooth anchor offset for fixed navbar */
-    :target { scroll-margin-top: 84px; }
-    /* Theme toggle button */
-    .theme-toggle { border: 1px solid rgba(255,255,255,.25); }
-    /* Make hero image/icon nicer on dark */
-    .hero-avatar { width: 84px; height: 84px; border-radius: 999px; display: grid; place-items: center; font-size: 40px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); }
-  </style>
-</head>
-<body data-bs-spy="scroll" data-bs-target="#navbar" data-bs-smooth-scroll="true">
-  <!-- Navbar -->
-  <nav id="navbar" class="navbar navbar-expand-lg navbar-dark bg-body-tertiary fixed-top glass">
-    <div class="container">
-      <a class="navbar-brand fw-bold" href="#home">Wladimir<span class="brand-dot">.</span></a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navContent" aria-controls="navContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navContent">
-        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-          <li class="nav-item"><a class="nav-link" href="#projects">Projets</a></li>
-          <li class="nav-item"><a class="nav-link" href="#skills">Compétences</a></li>
-          <li class="nav-item"><a class="nav-link" href="#timeline">Parcours</a></li>
-          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-        </ul>
-        <div class="d-flex gap-2 ms-lg-3">
-          <a class="btn btn-outline-light btn-sm" href="#" target="_blank" rel="noopener" title="Télécharger le CV">
-            <i class="bi bi-file-earmark-arrow-down"></i> CV
-          </a>
-          <button id="themeBtn" class="btn btn-sm theme-toggle" type="button" aria-label="Basculer le thème">
-            <i class="bi bi-moon-stars"></i>
-          </button>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Wladimir Bigand — Portfolio</title>
+    <meta
+      name="description"
+      content="Portfolio de Wladimir Bigand — projets, compétences, parcours et contact."
+    />
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Bootstrap Icons -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <!-- Fonts (optionnel) -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --accent: #6ee7b7; /* vert menthe */
+        --accent-2: #60a5fa; /* bleu */
+      }
+      html,
+      body {
+        font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu,
+          Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial,
+          "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+      }
+      /* Background gradient */
+      body::before {
+        content: "";
+        position: fixed;
+        inset: -10% -10% auto -10%;
+        height: 60vh;
+        z-index: -1;
+        background: radial-gradient(
+            1000px 500px at 10% 10%,
+            rgba(96, 165, 250, 0.25),
+            transparent
+          ),
+          radial-gradient(
+            800px 400px at 90% 0%,
+            rgba(110, 231, 183, 0.18),
+            transparent
+          );
+        filter: blur(40px);
+      }
+      /* Section spacing */
+      section {
+        padding: 84px 0;
+      }
+      .section-title {
+        letter-spacing: 0.02em;
+        font-weight: 800;
+      }
+      /* Glass cards */
+      .glass {
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(8px);
+      }
+      .card.hover-lift {
+        transition: transform 0.18s ease, box-shadow 0.18s ease,
+          border-color 0.18s ease;
+        border-color: rgba(255, 255, 255, 0.08);
+      }
+      .card.hover-lift:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+        border-color: rgba(255, 255, 255, 0.18);
+      }
+      /* Accent underline */
+      .underline {
+        position: relative;
+        display: inline-block;
+      }
+      .underline::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -0.3rem;
+        height: 0.35rem;
+        border-radius: 0.35rem;
+        background: linear-gradient(90deg, var(--accent), var(--accent-2));
+        opacity: 0.7;
+      }
+      /* Navbar brand highlight */
+      .brand-dot {
+        color: var(--accent);
+      }
+      /* Badge style */
+      .tech-badge {
+        border: 1px dashed rgba(255, 255, 255, 0.25);
+        background: rgba(255, 255, 255, 0.03);
+      }
+      /* Timeline */
+      .timeline {
+        border-left: 2px solid rgba(255, 255, 255, 0.2);
+        padding-left: 1rem;
+      }
+      .timeline .item::marker {
+        content: none;
+      }
+      .timeline .dot {
+        width: 0.8rem;
+        height: 0.8rem;
+        border-radius: 999px;
+        background: linear-gradient(90deg, var(--accent), var(--accent-2));
+        display: inline-block;
+        margin-right: 0.5rem;
+      }
+      /* Smooth anchor offset for fixed navbar */
+      :target {
+        scroll-margin-top: 84px;
+      }
+      /* Theme toggle button */
+      .theme-toggle {
+        border: 1px solid rgba(255, 255, 255, 0.25);
+      }
+      /* Make hero image/icon nicer on dark */
+      .hero-avatar {
+        width: 84px;
+        height: 84px;
+        border-radius: 999px;
+        display: grid;
+        place-items: center;
+        font-size: 40px;
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        object-fit: cover;
+      }
+    </style>
+  </head>
+  <body
+    data-bs-spy="scroll"
+    data-bs-target="#navbar"
+    data-bs-smooth-scroll="true"
+  >
+    <!-- Navbar -->
+    <nav
+      id="navbar"
+      class="navbar navbar-expand-lg navbar-dark bg-body-tertiary fixed-top glass"
+    >
+      <div class="container">
+        <a class="navbar-brand fw-bold" href="#home"
+          >Wladimir<span class="brand-dot">.</span>B</a
+        >
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navContent"
+          aria-controls="navContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navContent">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="#projects">Projets</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#skills">Compétences</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#timeline">Parcours</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#contact">Contact</a>
+            </li>
+          </ul>
+          <div class="d-flex gap-2 ms-lg-3">
+            <a
+              class="btn btn-outline-light btn-sm"
+              href="CV Wladimir Bigand.pdf"
+              target="_blank"
+              rel="noopener"
+              title="Télécharger le CV"
+            >
+              <i class="bi bi-file-earmark-arrow-down"></i> CV
+            </a>
+            <button
+              id="themeBtn"
+              class="btn btn-sm theme-toggle"
+              type="button"
+              aria-label="Basculer le thème"
+            >
+              <i class="bi bi-moon-stars"></i>
+            </button>
+          </div>
         </div>
       </div>
-    </div>
-  </nav>
+    </nav>
 
-  <!-- Hero -->
-  <header id="home" class="py-5" style="padding-top: 120px !important;">
-    <div class="container">
-      <div class="row align-items-center g-4">
-        <div class="col-lg-7">
-          <div class="d-flex align-items-center gap-3 mb-4">
-            <div class="hero-avatar text-muted"><i class="bi bi-person"></i></div>
-            <div>
-              <h1 class="display-5 fw-800 mb-1">Wladimir Bigand</h1>
-              <p class="text-secondary mb-0">Étudiant BTS SIO • Aspirant DevSecOps • Passionné de vidéo & drones</p>
-            </div>
-          </div>
-          <p class="lead text-body-secondary">Je conçois des sites modernes, performants et accessibles. J’aime allier <span class="underline">qualité</span> et <span class="underline">sobriété</span> avec une touche de Bootstrap & JS.</p>
-          <div class="d-flex flex-wrap gap-2 mb-4">
-            <span class="badge rounded-pill tech-badge">HTML5</span>
-            <span class="badge rounded-pill tech-badge">CSS3</span>
-            <span class="badge rounded-pill tech-badge">JavaScript</span>
-            <span class="badge rounded-pill tech-badge"><i class="bi bi-bootstrap"></i> Bootstrap</span>
-            <span class="badge rounded-pill tech-badge"><i class="bi bi-git"></i> Git/GitHub</span>
-            <span class="badge rounded-pill tech-badge"><i class="bi bi-ubuntu"></i> Linux</span>
-          </div>
-          <div class="d-flex gap-3">
-            <a href="#projects" class="btn btn-light">Voir mes projets</a>
-            <a href="#contact" class="btn btn-outline-light">Me contacter</a>
-          </div>
-        </div>
-        <div class="col-lg-5">
-          <div class="card glass hover-lift">
-            <div class="card-body">
-              <h5 class="card-title">À propos</h5>
-              <p class="mb-3">Je construis un portfolio <strong>qualitatif et moderne</strong> en HTML/CSS/JS avec une pincée de Bootstrap & d’icônes. Objectif : présenter mes projets, ma progression et mes compétences avec clarté.</p>
-              <ul class="mb-0 small text-body-secondary">
-                <li>Design responsive & accessible (WCAG de base)</li>
-                <li>Performances : images optimisées, CSS minimal, CDN</li>
-                <li>Déploiement gratuit via GitHub Pages</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <!-- Projects -->
-  <section id="projects" class="bg-body-tertiary">
-    <div class="container">
-      <div class="d-flex justify-content-between align-items-end mb-4">
-        <h2 class="section-title h1 m-0">Projets</h2>
-        <a class="link-light text-decoration-none" href="https://github.com/" target="_blank" rel="noopener"><i class="bi bi-github"></i> Tous les dépôts</a>
-      </div>
-      <div class="row g-4">
-        <!-- Project Card -->
-        <div class="col-md-6 col-lg-4">
-          <div class="card hover-lift h-100">
-            <img src="https://picsum.photos/seed/site1/800/500" class="card-img-top" alt="aperçu projet" loading="lazy">
-            <div class="card-body d-flex flex-column">
-              <h5 class="card-title">Portfolio v1</h5>
-              <p class="card-text text-body-secondary">Site statique optimisé — HTML/CSS/JS, Bootstrap Icons, déployé sur GitHub Pages.</p>
-              <div class="mt-auto d-flex gap-2 flex-wrap small">
-                <span class="badge rounded-pill text-bg-dark">HTML</span>
-                <span class="badge rounded-pill text-bg-dark">CSS</span>
-                <span class="badge rounded-pill text-bg-dark">Bootstrap</span>
+    <!-- Hero -->
+    <header id="home" class="py-5" style="padding-top: 120px !important">
+      <div class="container">
+        <div class="row align-items-center g-4">
+          <div class="col-lg-7">
+            <div class="d-flex align-items-center gap-3 mb-4">
+              <img
+                src="profil.jpg"
+                alt="Photo de Wladimir Bigand"
+                class="hero-avatar"
+              />
+              <div>
+                <h1 class="display-5 fw-800 mb-1">Wladimir Bigand</h1>
+                <p class="text-secondary mb-0">
+                  Étudiant BTS SIO (SISR) • Aspirant DevSecOps • Passionné de
+                  vidéo & drones
+                </p>
               </div>
             </div>
-            <div class="card-footer d-flex gap-2">
-              <a class="btn btn-sm btn-light" href="#" target="_blank" rel="noopener"><i class="bi bi-box-arrow-up-right"></i> Démo</a>
-              <a class="btn btn-sm btn-outline-light" href="#" target="_blank" rel="noopener"><i class="bi bi-github"></i> Code</a>
+            <p class="lead text-body-secondary">
+              Mon travail en sites vitrines n'est que la vitrine de mes
+              compétences web, je suis surtout passionné par le réseau,
+              l’architecture matérielle et le monde du SISR.
+            </p>
+            <div class="d-flex flex-wrap gap-2 mb-4">
+              <span class="badge rounded-pill tech-badge">HTML5</span>
+              <span class="badge rounded-pill tech-badge">CSS3</span>
+              <span class="badge rounded-pill tech-badge">JavaScript</span>
+              <span class="badge rounded-pill tech-badge"
+                ><i class="bi bi-bootstrap"></i> Bootstrap</span
+              >
+              <span class="badge rounded-pill tech-badge"
+                ><i class="bi bi-git"></i> Git/GitHub</span
+              >
+              <span class="badge rounded-pill tech-badge"
+                ><i class="bi bi-ubuntu"></i> Linux</span
+              >
+              <span class="badge rounded-pill tech-badge"
+                ><i class="bi bi-windows"></i> Windows</span
+              >
+              <span class="badge rounded-pill tech-badge"
+                >Active Directory</span
+              >
+              <span class="badge rounded-pill tech-badge"
+                >Capture The Flag</span
+              >
+              <span class="badge rounded-pill tech-badge">C#</span>
+              <span class="badge rounded-pill tech-badge"
+                ><i class="bi bi-unity"></i> Unity</span
+              >
+              <span class="badge rounded-pill tech-badge"
+                >Administration réseau</span
+              >
+              <span class="badge rounded-pill tech-badge">DHCP</span>
+            </div>
+            <div class="d-flex gap-3">
+              <a href="#projects" class="btn btn-light">Voir mes projets</a>
+              <a href="#contact" class="btn btn-outline-light">Me contacter</a>
             </div>
           </div>
-        </div>
-        <!-- Duplicate this block for more projects -->
-        <div class="col-md-6 col-lg-4">
-          <div class="card hover-lift h-100">
-            <img src="https://picsum.photos/seed/app2/800/500" class="card-img-top" alt="aperçu projet" loading="lazy">
-            <div class="card-body d-flex flex-column">
-              <h5 class="card-title">Mini App</h5>
-              <p class="card-text text-body-secondary">Composants Bootstrap personnalisés, animations légères, bonne accessibilité clavier.</p>
-              <div class="mt-auto d-flex gap-2 flex-wrap small">
-                <span class="badge rounded-pill text-bg-dark">JavaScript</span>
-                <span class="badge rounded-pill text-bg-dark">Bootstrap</span>
+          <div class="col-lg-5">
+            <div class="card glass hover-lift">
+              <div class="card-body">
+                <h5 class="card-title">À propos</h5>
+                <p class="mb-3">
+                  Étudiant en <strong>BTS SIO (SISR)</strong>, je crée des
+                  <strong>sites vitrines</strong> modernes et accessibles en
+                  HTML/CSS/JS. Ma passion va surtout vers le
+                  <strong>réseau</strong>, l’<strong
+                    >architecture matérielle</strong
+                  >
+                  et l’<strong>administration système</strong>.
+                </p>
+                <ul class="mb-0 small text-body-secondary">
+                  <li>Web : sites vitrines légers (vue utilisateur)</li>
+                  <li>SISR : réseau & systèmes (TCP/IP, Windows, Linux)</li>
+                  <li>Déploiement : GitHub Pages, Git/GitHub</li>
+                </ul>
               </div>
             </div>
-            <div class="card-footer d-flex gap-2">
-              <a class="btn btn-sm btn-light" href="#" target="_blank" rel="noopener"><i class="bi bi-box-arrow-up-right"></i> Démo</a>
-              <a class="btn btn-sm btn-outline-light" href="#" target="_blank" rel="noopener"><i class="bi bi-github"></i> Code</a>
-            </div>
           </div>
         </div>
-        <div class="col-md-6 col-lg-4">
-          <div class="card hover-lift h-100">
-            <img src="https://picsum.photos/seed/tool3/800/500" class="card-img-top" alt="aperçu projet" loading="lazy">
-            <div class="card-body d-flex flex-column">
-              <h5 class="card-title">Outil CLI</h5>
-              <p class="card-text text-body-secondary">Petit utilitaire orienté DevSecOps (à venir) avec README propre et tests.</p>
-              <div class="mt-auto d-flex gap-2 flex-wrap small">
-                <span class="badge rounded-pill text-bg-dark">Linux</span>
-                <span class="badge rounded-pill text-bg-dark">Bash</span>
+      </div>
+    </header>
+
+    <!-- Projects -->
+    <section id="projects" class="bg-body-tertiary">
+      <div class="container">
+        <div class="d-flex justify-content-between align-items-end mb-4">
+          <h2 class="section-title h1 m-0">Projets</h2>
+          <a
+            class="link-light text-decoration-none"
+            href="https://github.com/"
+            target="_blank"
+            rel="noopener"
+            ><i class="bi bi-github"></i> Tous les dépôts</a
+          >
+        </div>
+        <div class="row g-4">
+          <!-- Project Card -->
+          <div class="col-md-6 col-lg-4">
+            <div class="card hover-lift h-100">
+              <img
+                src="https://images.squarespace-cdn.com/content/v1/6745ee8fde9e7b64f3827ac7/1739921270243-TIWX2J1HMA3OYZK79CBP/image-asset.jpeg"
+                class="card-img-top"
+                alt="aperçu projet"
+                loading="lazy"
+              />
+              <div class="card-body d-flex flex-column">
+                <h5 class="card-title">Portfolio</h5>
+                <p class="card-text text-body-secondary">
+                  Site statique optimisé — HTML/CSS/JS, Bootstrap Icons, déployé
+                  sur GitHub Pages.
+                </p>
+                <div class="mt-auto d-flex gap-2 flex-wrap small">
+                  <span class="badge rounded-pill text-bg-dark">HTML</span>
+                  <span class="badge rounded-pill text-bg-dark">CSS</span>
+                  <span class="badge rounded-pill text-bg-dark">Bootstrap</span>
+                </div>
+              </div>
+              <div class="card-footer d-flex gap-2">
+                <a
+                  class="btn btn-sm btn-light"
+                  href="https://wladimirbigand.github.io"
+                  target="_blank"
+                  rel="noopener"
+                  ><i class="bi bi-box-arrow-up-right"></i> Démo</a
+                >
+                <a
+                  class="btn btn-sm btn-outline-light"
+                  href="https://github.com/wladimirbigand/wladimirbigand.github.io/blob/main/index.html"
+                  target="_blank"
+                  rel="noopener"
+                  ><i class="bi bi-github"></i> Code</a
+                >
               </div>
             </div>
-            <div class="card-footer d-flex gap-2">
-              <a class="btn btn-sm btn-light disabled" aria-disabled="true"><i class="bi bi-hourglass"></i> Bientôt</a>
-              <a class="btn btn-sm btn-outline-light disabled" aria-disabled="true"><i class="bi bi-github"></i> Privé</a>
+          </div>
+          <!-- Duplicate this block for more projects -->
+          <div class="col-md-6 col-lg-4">
+            <div class="card hover-lift h-100">
+              <img
+                src="https://images.petitbleu.fr/api/v1/images/view/645a3bfc0888ec257327edbc/large/image.jpg?v=1"
+                class="card-img-top"
+                alt="Site vitrine de l'association Jean Pouzet"
+                loading="lazy"
+              />
+              <div class="card-body d-flex flex-column">
+                <h5 class="card-title">
+                  Association Jean Pouzet — Site vitrine avec menu Admin
+                </h5>
+                <p class="card-text text-body-secondary">
+                  Site avec <strong>backend</strong> et
+                  <strong>interface administrateur sécurisée</strong> :
+                  authentification, gestion des contenus, médias et paramètres.
+                  Gestion autonome de leur site.
+                </p>
+                <div class="mt-auto d-flex gap-2 flex-wrap small">
+                  <span class="badge rounded-pill text-bg-dark">HTML</span>
+                  <span class="badge rounded-pill text-bg-dark">CSS</span>
+                  <span class="badge rounded-pill text-bg-dark">JS</span>
+                  <span class="badge rounded-pill text-bg-dark">Bootstrap</span>
+                  <span class="badge rounded-pill text-bg-dark">PHP</span>
+                  <span class="badge rounded-pill text-bg-dark">SQL</span>
+                </div>
+              </div>
+              <div class="card-footer d-flex gap-2">
+                <a
+                  class="btn btn-sm btn-light"
+                  href="#"
+                  target="_blank"
+                  rel="noopener"
+                  ><i class="bi bi-box-arrow-up-right"></i> Démo</a
+                >
+                <a
+                  class="btn btn-sm btn-outline-light"
+                  href="#"
+                  target="_blank"
+                  rel="noopener"
+                  ><i class="bi bi-github"></i> Code</a
+                >
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <div class="card hover-lift h-100">
+              <img
+                src="https://picsum.photos/seed/tool3/800/500"
+                class="card-img-top"
+                alt="aperçu projet"
+                loading="lazy"
+              />
+              <div class="card-body d-flex flex-column">
+                <h5 class="card-title">Outil CLI</h5>
+                <p class="card-text text-body-secondary">
+                  Petit utilitaire orienté DevSecOps (à venir) avec README
+                  propre et tests.
+                </p>
+                <div class="mt-auto d-flex gap-2 flex-wrap small">
+                  <span class="badge rounded-pill text-bg-dark">Linux</span>
+                  <span class="badge rounded-pill text-bg-dark">Bash</span>
+                </div>
+              </div>
+              <div class="card-footer d-flex gap-2">
+                <a class="btn btn-sm btn-light disabled" aria-disabled="true"
+                  ><i class="bi bi-hourglass"></i> Bientôt</a
+                >
+                <a
+                  class="btn btn-sm btn-outline-light disabled"
+                  aria-disabled="true"
+                  ><i class="bi bi-github"></i> Privé</a
+                >
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Skills -->
-  <section id="skills">
-    <div class="container">
-      <h2 class="section-title h1 mb-4">Compétences</h2>
-      <div class="row g-4">
-        <div class="col-md-6">
-          <div class="card glass h-100">
-            <div class="card-body">
-              <h5 class="card-title"><i class="bi bi-braces"></i> Front-end</h5>
-              <ul class="list-unstyled mb-0 small">
-                <li>HTML5 sémantique, accessibilité (labels, contrastes, nav clavier)</li>
-                <li>CSS moderne (Flexbox/Grid), animations légères, responsive first</li>
-                <li>Bootstrap 5 (layout, utilities, composants, icons)</li>
-                <li>JS vanilla pour interactions & performances</li>
-              </ul>
+    <!-- Skills -->
+    <section id="skills">
+      <div class="container">
+        <h2 class="section-title h1 mb-4">Compétences</h2>
+        <div class="row g-4">
+          <div class="col-md-6">
+            <div class="card glass h-100">
+              <div class="card-body">
+                <h5 class="card-title">
+                  <i class="bi bi-braces"></i> Front-end
+                </h5>
+                <ul class="list-unstyled mb-0 small">
+                  <li>
+                    HTML5 sémantique, accessibilité (labels, contrastes, nav
+                    clavier)
+                  </li>
+                  <li>
+                    CSS moderne (Flexbox/Grid), animations légères, responsive
+                    first
+                  </li>
+                  <li>Bootstrap 5 (layout, utilities, composants, icons)</li>
+                  <li>JS vanilla pour interactions & performances</li>
+                </ul>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="col-md-6">
-          <div class="card glass h-100">
-            <div class="card-body">
-              <h5 class="card-title"><i class="bi bi-shield-check"></i> Outils & Qualité</h5>
-              <ul class="list-unstyled mb-0 small">
-                <li>Git/GitHub : bonnes pratiques de commit & branches</li>
-                <li>Optimisation (images, minification, Lighthouse de base)</li>
-                <li>CI/CD simple via GitHub Pages</li>
-                <li>Culture DevSecOps en progression</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Timeline -->
-  <section id="timeline" class="bg-body-tertiary">
-    <div class="container">
-      <h2 class="section-title h1 mb-4">Parcours</h2>
-      <ol class="timeline list-unstyled m-0">
-        <li class="mb-4">
-          <span class="dot"></span>
-          <strong>BTS SIO (SISR)</strong> — 2025 · Projets réseau, systèmes, sécurité
-          <div class="text-body-secondary small ms-4">Mise en pratique : hébergement, GitHub Pages, scripts, surveillance.</div>
-        </li>
-        <li class="mb-4">
-          <span class="dot"></span>
-          <strong>Projets perso</strong> — Drone, montage vidéo, outils web
-          <div class="text-body-secondary small ms-4">Création de contenus, optimisation vidéo, automatisations légères.</div>
-        </li>
-        <li class="mb-2">
-          <span class="dot"></span>
-          <strong>Veille & auto-formation</strong> — Web, Linux, DevSecOps
-          <div class="text-body-secondary small ms-4">Laboratoire perso, tests d’outils, documentation de progression.</div>
-        </li>
-      </ol>
-    </div>
-  </section>
-
-  <!-- Contact -->
-  <section id="contact">
-    <div class="container">
-      <div class="row g-4 align-items-center">
-        <div class="col-lg-7">
-          <h2 class="section-title h1 mb-3">Contact</h2>
-          <p class="text-body-secondary">Intéressé par un échange, un stage ou une alternance ? Écrivez-moi !</p>
-          <div class="d-flex gap-3">
-            <a class="btn btn-light" href="mailto:contact@exemple.fr"><i class="bi bi-envelope"></i> Envoyer un email</a>
-            <a class="btn btn-outline-light" href="#" target="_blank" rel="noopener"><i class="bi bi-linkedin"></i> LinkedIn</a>
-            <a class="btn btn-outline-light" href="#" target="_blank" rel="noopener"><i class="bi bi-github"></i> GitHub</a>
-          </div>
-        </div>
-        <div class="col-lg-5">
-          <div class="card glass">
-            <div class="card-body">
-              <h5 class="card-title">Disponibilités</h5>
-              <p class="mb-2">Ouvert aux opportunités en <strong>Cybersécurité / DevSecOps</strong>.</p>
-              <ul class="small text-body-secondary mb-0">
-                <li>Localisation : France</li>
-                <li>Freelance : non</li>
-                <li>Alternance : oui (2025–2026)</li>
-              </ul>
+          <div class="col-md-6">
+            <div class="card glass h-100">
+              <div class="card-body">
+                <h5 class="card-title">
+                  <i class="bi bi-shield-check"></i> Outils & Qualité
+                </h5>
+                <ul class="list-unstyled mb-0 small">
+                  <li>Git/GitHub : bonnes pratiques de commit & branches</li>
+                  <li>
+                    Optimisation (images, minification, Lighthouse de base)
+                  </li>
+                  <li>CI/CD simple via GitHub Pages</li>
+                  <li>Culture DevSecOps en progression</li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <footer class="py-4 border-top border-secondary-subtle">
-    <div class="container d-flex flex-wrap justify-content-between gap-2 small text-body-secondary">
-      <span>© <span id="year"></span> Wladimir Bigand — Tous droits réservés.</span>
-      <span>Construit avec <i class="bi bi-bootstrap"></i> Bootstrap & <i class="bi bi-stars"></i> passion.</span>
-    </div>
-  </footer>
+    <!-- Timeline -->
+    <section id="timeline" class="bg-body-tertiary">
+      <div class="container">
+        <h2 class="section-title h1 mb-4">Parcours</h2>
+        <ol class="timeline list-unstyled m-0">
+          <li class="mb-4">
+            <span class="dot"></span>
+            <strong>BTS SIO (SISR)</strong> — 2025 · Projets réseau, systèmes,
+            sécurité
+            <div class="text-body-secondary small ms-4">
+              Mise en pratique : hébergement, GitHub Pages, scripts,
+              surveillance.
+            </div>
+          </li>
+          <li class="mb-4">
+            <span class="dot"></span>
+            <strong>Projets perso</strong> — Drone, montage vidéo, outils web
+            <div class="text-body-secondary small ms-4">
+              Création de contenus, optimisation vidéo, automatisations légères.
+            </div>
+          </li>
+          <li class="mb-2">
+            <span class="dot"></span>
+            <strong>Veille & auto-formation</strong> — Web, Linux, DevSecOps
+            <div class="text-body-secondary small ms-4">
+              Laboratoire perso, tests d’outils, documentation de progression.
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
 
-  <!-- Bootstrap JS (bundle) -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script>
-    // Année dynamique du footer
-    document.getElementById('year').textContent = new Date().getFullYear();
-    
-    // Thème (clair/sombre) avec mémoire locale
-    const themeBtn = document.getElementById('themeBtn');
-    const root = document.documentElement;
-    const storedTheme = localStorage.getItem('theme');
+    <!-- Contact -->
+    <section id="contact">
+      <div class="container">
+        <div class="row g-4 align-items-center">
+          <div class="col-lg-7">
+            <h2 class="section-title h1 mb-3">Contact</h2>
+            <p class="text-body-secondary">
+              Intéressé par un échange, un stage ou une alternance ? Écrivez-moi
+              !
+            </p>
+            <div class="d-flex gap-3">
+              <a class="btn btn-light" href="mailto:contact@exemple.fr"
+                ><i class="bi bi-envelope"></i> Envoyer un email</a
+              >
+              <a
+                class="btn btn-outline-light"
+                href="#"
+                target="_blank"
+                rel="noopener"
+                ><i class="bi bi-linkedin"></i> LinkedIn</a
+              >
+              <a
+                class="btn btn-outline-light"
+                href="#"
+                target="_blank"
+                rel="noopener"
+                ><i class="bi bi-github"></i> GitHub</a
+              >
+            </div>
+          </div>
+          <div class="col-lg-5">
+            <div class="card glass">
+              <div class="card-body">
+                <h5 class="card-title">Disponibilités</h5>
+                <p class="mb-2">
+                  Ouvert aux opportunités en
+                  <strong>Cybersécurité / DevSecOps</strong>.
+                </p>
+                <ul class="small text-body-secondary mb-0">
+                  <li>Localisation : France</li>
+                  <li>Freelance : non</li>
+                  <li>Alternance : oui (2025–2026)</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    const setTheme = (theme) => {
-      document.documentElement.setAttribute('data-bs-theme', theme);
-      localStorage.setItem('theme', theme);
-      themeBtn.innerHTML = theme === 'dark' ? '<i class="bi bi-moon-stars"></i>' : '<i class="bi bi-sun"></i>';
-    };
+    <footer class="py-4 border-top border-secondary-subtle">
+      <div
+        class="container d-flex flex-wrap justify-content-between gap-2 small text-body-secondary"
+      >
+        <span
+          >© <span id="year"></span> Wladimir Bigand — Tous droits
+          réservés.</span
+        >
+        <span
+          >Construit avec <i class="bi bi-bootstrap"></i> Bootstrap &
+          <i class="bi bi-stars"></i> passion.</span
+        >
+      </div>
+    </footer>
 
-    setTheme(storedTheme || 'dark');
+    <!-- Bootstrap JS (bundle) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      // Année dynamique du footer
+      document.getElementById("year").textContent = new Date().getFullYear();
 
-    themeBtn.addEventListener('click', () => {
-      const current = document.documentElement.getAttribute('data-bs-theme');
-      setTheme(current === 'dark' ? 'light' : 'dark');
-    });
+      // Thème (clair/sombre) avec mémoire locale
+      const themeBtn = document.getElementById("themeBtn");
+      const root = document.documentElement;
+      const storedTheme = localStorage.getItem("theme");
 
-    // Activer ScrollSpy (déjà via data attrib, mais re-init si besoin)
-    const scrollSpy = new bootstrap.ScrollSpy(document.body, { target: '#navbar', offset: 100 });
-  </script>
-</body>
+      const setTheme = (theme) => {
+        document.documentElement.setAttribute("data-bs-theme", theme);
+        localStorage.setItem("theme", theme);
+        themeBtn.innerHTML =
+          theme === "dark"
+            ? '<i class="bi bi-moon-stars"></i>'
+            : '<i class="bi bi-sun"></i>';
+      };
+
+      setTheme(storedTheme || "dark");
+
+      themeBtn.addEventListener("click", () => {
+        const current = document.documentElement.getAttribute("data-bs-theme");
+        setTheme(current === "dark" ? "light" : "dark");
+      });
+
+      // Activer ScrollSpy (déjà via data attrib, mais re-init si besoin)
+      const scrollSpy = new bootstrap.ScrollSpy(document.body, {
+        target: "#navbar",
+        offset: 100,
+      });
+    </script>
+  </body>
 </html>

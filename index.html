@@ -2,583 +2,666 @@
 <html lang="fr" data-bs-theme="dark">
 
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Portfolio - Wladimir Bigand</title>
-  <meta name="description" content="Portfolio de Wladimir Bigand — projets, compétences, parcours et contact." />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet" />
-  <link rel="icon" type="image/png" sizes="16x16" href="Assets/favicon-16x16.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="Assets/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="192x192" href="Assets/android-chrome-192x192.png">
-  <link rel="icon" type="image/png" sizes="512x512" href="Assets/android-chrome-512x512.png">
-  <link rel="apple-touch-icon" href="Assets/apple-touch-icon.png">
-  <link rel="shortcut icon" href="Assets/favicon.ico" type="image/x-icon">
-  <link rel="manifest" href="Assets/site.webmanifest">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Portfolio - Wladimir Bigand</title>
+    <meta name="description" content="Portfolio de Wladimir Bigand — projets, compétences, parcours et contact." />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet" />
+    <link rel="icon" type="image/png" sizes="16x16" href="Assets/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="Assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="Assets/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="Assets/android-chrome-512x512.png">
+    <link rel="apple-touch-icon" href="Assets/apple-touch-icon.png">
+    <link rel="shortcut icon" href="Assets/favicon.ico" type="image/x-icon">
+    <link rel="manifest" href="Assets/site.webmanifest">
 
-  <style>
-    :root {
-      --accent: #6ee7b7;
-      --accent-2: #60a5fa;
-    }
+    <style>
+        /* ========= THEME-INDEPENDANT ========= */
+        :root {
+            --accent: #6ee7b7;
+            --accent-2: #60a5fa;
+        }
 
-    html,
-    body {
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu,
-        Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial,
-        "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
-    }
+        html {
+            scroll-behavior: smooth;
+        }
 
-    html {
-      scroll-behavior: smooth;
-    }
+        html,
+        body {
+            font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell,
+                "Fira Sans", "Droid Sans", "Helvetica Neue", Arial,
+                "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+        }
 
-    body::before {
-      content: "";
-      position: fixed;
-      inset: -10% -10% auto -10%;
-      height: 60vh;
-      z-index: -1;
-      background: radial-gradient(1000px 500px at 10% 10%,
-          rgba(96, 165, 250, 0.25),
-          transparent),
-        radial-gradient(800px 400px at 90% 0%,
-          rgba(110, 231, 183, 0.18),
-          transparent);
-      filter: blur(40px);
-    }
+        body::before {
+            content: "";
+            position: fixed;
+            inset: -10% -10% auto -10%;
+            height: 60vh;
+            z-index: -1;
+            background:
+                radial-gradient(1000px 500px at 10% 10%, rgba(96, 165, 250, .25), transparent),
+                radial-gradient(800px 400px at 90% 0%, rgba(110, 231, 183, .18), transparent);
+            filter: blur(40px);
+        }
 
-    section {
-      padding: 84px 0;
-    }
+        section {
+            padding: 84px 0;
+        }
 
-    .section-title {
-      letter-spacing: 0.02em;
-      font-weight: 800;
-    }
+        .section-title {
+            letter-spacing: .02em;
+            font-weight: 800;
+        }
 
-    .glass {
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      backdrop-filter: blur(8px);
-    }
+        .underline {
+            position: relative;
+            display: inline-block;
+        }
 
-    .card.hover-lift {
-      transition: transform 0.18s ease, box-shadow 0.18s ease,
-        border-color 0.18s ease;
-      border-color: rgba(255, 255, 255, 0.08);
-    }
+        .underline::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: -.3rem;
+            height: .35rem;
+            border-radius: .35rem;
+            background: linear-gradient(90deg, var(--accent), var(--accent-2));
+            opacity: .7;
+        }
 
-    .card.hover-lift:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
-      border-color: rgba(255, 255, 255, 0.18);
-    }
+        .brand-dot {
+            color: var(--accent);
+        }
 
-    .underline {
-      position: relative;
-      display: inline-block;
-    }
+        :target {
+            scroll-margin-top: 84px;
+        }
 
-    .underline::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: -0.3rem;
-      height: 0.35rem;
-      border-radius: 0.35rem;
-      background: linear-gradient(90deg, var(--accent), var(--accent-2));
-      opacity: 0.7;
-    }
+        /* ========= THEME TOKENS ========= */
+        [data-bs-theme="dark"] {
+            --surface-1: rgba(255, 255, 255, .06);
+            --surface-border: rgba(255, 255, 255, .12);
+            --surface-border-hover: rgba(255, 255, 255, .18);
 
-    .brand-dot {
-      color: var(--accent);
-    }
+            --badge-bg: rgba(255, 255, 255, .08);
+            --badge-border: rgba(255, 255, 255, .30);
 
-    .tech-badge {
-      border: 1px dashed rgba(255, 255, 255, 0.25);
-      background: rgba(255, 255, 255, 0.03);
-    }
+            --hero-avatar-bg: rgba(255, 255, 255, .08);
+            --hero-avatar-border: rgba(255, 255, 255, .15);
 
-    .timeline {
-      border-left: 2px solid rgba(255, 255, 255, 0.2);
-      padding-left: 1rem;
-    }
+            --btn-contrast-bg: #fff;
+            --btn-contrast-color: #111;
+            --btn-contrast-border: #fff;
+            --btn-contrast-outline-color: #fff;
+            --btn-contrast-outline-border: rgba(255, 255, 255, .55);
 
-    .timeline .item::marker {
-      content: none;
-    }
+            --timeline-border: rgba(255, 255, 255, .28);
+        }
 
-    .timeline .dot {
-      width: 0.8rem;
-      height: 0.8rem;
-      border-radius: 999px;
-      background: linear-gradient(90deg, var(--accent), var(--accent-2));
-      display: inline-block;
-      margin-right: 0.5rem;
-    }
+        [data-bs-theme="light"] {
+            --surface-1: rgba(0, 0, 0, .03);
+            --surface-border: rgba(0, 0, 0, .08);
+            --surface-border-hover: rgba(0, 0, 0, .18);
 
-    :target {
-      scroll-margin-top: 84px;
-    }
+            --badge-bg: rgba(0, 0, 0, .06);
+            --badge-border: rgba(0, 0, 0, .25);
 
-    .theme-toggle {
-      border: 1px solid rgba(255, 255, 255, 0.25);
-    }
+            --hero-avatar-bg: rgba(0, 0, 0, .04);
+            --hero-avatar-border: rgba(0, 0, 0, .12);
 
-    .hero-avatar {
-      width: 84px;
-      height: 84px;
-      border-radius: 999px;
-      display: grid;
-      place-items: center;
-      font-size: 40px;
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      object-fit: cover;
-    }
-  </style>
+            --btn-contrast-bg: #111;
+            --btn-contrast-color: #fff;
+            --btn-contrast-border: #111;
+            --btn-contrast-outline-color: #111;
+            --btn-contrast-outline-border: rgba(0, 0, 0, .5);
+
+            --timeline-border: rgba(0, 0, 0, .20);
+        }
+
+        /* Équilibre de l’aura en clair */
+        [data-bs-theme="light"] body::before {
+            opacity: .45;
+            filter: blur(50px);
+        }
+
+        /* ========= COMPONENTS ========= */
+        .glass {
+            background: var(--surface-1) !important;
+            border: 1px solid var(--surface-border) !important;
+            backdrop-filter: blur(8px);
+        }
+
+        .card.hover-lift {
+            transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+            border-color: var(--surface-border);
+        }
+
+        .card.hover-lift:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, .15);
+            border-color: var(--surface-border-hover);
+        }
+
+        /* Avatar */
+        .hero-avatar {
+            width: 84px;
+            height: 84px;
+            border-radius: 999px;
+            display: grid;
+            place-items: center;
+            font-size: 40px;
+            background: var(--hero-avatar-bg);
+            border: 1px solid var(--hero-avatar-border);
+            object-fit: cover;
+        }
+
+        /* Badges techniques */
+        .tech-badge {
+            border: 1px dashed var(--badge-border);
+            background: var(--badge-bg);
+            color: inherit;
+        }
+
+        /* Boutons contrastés (remplaçent btn-light / btn-outline-light) */
+        .btn-contrast {
+            background-color: var(--btn-contrast-bg) !important;
+            color: var(--btn-contrast-color) !important;
+            border-color: var(--btn-contrast-border) !important;
+        }
+
+        .btn-contrast:hover {
+            opacity: .92;
+        }
+
+        .btn-contrast-outline {
+            background: transparent !important;
+            color: var(--btn-contrast-outline-color) !important;
+            border-color: var(--btn-contrast-outline-border) !important;
+        }
+
+        .btn-contrast-outline:hover {
+            background: var(--btn-contrast-outline-color) !important;
+            color: #fff !important;
+        }
+
+        /* Liens contrastés (ex: "Tous les dépôts") */
+        .link-contrast {
+            text-decoration: none;
+        }
+
+        .link-contrast:hover {
+            text-decoration: underline;
+        }
+
+        /* Timeline */
+        .timeline {
+            border-left: 2px solid var(--timeline-border);
+            padding-left: 1rem;
+        }
+
+        .timeline .dot {
+            width: .8rem;
+            height: .8rem;
+            border-radius: 999px;
+            display: inline-block;
+            margin-right: .5rem;
+            background: linear-gradient(90deg, var(--accent), var(--accent-2));
+            box-shadow: 0 0 0 3px var(--bs-body-bg);
+            /* anneau pour séparer du trait */
+        }
+    </style>
 </head>
 
 <body data-bs-spy="scroll" data-bs-target="#navbar" data-bs-smooth-scroll="true">
-  <nav id="navbar" class="navbar navbar-expand-lg navbar-dark bg-body-tertiary fixed-top glass">
-    <div class="container">
-      <a class="navbar-brand fw-bold" href="#home">Wladimir<span class="brand-dot">.</span>B</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navContent"
-        aria-controls="navContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navContent">
-        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link" href="#projects">Projets</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#skills">Compétences</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#certifications">Certifications</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#timeline">Parcours</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#contact">Contact</a>
-          </li>
-        </ul>
-        <div class="d-flex gap-2 ms-lg-3">
-          <a class="btn btn-outline-light btn-sm" href="/Assets/CV Wladimir Bigand.pdf" target="_blank" rel="noopener"
-            title="Télécharger le CV">
-            <i class="bi bi-file-earmark-arrow-down"></i> CV
-          </a>
-          <button id="themeBtn" class="btn btn-sm theme-toggle" type="button" aria-label="Basculer le thème">
-            <i class="bi bi-moon-stars"></i>
-          </button>
+    <nav id="navbar" class="navbar navbar-expand-lg bg-body-tertiary fixed-top glass">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#home">Wladimir<span class="brand-dot">.</span>B</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navContent"
+                aria-controls="navContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#projects">Projets</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#skills">Compétences</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#certifications">Certifications</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#timeline">Parcours</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                </ul>
+                <div class="d-flex gap-2 ms-lg-3">
+                    <a class="btn btn-contrast-outline btn-sm" href="/Assets/CV Wladimir Bigand.pdf" target="_blank"
+                        rel="noopener" title="Télécharger le CV">
+                        <i class="bi bi-file-earmark-arrow-down"></i> CV
+                    </a>
+                    <button id="themeBtn" class="btn btn-sm theme-toggle" type="button" aria-label="Basculer le thème">
+                        <i class="bi bi-moon-stars"></i>
+                    </button>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </nav>
+    </nav>
 
-  <header id="home" class="py-5" style="padding-top: 120px !important">
-    <div class="container">
-      <div class="row align-items-center g-4">
-        <div class="col-lg-7">
-          <div class="d-flex align-items-center gap-3 mb-4">
-            <img src="/Assets/Profil.jpg" alt="Photo de Wladimir Bigand" class="hero-avatar" />
-            <div>
-              <h1 class="display-5 fw-800 mb-1">Wladimir Bigand</h1>
-              <p class="text-secondary mb-0">
-                Étudiant BTS SIO (SISR) • Aspirant DevSecOps • Passionné de
-                vidéo & drones
-              </p>
+    <header id="home" class="py-5" style="padding-top: 120px !important">
+        <div class="container">
+            <div class="row align-items-center g-4">
+                <div class="col-lg-7">
+                    <div class="d-flex align-items-center gap-3 mb-4">
+                        <img src="/Assets/Profil.jpg" alt="Photo de Wladimir Bigand" class="hero-avatar" />
+                        <div>
+                            <h1 class="display-5 fw-800 mb-1">Wladimir Bigand</h1>
+                            <p class="text-secondary mb-0">
+                                Étudiant BTS SIO (SISR) • Aspirant DevSecOps • Passionné de
+                                vidéo & drones
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="d-flex flex-wrap gap-2 mb-4">
+                        <span class="badge rounded-pill tech-badge">HTML5</span>
+                        <span class="badge rounded-pill tech-badge">CSS3</span>
+                        <span class="badge rounded-pill tech-badge">JavaScript</span>
+                        <span class="badge rounded-pill tech-badge"><i class="bi bi-bootstrap"></i> Bootstrap</span>
+                        <span class="badge rounded-pill tech-badge"><i class="bi bi-git"></i> Git/GitHub</span>
+                        <span class="badge rounded-pill tech-badge"><i class="bi bi-ubuntu"></i> Linux</span>
+                        <span class="badge rounded-pill tech-badge"><i class="bi bi-windows"></i> Windows</span>
+                        <span class="badge rounded-pill tech-badge">Active Directory</span>
+                        <span class="badge rounded-pill tech-badge">Capture The Flag</span>
+                        <span class="badge rounded-pill tech-badge">C#</span>
+                        <span class="badge rounded-pill tech-badge"><i class="bi bi-unity"></i> Unity</span>
+                        <span class="badge rounded-pill tech-badge">Administration réseau</span>
+                        <span class="badge rounded-pill tech-badge">Cisco Packet Tracer</span>
+                    </div>
+                    <div class="d-flex gap-3">
+                        <a href="#projects" class="btn btn-contrast">Voir mes projets</a>
+                        <a href="#contact" class="btn btn-contrast-outline">Me contacter</a>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="card glass hover-lift">
+                        <div class="card-body">
+                            <h5 class="card-title">À propos de moi</h5>
+                            <p class="mb-3">
+                                Je suis actuellement étudiant en <strong>BTS SIO (SISR)</strong>, je suis
+                                <strong>passionné</strong> par
+                                l'informatique depuis tout petit, et récemment j'ai développé de l'apétence pour la
+                                <strong>cybersécurité</strong>
+                                mais également pour le <strong>développement web</strong>.
+                            </p>
+                            <ul class="mb-0 small text-body-secondary">
+                                <li>Web : sites vitrines légers (vue utilisateur)</li>
+                                <li>SISR : réseau & systèmes (TCP/IP, Windows, Linux)</li>
+                                <li>Déploiement : GitHub Pages, Git/GitHub</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-
-          <div class="d-flex flex-wrap gap-2 mb-4">
-            <span class="badge rounded-pill tech-badge">HTML5</span>
-            <span class="badge rounded-pill tech-badge">CSS3</span>
-            <span class="badge rounded-pill tech-badge">JavaScript</span>
-            <span class="badge rounded-pill tech-badge"><i class="bi bi-bootstrap"></i> Bootstrap</span>
-            <span class="badge rounded-pill tech-badge"><i class="bi bi-git"></i> Git/GitHub</span>
-            <span class="badge rounded-pill tech-badge"><i class="bi bi-ubuntu"></i> Linux</span>
-            <span class="badge rounded-pill tech-badge"><i class="bi bi-windows"></i> Windows</span>
-            <span class="badge rounded-pill tech-badge">Active Directory</span>
-            <span class="badge rounded-pill tech-badge">Capture The Flag</span>
-            <span class="badge rounded-pill tech-badge">C#</span>
-            <span class="badge rounded-pill tech-badge"><i class="bi bi-unity"></i> Unity</span>
-            <span class="badge rounded-pill tech-badge">Administration réseau</span>
-            <span class="badge rounded-pill tech-badge">Cisco Packet Tracer</span>
-          </div>
-          <div class="d-flex gap-3">
-            <a href="#projects" class="btn btn-light">Voir mes projets</a>
-            <a href="#contact" class="btn btn-outline-light">Me contacter</a>
-          </div>
         </div>
-        <div class="col-lg-5">
-          <div class="card glass hover-lift">
-            <div class="card-body">
-              <h5 class="card-title">À propos de moi</h5>
-              <p class="mb-3">
-                Je suis actuellement étudiant en <strong>BTS SIO (SISR)</strong>, je suis <strong>passionné</strong> par
-                l'informatique depuis tout petit, et récemment j'ai développé de l'apétence pour la <strong>cybersécurité</strong>
-                mais également pour le <strong>développement web</strong>.
-              </p>
-              <ul class="mb-0 small text-body-secondary">
-                <li>Web : sites vitrines légers (vue utilisateur)</li>
-                <li>SISR : réseau & systèmes (TCP/IP, Windows, Linux)</li>
-                <li>Déploiement : GitHub Pages, Git/GitHub</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </header>
+    </header>
 
-  <section id="projects" class="bg-body-tertiary">
-    <div class="container">
-      <div class="d-flex justify-content-between align-items-end mb-4">
-        <h2 class="section-title h1 m-0">Projets</h2>
-        <a class="link-light text-decoration-none" href="https://github.com/wladimirbigand" target="_blank"
-          rel="noopener"><i class="bi bi-github"></i> Tous les dépôts</a>
-      </div>
-      <div class="row g-4">
-        <div class="col-md-6 col-lg-4">
-          <div class="card hover-lift h-100">
-            <img
-              src="https://images.squarespace-cdn.com/content/v1/6745ee8fde9e7b64f3827ac7/1739921270243-TIWX2J1HMA3OYZK79CBP/image-asset.jpeg"
-              class="card-img-top" alt="aperçu projet" loading="lazy" />
-            <div class="card-body d-flex flex-column">
-              <h5 class="card-title">Portfolio</h5>
-              <p class="card-text text-body-secondary">
-                Site statique optimisé — HTML/CSS/JS, Bootstrap Icons, déployé
-                sur GitHub Pages.
-              </p>
-              <div class="mt-auto d-flex gap-2 flex-wrap small">
-                <span class="badge rounded-pill text-bg-dark">HTML</span>
-                <span class="badge rounded-pill text-bg-dark">CSS</span>
-                <span class="badge rounded-pill text-bg-dark">Bootstrap</span>
-              </div>
+    <section id="projects" class="bg-body-tertiary">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-end mb-4">
+                <h2 class="section-title h1 m-0">Projets</h2>
+                <a class="link-contrast" href="https://github.com/wladimirbigand" target="_blank" rel="noopener"><i
+                        class="bi bi-github"></i> Tous les dépôts</a>
             </div>
-            <div class="card-footer d-flex gap-2">
-              <a class="btn btn-sm btn-light" href="https://wladimirbigand.github.io" target="_blank" rel="noopener"><i
-                  class="bi bi-box-arrow-up-right"></i> Démo</a>
-              <a class="btn btn-sm btn-outline-light"
-                href="https://github.com/wladimirbigand/wladimirbigand.github.io/blob/main/index.html" target="_blank"
-                rel="noopener"><i class="bi bi-github"></i> Code</a>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4">
+                    <div class="card hover-lift h-100">
+                        <img src="https://images.squarespace-cdn.com/content/v1/6745ee8fde9e7b64f3827ac7/1739921270243-TIWX2J1HMA3OYZK79CBP/image-asset.jpeg"
+                            class="card-img-top" alt="aperçu projet" loading="lazy" />
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">Portfolio</h5>
+                            <p class="card-text text-body-secondary">
+                                Site statique optimisé — HTML/CSS/JS, Bootstrap Icons, déployé
+                                sur GitHub Pages.
+                            </p>
+                            <div class="mt-auto d-flex gap-2 flex-wrap small">
+                                <span class="badge rounded-pill text-bg-dark">HTML</span>
+                                <span class="badge rounded-pill text-bg-dark">CSS</span>
+                                <span class="badge rounded-pill text-bg-dark">Bootstrap</span>
+                            </div>
+                        </div>
+                        <div class="card-footer d-flex gap-2">
+                            <a class="btn btn-sm btn-contrast" href="https://wladimirbigand.github.io" target="_blank"
+                                rel="noopener"><i class="bi bi-box-arrow-up-right"></i> Démo</a>
+                            <a class="btn btn-sm btn-contrast-outline"
+                                href="https://github.com/wladimirbigand/wladimirbigand.github.io/blob/main/index.html"
+                                target="_blank" rel="noopener"><i class="bi bi-github"></i> Code</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card hover-lift h-100">
+                        <img src="https://images.petitbleu.fr/api/v1/images/view/645a3bfc0888ec257327edbc/large/image.jpg?v=1"
+                            class="card-img-top" alt="Site vitrine de l'association Jean Pouzet" loading="lazy" />
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">
+                                Association Jean Pouzet — Site vitrine avec menu Admin
+                            </h5>
+                            <p class="card-text text-body-secondary">
+                                Site avec <strong>backend</strong> et
+                                <strong>interface administrateur sécurisée</strong> :
+                                authentification, gestion des contenus, médias et paramètres.
+                                Gestion autonome de leur site.
+                            </p>
+                            <div class="mt-auto d-flex gap-2 flex-wrap small">
+                                <span class="badge rounded-pill text-bg-dark">HTML</span>
+                                <span class="badge rounded-pill text-bg-dark">CSS</span>
+                                <span class="badge rounded-pill text-bg-dark">JS</span>
+                                <span class="badge rounded-pill text-bg-dark">Bootstrap</span>
+                                <span class="badge rounded-pill text-bg-dark">PHP</span>
+                                <span class="badge rounded-pill text-bg-dark">SQL</span>
+                            </div>
+                        </div>
+                        <div class="card-footer d-flex gap-2">
+                            <a class="btn btn-sm btn-contrast disabled" aria-disabled="true"><i
+                                    class="bi bi-hourglass"></i> Bientôt</a>
+                            <a class="btn btn-sm btn-contrast-outline"
+                                href="https://github.com/wladimirbigand/CentreJeanPouzet.github.io.git" target="_blank"
+                                rel="noopener"><i class="bi bi-github"></i> Code</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card hover-lift h-100">
+                        <img src="Assets/DiabLandes.png" class="card-img-top"
+                            alt="Site vitrine de l'association Jean Pouzet" loading="lazy" />
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">
+                                Association Diab'Landes — Site vitrine avec menu Admin
+                            </h5>
+                            <p class="card-text text-body-secondary">
+                                <Strong>Description</Strong> : Site pour une association d'enfant malade du diabète de
+                                type 1.
+                                <br>
+                                <strong>Objectif</strong> : Permettre une gestion autonome de leur site.
+                            </p>
+                            <div class="mt-auto d-flex gap-2 flex-wrap small">
+                                <span class="badge rounded-pill text-bg-dark">HTML</span>
+                                <span class="badge rounded-pill text-bg-dark">CSS</span>
+                                <span class="badge rounded-pill text-bg-dark">JS</span>
+                                <span class="badge rounded-pill text-bg-dark">PHP</span>
+                                <span class="badge rounded-pill text-bg-dark">SQL</span>
+                            </div>
+                        </div>
+                        <div class="card-footer d-flex gap-2">
+                            <a class="btn btn-sm btn-contrast disabled" aria-disabled="true"><i
+                                    class="bi bi-exclamation-circle"></i>
+                                Indisponible</a>
+                            <a class="btn btn-sm btn-contrast-outline"
+                                href="https://github.com/wladimirbigand/CentreJeanPouzet.github.io.git" target="_blank"
+                                rel="noopener"><i class="bi bi-github"></i> Code</a>
+                            <a class="btn btn-sm btn-contrast-outline"
+                                href="https://www.esiea.fr/muwd-meet-up-with-diabetics-developper-un-site-web-pour-lassociation-diablandes"
+                                target="_blank" rel="noopener"><i class="bi bi-link-45deg"></i> Article</a>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-4">
-          <div class="card hover-lift h-100">
-            <img src="https://images.petitbleu.fr/api/v1/images/view/645a3bfc0888ec257327edbc/large/image.jpg?v=1"
-              class="card-img-top" alt="Site vitrine de l'association Jean Pouzet" loading="lazy" />
-            <div class="card-body d-flex flex-column">
-              <h5 class="card-title">
-                Association Jean Pouzet — Site vitrine avec menu Admin
-              </h5>
-              <p class="card-text text-body-secondary">
-                Site avec <strong>backend</strong> et
-                <strong>interface administrateur sécurisée</strong> :
-                authentification, gestion des contenus, médias et paramètres.
-                Gestion autonome de leur site.
-              </p>
-              <div class="mt-auto d-flex gap-2 flex-wrap small">
-                <span class="badge rounded-pill text-bg-dark">HTML</span>
-                <span class="badge rounded-pill text-bg-dark">CSS</span>
-                <span class="badge rounded-pill text-bg-dark">JS</span>
-                <span class="badge rounded-pill text-bg-dark">Bootstrap</span>
-                <span class="badge rounded-pill text-bg-dark">PHP</span>
-                <span class="badge rounded-pill text-bg-dark">SQL</span>
-              </div>
-            </div>
-            <div class="card-footer d-flex gap-2">
-              <a class="btn btn-sm btn-light disabled" aria-disabled="true"><i class="bi bi-hourglass"></i> Bientôt</a>
-              <a class="btn btn-sm btn-outline-light"
-                href="https://github.com/wladimirbigand/CentreJeanPouzet.github.io.git" target="_blank"
-                rel="noopener"><i class="bi bi-github"></i> Code</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-4">
-          <div class="card hover-lift h-100">
-            <img src="Assets/DiabLandes.png" class="card-img-top" alt="Site vitrine de l'association Jean Pouzet"
-              loading="lazy" />
-            <div class="card-body d-flex flex-column">
-              <h5 class="card-title">
-                Association Diab'Landes — Site vitrine avec menu Admin
-              </h5>
-              <p class="card-text text-body-secondary">
-                <Strong>Description</Strong> : Site pour une association d'enfant malade du diabète de type 1.
-                <br>
-                <strong>Objectif</strong> : Permettre une gestion autonome de leur site.
-              </p>
-              <div class="mt-auto d-flex gap-2 flex-wrap small">
-                <span class="badge rounded-pill text-bg-dark">HTML</span>
-                <span class="badge rounded-pill text-bg-dark">CSS</span>
-                <span class="badge rounded-pill text-bg-dark">JS</span>
-                <span class="badge rounded-pill text-bg-dark">PHP</span>
-                <span class="badge rounded-pill text-bg-dark">SQL</span>
-              </div>
-            </div>
-            <div class="card-footer d-flex gap-2">
-              <a class="btn btn-sm btn-light disabled" aria-disabled="true"><i class="bi bi-exclamation-circle"></i>
-                Indisponible</a>
-              <a class="btn btn-sm btn-outline-light"
-                href="https://github.com/wladimirbigand/CentreJeanPouzet.github.io.git" target="_blank"
-                rel="noopener"><i class="bi bi-github"></i> Code</a>
-              <a class="btn btn-sm btn-outline-light"
-                href="https://www.esiea.fr/muwd-meet-up-with-diabetics-developper-un-site-web-pour-lassociation-diablandes"
-                target="_blank" rel="noopener"><i class="bi bi-link-45deg"></i> Article</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    </div>
-    </div>
-  </section>
-
-  <section id="skills" class="bg-body-tertiary">
-    <div class="container">
-      <h2 class="section-title h1 mb-4 text-center">Compétences</h2>
-      <div class="row g-4">
-
-        <div class="col-md-4">
-          <div class="card glass h-100 hover-lift">
-            <div class="card-body text-center">
-              <h5 class="card-title mb-3"><i class="bi bi-code-slash"></i> Développement</h5>
-              <div class="d-flex flex-wrap justify-content-center gap-2">
-                <span class="badge rounded-pill tech-badge">HTML5 / CSS3</span>
-                <span class="badge rounded-pill tech-badge">JavaScript</span>
-                <span class="badge rounded-pill tech-badge">Bootstrap</span>
-                <span class="badge rounded-pill tech-badge">Responsive Design</span>
-                <span class="badge rounded-pill tech-badge">PHP</span>
-                <span class="badge rounded-pill tech-badge">SQL</span>
-                <span class="badge rounded-pill tech-badge">C#</span>
-                <span class="badge rounded-pill tech-badge">Unity</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-4">
-          <div class="card glass h-100 hover-lift">
-            <div class="card-body text-center">
-              <h5 class="card-title mb-3"><i class="bi bi-hdd-network"></i> Systèmes & Réseaux</h5>
-              <div class="d-flex flex-wrap justify-content-center gap-2">
-                <span class="badge rounded-pill tech-badge">Linux</span>
-                <span class="badge rounded-pill tech-badge">Windows</span>
-                <span class="badge rounded-pill tech-badge">Active Directory</span>
-                <span class="badge rounded-pill tech-badge">Administration réseau</span>
-                <span class="badge rounded-pill tech-badge">TCP/IP</span>
-                <span class="badge rounded-pill tech-badge">DHCP</span>
-                <span class="badge rounded-pill tech-badge">Scripting</span>
-                <span class="badge rounded-pill tech-badge">Cisco Packet Tracer</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-4">
-          <div class="card glass h-100 hover-lift">
-            <div class="card-body text-center">
-              <h5 class="card-title mb-3"><i class="bi bi-shield-check"></i> Outils & Qualité</h5>
-              <div class="d-flex flex-wrap justify-content-center gap-2">
-                <span class="badge rounded-pill tech-badge">Git / GitHub</span>
-                <span class="badge rounded-pill tech-badge">CI/CD</span>
-                <span class="badge rounded-pill tech-badge">Optimisation web</span>
-                <span class="badge rounded-pill tech-badge">Capture The Flag</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <section id="certifications" class="bg-body-tertiary">
-    <div class="container">
-      <h2 class="section-title h1 mb-4">Certifications</h2>
-
-      <div class="row g-4">
-        <div class="col-md-6 col-lg-4">
-          <div class="card glass h-100 hover-lift">
-            <div class="card-body">
-              <h5 class="card-title"><i class="bi bi-patch-check"></i> TOEIC</h5>
-              <p class="text-body-secondary small mb-2">
-                <strong>ETS</strong> — Score : <em>à définir</em> · Année : <em>2025</em>
-              </p>
-              <div class="d-flex flex-wrap gap-2">
-                <span class="badge rounded-pill tech-badge">Listening</span>
-                <span class="badge rounded-pill tech-badge">Reading</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-6 col-lg-4">
-          <div class="card glass h-100 hover-lift">
-            <div class="card-body">
-              <h5 class="card-title"><i class="bi bi-award"></i> Certificat Voltaire</h5>
-              <p class="text-body-secondary small mb-2">
-                <strong>Projet Voltaire</strong> — Score : <em>714 points</em> · Année : <em>2025</em>
-              </p>
-              <div class="d-flex flex-wrap gap-2">
-                <span class="badge rounded-pill tech-badge">Orthographe</span>
-                <span class="badge rounded-pill tech-badge">Expression</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-6 col-lg-4">
-          <div class="card glass h-100 hover-lift">
-            <div class="card-body">
-              <h5 class="card-title"><i class="bi bi-shield-lock"></i> MOOC CNIL</h5>
-              <p class="text-body-secondary small mb-2">
-                <strong>CNIL</strong> — RGPD : les essentiels · Statut : <em>en cours</em>
-              </p>
-              <div class="d-flex flex-wrap gap-2">
-                <span class="badge rounded-pill tech-badge">RGPD</span>
-                <span class="badge rounded-pill tech-badge">Protection des données</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-6 col-lg-4">
-          <div class="card glass h-100 border-dashed hover-lift" style="border-style:dashed;">
-            <div class="card-body">
-              <h5 class="card-title"><i class="bi bi-hourglass-split"></i> À venir</h5>
-              <p class="text-body-secondary small mb-0">
-                D’autres certifications sont prévues (réseau / sécurité / cloud). Restez connectés !
-              </p>
-            </div>
-          </div>
         </div>
         </div>
-      </div>
-
-    </div>
-  </section>
-
-  <section id="timeline" class="bg-body-tertiary">
-    <div class="container">
-      <h2 class="section-title h1 mb-4">Parcours</h2>
-      <ol class="timeline list-unstyled m-0">
-
-        <li class="mb-4">
-          <span class="dot"></span>
-          <strong>BTS SIO (SISR)</strong> — 2025 - MAINTENANT · Réseau, systèmes,
-          sécurité
-          <div class="text-body-secondary small ms-4">
-            Bientôt <i class="bi bi-hourglass"></i>
-          </div>
-        </li>
-        <li class="mb-4">
-          <span class="dot"></span>
-          <strong>ESIEA (Campus Numérique 47) – Agen</strong> — 2023 – 2025 · Étudiant Informatique
-          <div class="text-body-secondary small ms-4">
-            <u>Projets informatiques</u> :
-            <ul class="mt-2 mb-2">
-              <li><strong>Accorderie Agenaise</strong> – Site web statique (HTML, CSS, JS)</li>
-              <li><strong>Diab’Landes</strong> – Site web dynamique (HTML, CSS, JS, PHP, SQL)</li>
-              <li><strong>Centre Jean Pouzet</strong> – Site web statique + admin (HTML, CSS, JS)</li>
-            </ul>
-            <u>Projets de formations humaines</u> :
-            <ul class="mt-2 mb-2">
-              <li>BATUC’FANFAR’ BRASS-BAND – Création print</li>
-              <li>Philippides – Communication visuelle</li>
-              <li>EVAD – Communication print</li>
-            </ul>
-            <u>Certifications</u> : TOEIC, Voltaire.
-          </div>
-        </li>
-
-        <li class="mb-4">
-          <span class="dot"></span>
-          <strong>Institution Sainte-Catherine – Villeneuve-sur-Lot</strong> — 2021 – 2023
-          <div class="text-body-secondary small ms-4">
-            Baccalauréat Technologique – Énergie & Environnement.
-          </div>
-        </li>
-
-        <li class="mb-2">
-          <span class="dot"></span>
-          <strong>Collège La Fontaine des Prés – Senlis</strong> — 2019 – 2021
-          <div class="text-body-secondary small ms-4">
-            Brevet des collèges – Mention Très Bien.
-          </div>
-        </li>
-
-      </ol>
-    </div>
-  </section>
-
-  <section id="contact">
-    <div class="container">
-      <div class="row justify-content-center text-center">
-        <div class="col-lg-8">
-          <h2 class="section-title h1 mb-3">Contact</h2>
-          <p class="text-body-secondary">
-            Intéressé par un échange, un stage ou une alternance ? Écrivez-moi !
-          </p>
-          <div class="d-flex flex-wrap justify-content-center gap-3">
-            <a class="btn btn-light" href="mailto:wladimir.bigand@gmail.com">
-              <i class="bi bi-envelope"></i> Envoyer un email
-            </a>
-            <a class="btn btn-outline-light" href="https://www.linkedin.com/in/wladimir-bigand-12a38930b"
-              target="_blank" rel="noopener">
-              <i class="bi bi-linkedin"></i> LinkedIn
-            </a>
-            <a class="btn btn-outline-light" href="https://github.com/wladimirbigand" target="_blank" rel="noopener">
-              <i class="bi bi-github"></i> GitHub
-            </a>
-          </div>
         </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <footer class="py-4 border-top border-secondary-subtle">
-    <div class="container text-center small text-body-secondary">
-      <span>© <span id="year"></span> Wladimir Bigand — Tous droits réservés.</span>
-    </div>
-  </footer>
+    <section id="skills" class="bg-body-tertiary">
+        <div class="container">
+            <h2 class="section-title h1 mb-4 text-center">Compétences</h2>
+            <div class="row g-4">
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
+                <div class="col-md-4">
+                    <div class="card glass h-100 hover-lift">
+                        <div class="card-body text-center">
+                            <h5 class="card-title mb-3"><i class="bi bi-code-slash"></i> Développement</h5>
+                            <div class="d-flex flex-wrap justify-content-center gap-2">
+                                <span class="badge rounded-pill tech-badge">HTML5 / CSS3</span>
+                                <span class="badge rounded-pill tech-badge">JavaScript</span>
+                                <span class="badge rounded-pill tech-badge">Bootstrap</span>
+                                <span class="badge rounded-pill tech-badge">Responsive Design</span>
+                                <span class="badge rounded-pill tech-badge">PHP</span>
+                                <span class="badge rounded-pill tech-badge">SQL</span>
+                                <span class="badge rounded-pill tech-badge">C#</span>
+                                <span class="badge rounded-pill tech-badge">Unity</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-    const themeBtn = document.getElementById("themeBtn");
-    const root = document.documentElement;
-    const storedTheme = localStorage.getItem("theme");
+                <div class="col-md-4">
+                    <div class="card glass h-100 hover-lift">
+                        <div class="card-body text-center">
+                            <h5 class="card-title mb-3"><i class="bi bi-hdd-network"></i> Systèmes & Réseaux</h5>
+                            <div class="d-flex flex-wrap justify-content-center gap-2">
+                                <span class="badge rounded-pill tech-badge">Linux</span>
+                                <span class="badge rounded-pill tech-badge">Windows</span>
+                                <span class="badge rounded-pill tech-badge">Active Directory</span>
+                                <span class="badge rounded-pill tech-badge">Administration réseau</span>
+                                <span class="badge rounded-pill tech-badge">TCP/IP</span>
+                                <span class="badge rounded-pill tech-badge">DHCP</span>
+                                <span class="badge rounded-pill tech-badge">Scripting</span>
+                                <span class="badge rounded-pill tech-badge">Cisco Packet Tracer</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-    const setTheme = (theme) => {
-      document.documentElement.setAttribute("data-bs-theme", theme);
-      localStorage.setItem("theme", theme);
-      themeBtn.innerHTML =
-        theme === "dark"
-          ? '<i class="bi bi-moon-stars"></i>'
-          : '<i class="bi bi-sun"></i>';
-    };
+                <div class="col-md-4">
+                    <div class="card glass h-100 hover-lift">
+                        <div class="card-body text-center">
+                            <h5 class="card-title mb-3"><i class="bi bi-shield-check"></i> Outils & Qualité</h5>
+                            <div class="d-flex flex-wrap justify-content-center gap-2">
+                                <span class="badge rounded-pill tech-badge">Git / GitHub</span>
+                                <span class="badge rounded-pill tech-badge">CI/CD</span>
+                                <span class="badge rounded-pill tech-badge">Optimisation web</span>
+                                <span class="badge rounded-pill tech-badge">Capture The Flag</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-    setTheme(storedTheme || "dark");
+            </div>
+        </div>
+    </section>
 
-    themeBtn.addEventListener("click", () => {
-      const current = document.documentElement.getAttribute("data-bs-theme");
-      setTheme(current === "dark" ? "light" : "dark");
-    });
+    <section id="certifications" class="bg-body-tertiary">
+        <div class="container">
+            <h2 class="section-title h1 mb-4">Certifications</h2>
 
-    const scrollSpy = new bootstrap.ScrollSpy(document.body, {
-      target: "#navbar",
-      offset: 100,
-    });
-  </script>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4">
+                    <div class="card glass h-100 hover-lift">
+                        <div class="card-body">
+                            <h5 class="card-title"><i class="bi bi-patch-check"></i> TOEIC</h5>
+                            <p class="text-body-secondary small mb-2">
+                                <strong>ETS</strong> — Score : <em>à définir</em> · Année : <em>2025</em>
+                            </p>
+                            <div class="d-flex flex-wrap gap-2">
+                                <span class="badge rounded-pill tech-badge">Listening</span>
+                                <span class="badge rounded-pill tech-badge">Reading</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="card glass h-100 hover-lift">
+                        <div class="card-body">
+                            <h5 class="card-title"><i class="bi bi-award"></i> Certificat Voltaire</h5>
+                            <p class="text-body-secondary small mb-2">
+                                <strong>Projet Voltaire</strong> — Score : <em>714 points</em> · Année : <em>2025</em>
+                            </p>
+                            <div class="d-flex flex-wrap gap-2">
+                                <span class="badge rounded-pill tech-badge">Orthographe</span>
+                                <span class="badge rounded-pill tech-badge">Expression</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="card glass h-100 hover-lift">
+                        <div class="card-body">
+                            <h5 class="card-title"><i class="bi bi-shield-lock"></i> MOOC CNIL</h5>
+                            <p class="text-body-secondary small mb-2">
+                                <strong>CNIL</strong> — RGPD : les essentiels · Statut : <em>en cours</em>
+                            </p>
+                            <div class="d-flex flex-wrap gap-2">
+                                <span class="badge rounded-pill tech-badge">RGPD</span>
+                                <span class="badge rounded-pill tech-badge">Protection des données</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="card glass h-100 border-dashed hover-lift" style="border-style:dashed;">
+                        <div class="card-body">
+                            <h5 class="card-title"><i class="bi bi-hourglass-split"></i> À venir</h5>
+                            <p class="text-body-secondary small mb-0">
+                                D’autres certifications sont prévues (réseau / sécurité / cloud). Restez connectés !
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        </div>
+    </section>
+
+    <section id="timeline" class="bg-body-tertiary">
+        <div class="container">
+            <h2 class="section-title h1 mb-4">Parcours</h2>
+            <ol class="timeline list-unstyled m-0">
+
+                <li class="mb-4">
+                    <span class="dot"></span>
+                    <strong>BTS SIO (SISR)</strong> — 2025 - MAINTENANT · Réseau, systèmes,
+                    sécurité
+                    <div class="text-body-secondary small ms-4">
+                        Bientôt <i class="bi bi-hourglass"></i>
+                    </div>
+                </li>
+                <li class="mb-4">
+                    <span class="dot"></span>
+                    <strong>ESIEA (Campus Numérique 47) – Agen</strong> — 2023 – 2025 · Étudiant Informatique
+                    <div class="text-body-secondary small ms-4">
+                        <u>Projets informatiques</u> :
+                        <ul class="mt-2 mb-2">
+                            <li><strong>Accorderie Agenaise</strong> – Site web statique (HTML, CSS, JS)</li>
+                            <li><strong>Diab’Landes</strong> – Site web dynamique (HTML, CSS, JS, PHP, SQL)</li>
+                            <li><strong>Centre Jean Pouzet</strong> – Site web statique + admin (HTML, CSS, JS)</li>
+                        </ul>
+                        <u>Projets de formations humaines</u> :
+                        <ul class="mt-2 mb-2">
+                            <li>BATUC’FANFAR’ BRASS-BAND – Création print</li>
+                            <li>Philippides – Communication visuelle</li>
+                            <li>EVAD – Communication print</li>
+                        </ul>
+                        <u>Certifications</u> : TOEIC, Voltaire.
+                    </div>
+                </li>
+
+                <li class="mb-4">
+                    <span class="dot"></span>
+                    <strong>Institution Sainte-Catherine – Villeneuve-sur-Lot</strong> — 2021 – 2023
+                    <div class="text-body-secondary small ms-4">
+                        Baccalauréat Technologique – Énergie & Environnement.
+                    </div>
+                </li>
+
+                <li class="mb-2">
+                    <span class="dot"></span>
+                    <strong>Collège La Fontaine des Prés – Senlis</strong> — 2019 – 2021
+                    <div class="text-body-secondary small ms-4">
+                        Brevet des collèges – Mention Très Bien.
+                    </div>
+                </li>
+
+            </ol>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-lg-8">
+                    <h2 class="section-title h1 mb-3">Contact</h2>
+                    <p class="text-body-secondary">
+                        Intéressé par un échange, un stage ou une alternance ? Écrivez-moi !
+                    </p>
+                    <div class="d-flex flex-wrap justify-content-center gap-3">
+                        <a class="btn btn-contrast" href="mailto:wladimir.bigand@gmail.com">
+                            <i class="bi bi-envelope"></i> Envoyer un email
+                        </a>
+                        <a class="btn btn-contrast-outline" href="https://www.linkedin.com/in/wladimir-bigand-12a38930b"
+                            target="_blank" rel="noopener">
+                            <i class="bi bi-linkedin"></i> LinkedIn
+                        </a>
+                        <a class="btn btn-contrast-outline" href="https://github.com/wladimirbigand" target="_blank"
+                            rel="noopener">
+                            <i class="bi bi-github"></i> GitHub
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-4 border-top border-secondary-subtle">
+        <div class="container text-center small text-body-secondary">
+            <span>© <span id="year"></span> Wladimir Bigand — Tous droits réservés.</span>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById("year").textContent = new Date().getFullYear();
+
+        const themeBtn = document.getElementById("themeBtn");
+        const nav = document.getElementById("navbar");
+        const storedTheme = localStorage.getItem("theme");
+
+        const setTheme = (theme) => {
+            document.documentElement.setAttribute("data-bs-theme", theme);
+            localStorage.setItem("theme", theme);
+            themeBtn.innerHTML = theme === "dark"
+                ? '<i class="bi bi-moon-stars"></i>'
+                : '<i class="bi bi-sun"></i>';
+
+            // Ajuste la navbar pour le contraste
+            nav.classList.toggle("navbar-dark", theme === "dark");
+            nav.classList.toggle("navbar-light", theme === "light");
+        };
+
+        setTheme(storedTheme || "dark");
+
+        themeBtn.addEventListener("click", () => {
+            const current = document.documentElement.getAttribute("data-bs-theme");
+            setTheme(current === "dark" ? "light" : "dark");
+        });
+
+        const scrollSpy = new bootstrap.ScrollSpy(document.body, {
+            target: "#navbar",
+            offset: 100,
+        });
+    </script>
+
 </body>
 
 </html>

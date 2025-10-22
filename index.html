@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr" data-bs-theme="dark">
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -16,61 +17,264 @@
     <link rel="shortcut icon" href="Assets/favicon.ico" type="image/x-icon">
     <link rel="manifest" href="Assets/site.webmanifest">
     <style>
-        :root{--accent:#6ee7b7;--accent-2:#60a5fa}
-        html{scroll-behavior:smooth}
-        html,body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,"Fira Sans","Droid Sans","Helvetica Neue",Arial,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol",sans-serif}
-        body::before{content:"";position:fixed;inset:-10% -10% auto -10%;height:60vh;z-index:-1;background:radial-gradient(1000px 500px at 10% 10%,rgba(96,165,250,.25),transparent),radial-gradient(800px 400px at 90% 0%,rgba(110,231,183,.18),transparent);filter:blur(40px)}
-        section{padding:84px 0}
-        .section-title{letter-spacing:.02em;font-weight:800}
-        .underline{position:relative;display:inline-block}
-        .underline::after{content:"";position:absolute;left:0;right:0;bottom:-.3rem;height:.35rem;border-radius:.35rem;background:linear-gradient(90deg,var(--accent),var(--accent-2));opacity:.7}
-        .brand-dot{color:var(--accent)}
-        :target{scroll-margin-top:84px}
-        [data-bs-theme="dark"]{--surface-1:rgba(255,255,255,.06);--surface-border:rgba(255,255,255,.12);--surface-border-hover:rgba(255,255,255,.18);--badge-bg:rgba(255,255,255,.08);--badge-border:rgba(255,255,255,.30);--hero-avatar-bg:rgba(255,255,255,.08);--hero-avatar-border:rgba(255,255,255,.15);--btn-contrast-bg:#fff;--btn-contrast-color:#111;--btn-contrast-border:#fff;--btn-contrast-outline-color:#fff;--btn-contrast-outline-border:rgba(255,255,255,.55);--timeline-border:rgba(255,255,255,.28)}
-        [data-bs-theme="light"]{--surface-1:rgba(0,0,0,.03);--surface-border:rgba(0,0,0,.08);--surface-border-hover:rgba(0,0,0,.18);--badge-bg:rgba(0,0,0,.06);--badge-border:rgba(0,0,0,.25);--hero-avatar-bg:rgba(0,0,0,.04);--hero-avatar-border:rgba(0,0,0,.12);--btn-contrast-bg:#111;--btn-contrast-color:#fff;--btn-contrast-border:#111;--btn-contrast-outline-color:#111;--btn-contrast-outline-border:rgba(0,0,0,.5);--timeline-border:rgba(0,0,0,.20)}
-        [data-bs-theme="light"] body::before{opacity:.45;filter:blur(50px)}
-        .glass{background:var(--surface-1)!important;border:1px solid var(--surface-border)!important;backdrop-filter:blur(8px)}
-        .card.hover-lift{transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease;border-color:var(--surface-border)}
-        .card.hover-lift:hover{transform:translateY(-4px);box-shadow:0 10px 30px rgba(0,0,0,.15);border-color:var(--surface-border-hover)}
-        .hero-avatar{width:84px;height:84px;border-radius:999px;display:grid;place-items:center;font-size:40px;background:var(--hero-avatar-bg);border:1px solid var(--hero-avatar-border);object-fit:cover}
-        .tech-badge{border:1px dashed var(--badge-border);background:var(--badge-bg);color:inherit}
-        .btn-contrast{background-color:var(--btn-contrast-bg)!important;color:var(--btn-contrast-color)!important;border-color:var(--btn-contrast-border)!important}
-        .btn-contrast:hover{opacity:.92}
-        .btn-contrast-outline{background:transparent!important;color:var(--btn-contrast-outline-color)!important;border-color:var(--btn-contrast-outline-border)!important}
-        .btn-contrast-outline:hover{background:var(--btn-contrast-outline-color)!important;color:#fff!important}
-        .link-contrast{text-decoration:none}
-        .link-contrast:hover{text-decoration:underline}
-        .timeline{border-left:2px solid var(--timeline-border);padding-left:1rem}
-        .timeline .dot{width:.8rem;height:.8rem;border-radius:999px;display:inline-block;margin-right:.5rem;background:linear-gradient(90deg,var(--accent),var(--accent-2));box-shadow:0 0 0 3px var(--bs-body-bg)}
-        .cc-card{background:color-mix(in oklab,var(--bs-body-bg) 76%,transparent);border-color:var(--bs-border-color);backdrop-filter:blur(10px) saturate(1.2)}
-        .cc-accent{height:4px;background:linear-gradient(90deg,var(--accent),var(--accent-2));border-top-left-radius:1rem;border-top-right-radius:1rem}
-        .btn-accent{--_g:linear-gradient(90deg,var(--accent),var(--accent-2));background-image:var(--_g);border:0;color:#0d1117;font-weight:600;box-shadow:0 .5rem 1rem rgba(0,0,0,.18),inset 0 0 0 1px rgba(255,255,255,.22);transition:transform .15s ease,filter .15s ease,box-shadow .15s ease}
-        .btn-accent:hover{filter:brightness(1.05);transform:translateY(-1px)}
-        .btn-accent:active{transform:translateY(0)}
-        .btn-soft{background:var(--surface-1);border:1px solid var(--surface-border);color:var(--bs-body-color);transition:background .15s ease,border-color .15s ease,transform .15s ease}
-        .btn-soft:hover{background:color-mix(in oklab,var(--surface-1) 70%,var(--bs-body-bg));border-color:var(--surface-border-hover);transform:translateY(-1px)}
-        .btn-soft:active{transform:translateY(0)}
-        #cookie-banner{opacity:0;transform:translate(-50%,12px)}
-        #cookie-banner.show{opacity:1;transform:translate(-50%,0);transition:transform .28s ease,opacity .28s ease}
+        :root {
+            --accent: #6ee7b7;
+            --accent-2: #60a5fa
+        }
+
+        html {
+            scroll-behavior: smooth
+        }
+
+        html,
+        body {
+            font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: -10% -10% auto -10%;
+            height: 60vh;
+            z-index: -1;
+            background: radial-gradient(1000px 500px at 10% 10%, rgba(96, 165, 250, .25), transparent), radial-gradient(800px 400px at 90% 0%, rgba(110, 231, 183, .18), transparent);
+            filter: blur(40px)
+        }
+
+        section {
+            padding: 84px 0
+        }
+
+        .section-title {
+            letter-spacing: .02em;
+            font-weight: 800
+        }
+
+        .underline {
+            position: relative;
+            display: inline-block
+        }
+
+        .underline::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: -.3rem;
+            height: .35rem;
+            border-radius: .35rem;
+            background: linear-gradient(90deg, var(--accent), var(--accent-2));
+            opacity: .7
+        }
+
+        .brand-dot {
+            color: var(--accent)
+        }
+
+        :target {
+            scroll-margin-top: 84px
+        }
+
+        [data-bs-theme="dark"] {
+            --surface-1: rgba(255, 255, 255, .06);
+            --surface-border: rgba(255, 255, 255, .12);
+            --surface-border-hover: rgba(255, 255, 255, .18);
+            --badge-bg: rgba(255, 255, 255, .08);
+            --badge-border: rgba(255, 255, 255, .30);
+            --hero-avatar-bg: rgba(255, 255, 255, .08);
+            --hero-avatar-border: rgba(255, 255, 255, .15);
+            --btn-contrast-bg: #fff;
+            --btn-contrast-color: #111;
+            --btn-contrast-border: #fff;
+            --btn-contrast-outline-color: #fff;
+            --btn-contrast-outline-border: rgba(255, 255, 255, .55);
+            --timeline-border: rgba(255, 255, 255, .28)
+        }
+
+        [data-bs-theme="light"] {
+            --surface-1: rgba(0, 0, 0, .03);
+            --surface-border: rgba(0, 0, 0, .08);
+            --surface-border-hover: rgba(0, 0, 0, .18);
+            --badge-bg: rgba(0, 0, 0, .06);
+            --badge-border: rgba(0, 0, 0, .25);
+            --hero-avatar-bg: rgba(0, 0, 0, .04);
+            --hero-avatar-border: rgba(0, 0, 0, .12);
+            --btn-contrast-bg: #111;
+            --btn-contrast-color: #fff;
+            --btn-contrast-border: #111;
+            --btn-contrast-outline-color: #111;
+            --btn-contrast-outline-border: rgba(0, 0, 0, .5);
+            --timeline-border: rgba(0, 0, 0, .20)
+        }
+
+        [data-bs-theme="light"] body::before {
+            opacity: .45;
+            filter: blur(50px)
+        }
+
+        .glass {
+            background: var(--surface-1) !important;
+            border: 1px solid var(--surface-border) !important;
+            backdrop-filter: blur(8px)
+        }
+
+        .card.hover-lift {
+            transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+            border-color: var(--surface-border)
+        }
+
+        .card.hover-lift:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, .15);
+            border-color: var(--surface-border-hover)
+        }
+
+        .hero-avatar {
+            width: 84px;
+            height: 84px;
+            border-radius: 999px;
+            display: grid;
+            place-items: center;
+            font-size: 40px;
+            background: var(--hero-avatar-bg);
+            border: 1px solid var(--hero-avatar-border);
+            object-fit: cover
+        }
+
+        .tech-badge {
+            border: 1px dashed var(--badge-border);
+            background: var(--badge-bg);
+            color: inherit
+        }
+
+        .btn-contrast {
+            background-color: var(--btn-contrast-bg) !important;
+            color: var(--btn-contrast-color) !important;
+            border-color: var(--btn-contrast-border) !important
+        }
+
+        .btn-contrast:hover {
+            opacity: .92
+        }
+
+        .btn-contrast-outline {
+            background: transparent !important;
+            color: var(--btn-contrast-outline-color) !important;
+            border-color: var(--btn-contrast-outline-border) !important
+        }
+
+        .btn-contrast-outline:hover {
+            background: var(--btn-contrast-outline-color) !important;
+            color: var(--btn-contrast-color) !important;
+        }
+
+        .link-contrast {
+            text-decoration: none
+        }
+
+        .link-contrast:hover {
+            text-decoration: underline
+        }
+
+        .timeline {
+            border-left: 2px solid var(--timeline-border);
+            padding-left: 1rem
+        }
+
+        .timeline .dot {
+            width: .8rem;
+            height: .8rem;
+            border-radius: 999px;
+            display: inline-block;
+            margin-right: .5rem;
+            background: linear-gradient(90deg, var(--accent), var(--accent-2));
+            box-shadow: 0 0 0 3px var(--bs-body-bg)
+        }
+
+        .cc-card {
+            background: color-mix(in oklab, var(--bs-body-bg) 76%, transparent);
+            border-color: var(--bs-border-color);
+            backdrop-filter: blur(10px) saturate(1.2)
+        }
+
+        .cc-accent {
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-2));
+            border-top-left-radius: 1rem;
+            border-top-right-radius: 1rem
+        }
+
+        .btn-accent {
+            --_g: linear-gradient(90deg, var(--accent), var(--accent-2));
+            background-image: var(--_g);
+            border: 0;
+            color: #0d1117;
+            font-weight: 600;
+            box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .18), inset 0 0 0 1px rgba(255, 255, 255, .22);
+            transition: transform .15s ease, filter .15s ease, box-shadow .15s ease
+        }
+
+        .btn-accent:hover {
+            filter: brightness(1.05);
+            transform: translateY(-1px)
+        }
+
+        .btn-accent:active {
+            transform: translateY(0)
+        }
+
+        .btn-soft {
+            background: var(--surface-1);
+            border: 1px solid var(--surface-border);
+            color: var(--bs-body-color);
+            transition: background .15s ease, border-color .15s ease, transform .15s ease
+        }
+
+        .btn-soft:hover {
+            background: color-mix(in oklab, var(--surface-1) 70%, var(--bs-body-bg));
+            border-color: var(--surface-border-hover);
+            transform: translateY(-1px)
+        }
+
+        .btn-soft:active {
+            transform: translateY(0)
+        }
+
+        #cookie-banner {
+            opacity: 0;
+            transform: translate(-50%, 12px)
+        }
+
+        #cookie-banner.show {
+            opacity: 1;
+            transform: translate(-50%, 0);
+            transition: transform .28s ease, opacity .28s ease
+        }
     </style>
 </head>
+
 <body data-bs-spy="scroll" data-bs-target="#navbar" data-bs-smooth-scroll="true">
     <nav id="navbar" class="navbar navbar-expand-lg bg-body-tertiary fixed-top glass">
         <div class="container">
             <a class="navbar-brand fw-bold" href="#home">Wladimir<span class="brand-dot">.</span>B</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navContent" aria-controls="navContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navContent"
+                aria-controls="navContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="#timeline">Parcours</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#formation">Formation</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#entreprise">Entreprise</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#epreuves">Épreuves</a></li>
                     <li class="nav-item"><a class="nav-link" href="#projects">Projets</a></li>
                     <li class="nav-item"><a class="nav-link" href="#skills">Compétences</a></li>
                     <li class="nav-item"><a class="nav-link" href="#certifications">Certifications</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#timeline">Parcours</a></li>
                     <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
                 </ul>
                 <div class="d-flex gap-2 ms-lg-3">
-                    <a class="btn btn-contrast-outline btn-sm" href="/Assets/CV Wladimir Bigand.pdf" target="_blank" rel="noopener" title="Télécharger le CV">
+                    <a class="btn btn-contrast-outline btn-sm" href="/Assets/CV Wladimir Bigand.pdf" target="_blank"
+                        rel="noopener" title="Télécharger le CV">
                         <i class="bi bi-file-earmark-arrow-down"></i> CV
                     </a>
                     <button id="themeBtn" class="btn btn-sm theme-toggle" type="button" aria-label="Basculer le thème">
@@ -86,10 +290,11 @@
             <div class="row align-items-center g-4">
                 <div class="col-lg-7">
                     <div class="d-flex align-items-center gap-3 mb-4">
-                        <img src="/Assets/Profil.jpg" alt="Photo de Wladimir Bigand" class="hero-avatar" />
+                        <img src="Assets\Profil.jpg" alt="Photo de Wladimir Bigand" class="hero-avatar" />
                         <div>
                             <h1 class="display-5 fw-800 mb-1">Wladimir Bigand</h1>
-                            <p class="text-secondary mb-0">Étudiant BTS SIO (SISR) • Aspirant DevSecOps • Passionné de vidéo & drones</p>
+                            <p class="text-secondary mb-0">Étudiant BTS SIO (SISR) • Aspirant DevSecOps • Passionné de
+                                vidéo & drones</p>
                         </div>
                     </div>
                     <div class="d-flex flex-wrap gap-2 mb-4">
@@ -116,7 +321,10 @@
                     <div class="card glass hover-lift">
                         <div class="card-body">
                             <h5 class="card-title">À propos de moi</h5>
-                            <p class="mb-3">Je suis actuellement étudiant en <strong>BTS SIO (SISR)</strong>, je suis <strong>passionné</strong> par l'informatique depuis tout petit, et récemment j'ai développé de l'apétence pour la <strong>cybersécurité</strong> mais également pour le <strong>développement web</strong>.</p>
+                            <p class="mb-3">Je suis actuellement étudiant en <strong>BTS SIO (SISR)</strong>, je suis
+                                <strong>passionné</strong> par l'informatique depuis tout petit, et récemment j'ai
+                                développé de l'apétence pour la <strong>cybersécurité</strong> mais également pour le
+                                <strong>développement web</strong>.</p>
                             <ul class="mb-0 small text-body-secondary">
                                 <li>Web : sites vitrines légers (vue utilisateur)</li>
                                 <li>SISR : réseau & systèmes (TCP/IP, Windows, Linux)</li>
@@ -129,19 +337,368 @@
         </div>
     </header>
 
+    <section id="timeline" class="bg-body-tertiary">
+        <div class="container">
+            <h2 class="section-title h1 mb-4">Parcours</h2>
+            <ol class="timeline list-unstyled m-0">
+                <li class="mb-4">
+                    <span class="dot"></span>
+                    <strong>BTS SIO (SISR)</strong> — 2025 - MAINTENANT · Réseau, systèmes, sécurité
+                    <div class="text-body-secondary small ms-4">Bientôt <i class="bi bi-hourglass"></i></div>
+                </li>
+                <li class="mb-4">
+                    <span class="dot"></span>
+                    <strong>ESIEA (Campus Numérique 47) – Agen</strong> — 2023 – 2025 · Étudiant Informatique
+                    <div class="text-body-secondary small ms-4">
+                        <u>Projets informatiques</u> :
+                        <ul class="mt-2 mb-2">
+                            <li><strong>Accorderie Agenaise</strong> – Site web statique (HTML, CSS, JS)</li>
+                            <li><strong>Diab’Landes</strong> – Site web dynamique (HTML, CSS, JS, PHP, SQL)</li>
+                            <li><strong>Centre Jean Pouzet</strong> – Site web statique + admin (HTML, CSS, JS)</li>
+                        </ul>
+                        <u>Projets de formations humaines</u> :
+                        <ul class="mt-2 mb-2">
+                            <li>BATUC’FANFAR’ BRASS-BAND – Création print</li>
+                            <li>Philippides – Communication visuelle</li>
+                            <li>EVAD – Communication print</li>
+                        </ul>
+                        <u>Certifications</u> : TOEIC, Voltaire.
+                    </div>
+                </li>
+                <li class="mb-4">
+                    <span class="dot"></span>
+                    <strong>Institution Sainte-Catherine – Villeneuve-sur-Lot</strong> — 2021 – 2023
+                    <div class="text-body-secondary small ms-4">Baccalauréat Technologique – Énergie & Environnement.
+                    </div>
+                </li>
+                <li class="mb-2">
+                    <span class="dot"></span>
+                    <strong>Collège La Fontaine des Prés – Senlis</strong> — 2019 – 2021
+                    <div class="text-body-secondary small ms-4">Brevet des collèges – Mention Très Bien.</div>
+                </li>
+            </ol>
+        </div>
+    </section>
+
+    <section id="formation" class="bg-body-tertiary">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-end mb-4">
+                <h2 class="section-title h1 m-0">Formation</h2>
+                <!-- Lien officiel du campus -->
+                <a class="link-contrast" href="#" target="_blank" rel="noopener">
+                    <i class="bi bi-box-arrow-up-right"></i> Site du Campus Ermitage
+                </a>
+            </div>
+
+            <!-- Intro Campus + Logo -->
+            <div class="row g-4 align-items-center mb-2">
+                <div class="col-lg-8">
+                    <div class="card glass h-100 hover-lift">
+                        <div class="card-body">
+                            <h5 class="card-title mb-2">Le Campus Ermitage (ex-UFA47)</h5>
+                            <p class="text-body-secondary mb-3">
+                                Le <strong>Campus Ermitage</strong>, anciennement UFA47, est un partenariat entre
+                                <strong>L’Ermitage</strong> et l’<strong>Institution Sainte Catherine</strong>, impulsé
+                                par la <strong>DDEC47</strong>.
+                                Il est rattaché au <strong>CFA Aspect Aquitaine</strong> à Bordeaux.
+                            </p>
+                            <p class="mb-0">
+                                Il propose <strong>4 BTS</strong> et un <strong>Bachelor</strong> en alternance sur Agen
+                                et répond aux besoins du territoire
+                                en créant un <strong>parcours Numérique</strong> de la Seconde au BTS, et prochainement
+                                jusqu’à <strong>BAC+3</strong> et <strong>BAC+5</strong>.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="card glass h-100 hover-lift text-center p-3">
+                        <!-- Remplace le src par ton chemin -->
+                        <img src="https://garonnhack.fr/wp-content/uploads/2024/10/LOGO-Campus-Ermitage-2.webp" alt="Logo Campus Ermitage" class="img-fluid mx-auto"
+                            style="max-height: 90px; object-fit: contain;">
+                        <div class="mt-3">
+                            <span class="badge rounded-pill tech-badge">Alternance</span>
+                            <span class="badge rounded-pill tech-badge">Agen</span>
+                            <span class="badge rounded-pill tech-badge">CFA Aspect Aquitaine</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Programmes -->
+            <div class="row g-4">
+                <!-- SAM -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card glass h-100 hover-lift">
+                        <div class="card-body">
+                            <h5 class="card-title"><i class="bi bi-people"></i> BTS SAM</h5>
+                            <p class="text-body-secondary small mb-2">
+                                <strong>Support à l’Action Managériale</strong> : assistance aux cadres, compétences
+                                relationnelles, organisationnelles et administratives.
+                            </p>
+                            <ul class="small mb-0">
+                                <li>Gestion & coordination</li>
+                                <li>Communication pro</li>
+                                <li>Outils bureautiques</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PI -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card glass h-100 hover-lift">
+                        <div class="card-body">
+                            <h5 class="card-title"><i class="bi bi-building"></i> BTS PI</h5>
+                            <p class="text-body-secondary small mb-2">
+                                <strong>Professions Immobilières</strong> : comptabilité, transaction, gestion locative
+                                et
+                                dimensions juridiques de la profession.
+                            </p>
+                            <ul class="small mb-0">
+                                <li>Transaction & location</li>
+                                <li>Gestion locative</li>
+                                <li>Aspects juridiques</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CJN -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card glass h-100 hover-lift">
+                        <div class="card-body">
+                            <h5 class="card-title"><i class="bi bi-file-earmark-text"></i> BTS CJN</h5>
+                            <p class="text-body-secondary small mb-2">
+                                <strong>Collaborateur Juriste Notarial</strong> : pour les fonctions de collaborateur
+                                notarial
+                                et de formaliste.
+                            </p>
+                            <ul class="small mb-0">
+                                <li>Actes & formalités</li>
+                                <li>Procédures notariales</li>
+                                <li>Veille juridique</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SIO -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card glass h-100 hover-lift">
+                        <div class="card-body">
+                            <h5 class="card-title"><i class="bi bi-hdd-network"></i> BTS SIO</h5>
+                            <p class="text-body-secondary small mb-2">
+                                <strong>Services Informatiques aux Organisations</strong> : préparation aux métiers
+                                d’<em>administrateur réseau</em> ou de <em>développeur</em> (options SISR/SLAM).
+                            </p>
+                            <ul class="small mb-0">
+                                <li>Réseaux & systèmes (SISR)</li>
+                                <li>Développement (SLAM)</li>
+                                <li>Sécurité & support</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bachelor / Parcours numérique -->
+            <div class="row g-4 mt-1">
+                <div class="col-12">
+                    <div class="card glass hover-lift">
+                        <div
+                            class="card-body d-flex flex-column flex-lg-row align-items-start align-items-lg-center gap-3">
+                            <i class="bi bi-mortarboard" style="font-size:1.6rem;"></i>
+                            <div class="flex-grow-1">
+                                <h5 class="card-title mb-1">Bachelor & parcours Numérique</h5>
+                                <p class="text-body-secondary mb-0">
+                                    Le Campus Ermitage développe un <strong>parcours Numérique</strong> continu :
+                                    de la <strong>Seconde</strong> au <strong>BTS</strong>, et prochainement jusqu’à
+                                    <strong>BAC+3</strong> et <strong>BAC+5</strong>.
+                                </p>
+                            </div>
+                            <div class="d-flex flex-wrap gap-2">
+                                <span class="badge rounded-pill tech-badge">Parcours continu</span>
+                                <span class="badge rounded-pill tech-badge">BAC+3</span>
+                                <span class="badge rounded-pill tech-badge">BAC+5</span>
+                                <span class="badge rounded-pill tech-badge">Alternance</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+    <section id="company" class="bg-body-tertiary">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-end mb-4">
+                <h2 class="section-title h1 m-0">Mon entreprise</h2>
+                <!-- Lien vers site ou LinkedIn -->
+                <a class="link-contrast" href="https://lot-et-garonne-numerique.fr" target="_blank" rel="noopener">
+                    <i class="bi bi-box-arrow-up-right"></i> Site
+                </a>
+            </div>
+
+            <div class="row g-4">
+                <!-- Carte présentation -->
+                <div class="col-lg-7">
+                    <div class="card glass h-100 hover-lift">
+                        <div class="card-body">
+                            <h5 class="card-title">Lot-et-Garonne Numérique</h5>
+                            <p class="text-body-secondary small mb-3">
+                                Syndicat mixte en charge de l’aménagement numérique du territoire (fibre, services
+                                numériques, données ouvertes).
+                            </p>
+
+                            <div class="row g-3">
+                                <div class="col-sm-6">
+                                    <ul class="small mb-0">
+                                        <li><strong>Rôle :</strong> Dev web / intégration</li>
+                                        <li><strong>Données :</strong> Collecte & mise en forme</li>
+                                        <li><strong>Stack :</strong> HTML/CSS/JS, Widgets ODS</li>
+                                    </ul>
+                                </div>
+                                <div class="col-sm-6">
+                                    <ul class="small mb-0">
+                                        <li><strong>Livrables :</strong> Portail data, pages thématiques</li>
+                                        <li><strong>Qualité :</strong> Perf & accessibilité</li>
+                                        <li><strong>Collab :</strong> Git/GitLab, tickets</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Carte faits marquants -->
+                <div class="col-lg-5">
+                    <div class="card glass h-100 hover-lift">
+                        <div class="card-body">
+                            <h5 class="card-title">Faits marquants</h5>
+                            <ul class="small mb-3">
+                                <li>Intégration de widgets OpenDataSoft</li>
+                                <li>Tableaux & cartes interactives</li>
+                                <li>Normalisation des jeux de données</li>
+                                <li>Automatisation légère (scripts)</li>
+                            </ul>
+                            <div class="d-flex flex-wrap gap-2">
+                                <span class="badge rounded-pill tech-badge">OpenData</span>
+                                <span class="badge rounded-pill tech-badge">ODS</span>
+                                <span class="badge rounded-pill tech-badge">Accessibilité</span>
+                                <span class="badge rounded-pill tech-badge">SEO/Perf</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="epreuves" class="bg-body-tertiary">
+  <div class="container">
+    <h2 class="section-title h1 mb-4 text-center">Épreuves du BTS SIO (SISR)</h2>
+    <p class="text-center text-body-secondary mb-5">
+      Retrouver ici les principales épreuves professionnelles du BTS SIO, avec les compétences évaluées et les supports associés.
+    </p>
+
+    <div class="row g-4">
+
+      <!-- EF3 -->
+      <div class="col-md-6 col-lg-4">
+        <div class="card glass h-100 hover-lift border-0 shadow-sm">
+          <div class="card-body d-flex flex-column text-center">
+            <div class="mb-3">
+              <i class="bi bi-gear-fill" style="font-size:2.5rem; background:linear-gradient(90deg,var(--accent),var(--accent-2)); -webkit-background-clip:text; -webkit-text-fill-color:transparent;"></i>
+            </div>
+            <h5 class="card-title mb-1 fw-semibold">Épreuve EF3</h5>
+            <p class="text-body-secondary small mb-3">
+              Évaluation des compétences du bloc <strong>« Support et mise à disposition de services informatiques »</strong>.
+            </p>
+            <div class="mt-auto d-flex justify-content-center gap-2">
+              <a href="Assets/Epreuve_EF3.pdf" class="btn btn-sm btn-contrast">
+                <i class="bi bi-download"></i> Télécharger
+              </a>
+              <a href="#" class="btn btn-sm btn-contrast-outline">
+                <i class="bi bi-eye"></i> Aperçu
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- E5 -->
+      <div class="col-md-6 col-lg-4">
+        <div class="card glass h-100 hover-lift border-0 shadow-sm">
+          <div class="card-body d-flex flex-column text-center">
+            <div class="mb-3">
+              <i class="bi bi-hdd-network" style="font-size:2.5rem; background:linear-gradient(90deg,var(--accent-2),var(--accent)); -webkit-background-clip:text; -webkit-text-fill-color:transparent;"></i>
+            </div>
+            <h5 class="card-title mb-1 fw-semibold">Épreuve E5</h5>
+            <p class="text-body-secondary small mb-3">
+              Évaluation du bloc <strong>« Administration des systèmes et des réseaux »</strong> et mise en œuvre des services informatiques.
+            </p>
+            <div class="mt-auto d-flex justify-content-center gap-2">
+              <a href="Assets/Epreuve_E5.pdf" class="btn btn-sm btn-contrast">
+                <i class="bi bi-download"></i> Télécharger
+              </a>
+              <a href="#" class="btn btn-sm btn-contrast-outline">
+                <i class="bi bi-eye"></i> Aperçu
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- E6 -->
+      <div class="col-md-6 col-lg-4">
+        <div class="card glass h-100 hover-lift border-0 shadow-sm">
+          <div class="card-body d-flex flex-column text-center">
+            <div class="mb-3">
+              <i class="bi bi-person-workspace" style="font-size:2.5rem; background:linear-gradient(90deg,var(--accent),var(--accent-2)); -webkit-background-clip:text; -webkit-text-fill-color:transparent;"></i>
+            </div>
+            <h5 class="card-title mb-1 fw-semibold">Épreuve E6</h5>
+            <p class="text-body-secondary small mb-3">
+              Épreuve orale de 20 minutes sur la <strong>démarche de développement de compétences complémentaires</strong> en lien avec le projet professionnel.
+            </p>
+            <div class="mt-auto d-flex justify-content-center gap-2">
+              <a href="Assets/Epreuve_E6.pdf" class="btn btn-sm btn-contrast">
+                <i class="bi bi-download"></i> Télécharger
+              </a>
+              <a href="#" class="btn btn-sm btn-contrast-outline">
+                <i class="bi bi-eye"></i> Aperçu
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
     <section id="projects" class="bg-body-tertiary">
         <div class="container">
             <div class="d-flex justify-content-between align-items-end mb-4">
                 <h2 class="section-title h1 m-0">Projets</h2>
-                <a class="link-contrast" href="https://github.com/wladimirbigand" target="_blank" rel="noopener"><i class="bi bi-github"></i> Tous les dépôts</a>
+                <a class="link-contrast" href="https://github.com/wladimirbigand" target="_blank" rel="noopener"><i
+                        class="bi bi-github"></i> Tous les dépôts</a>
             </div>
             <div class="row g-4">
                 <div class="col-md-6 col-lg-4">
                     <div class="card hover-lift h-100">
-                        <img src="https://images.squarespace-cdn.com/content/v1/6745ee8fde9e7b64f3827ac7/1739921270243-TIWX2J1HMA3OYZK79CBP/image-asset.jpeg" class="card-img-top" alt="aperçu projet" loading="lazy" />
+                        <img src="https://images.squarespace-cdn.com/content/v1/6745ee8fde9e7b64f3827ac7/1739921270243-TIWX2J1HMA3OYZK79CBP/image-asset.jpeg"
+                            class="card-img-top" alt="aperçu projet" loading="lazy" />
                         <div class="card-body d-flex flex-column">
                             <h5 class="card-title">Portfolio</h5>
-                            <p class="card-text text-body-secondary">Site statique optimisé — HTML/CSS/JS, Bootstrap Icons, déployé sur GitHub Pages.</p>
+                            <p class="card-text text-body-secondary">Site statique optimisé — HTML/CSS/JS, Bootstrap
+                                Icons, déployé sur GitHub Pages.</p>
                             <div class="mt-auto d-flex gap-2 flex-wrap small">
                                 <span class="badge rounded-pill text-bg-dark">HTML</span>
                                 <span class="badge rounded-pill text-bg-dark">CSS</span>
@@ -149,17 +706,23 @@
                             </div>
                         </div>
                         <div class="card-footer d-flex gap-2">
-                            <a class="btn btn-sm btn-contrast" href="https://wladimirbigand.github.io" target="_blank" rel="noopener"><i class="bi bi-box-arrow-up-right"></i> Démo</a>
-                            <a class="btn btn-sm btn-contrast-outline" href="https://github.com/wladimirbigand/wladimirbigand.github.io/blob/main/index.html" target="_blank" rel="noopener"><i class="bi bi-github"></i> Code</a>
+                            <a class="btn btn-sm btn-contrast" href="https://wladimirbigand.github.io" target="_blank"
+                                rel="noopener"><i class="bi bi-box-arrow-up-right"></i> Démo</a>
+                            <a class="btn btn-sm btn-contrast-outline"
+                                href="https://github.com/wladimirbigand/wladimirbigand.github.io/blob/main/index.html"
+                                target="_blank" rel="noopener"><i class="bi bi-github"></i> Code</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-4">
                     <div class="card hover-lift h-100">
-                        <img src="https://images.petitbleu.fr/api/v1/images/view/645a3bfc0888ec257327edbc/large/image.jpg?v=1" class="card-img-top" alt="Site vitrine de l'association Jean Pouzet" loading="lazy" />
+                        <img src="https://images.petitbleu.fr/api/v1/images/view/645a3bfc0888ec257327edbc/large/image.jpg?v=1"
+                            class="card-img-top" alt="Site vitrine de l'association Jean Pouzet" loading="lazy" />
                         <div class="card-body d-flex flex-column">
                             <h5 class="card-title">Association Jean Pouzet — Site vitrine avec menu Admin</h5>
-                            <p class="card-text text-body-secondary">Site avec <strong>backend</strong> et <strong>interface administrateur sécurisée</strong> : authentification, gestion des contenus, médias et paramètres. Gestion autonome de leur site.</p>
+                            <p class="card-text text-body-secondary">Site avec <strong>backend</strong> et
+                                <strong>interface administrateur sécurisée</strong> : authentification, gestion des
+                                contenus, médias et paramètres. Gestion autonome de leur site.</p>
                             <div class="mt-auto d-flex gap-2 flex-wrap small">
                                 <span class="badge rounded-pill text-bg-dark">HTML</span>
                                 <span class="badge rounded-pill text-bg-dark">CSS</span>
@@ -170,17 +733,23 @@
                             </div>
                         </div>
                         <div class="card-footer d-flex gap-2">
-                            <a class="btn btn-sm btn-contrast disabled" aria-disabled="true"><i class="bi bi-hourglass"></i> Bientôt</a>
-                            <a class="btn btn-sm btn-contrast-outline" href="https://github.com/wladimirbigand/CentreJeanPouzet.github.io.git" target="_blank" rel="noopener"><i class="bi bi-github"></i> Code</a>
+                            <a class="btn btn-sm btn-contrast disabled" aria-disabled="true"><i
+                                    class="bi bi-hourglass"></i> Bientôt</a>
+                            <a class="btn btn-sm btn-contrast-outline"
+                                href="https://github.com/wladimirbigand/CentreJeanPouzet.github.io.git" target="_blank"
+                                rel="noopener"><i class="bi bi-github"></i> Code</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-4">
                     <div class="card hover-lift h-100">
-                        <img src="Assets/DiabLandes.png" class="card-img-top" alt="Site vitrine de l'association Jean Pouzet" loading="lazy" />
+                        <img src="Assets/DiabLandes.png" class="card-img-top"
+                            alt="Site vitrine de l'association Jean Pouzet" loading="lazy" />
                         <div class="card-body d-flex flex-column">
                             <h5 class="card-title">Association Diab'Landes — Site vitrine avec menu Admin</h5>
-                            <p class="card-text text-body-secondary"><strong>Description</strong> : Site pour une association d'enfant malade du diabète de type 1.<br><strong>Objectif</strong> : Permettre une gestion autonome de leur site.</p>
+                            <p class="card-text text-body-secondary"><strong>Description</strong> : Site pour une
+                                association d'enfant malade du diabète de type 1.<br><strong>Objectif</strong> :
+                                Permettre une gestion autonome de leur site.</p>
                             <div class="mt-auto d-flex gap-2 flex-wrap small">
                                 <span class="badge rounded-pill text-bg-dark">HTML</span>
                                 <span class="badge rounded-pill text-bg-dark">CSS</span>
@@ -190,9 +759,14 @@
                             </div>
                         </div>
                         <div class="card-footer d-flex gap-2">
-                            <a class="btn btn-sm btn-contrast disabled" aria-disabled="true"><i class="bi bi-exclamation-circle"></i> Indisponible</a>
-                            <a class="btn btn-sm btn-contrast-outline" href="https://github.com/wladimirbigand/CentreJeanPouzet.github.io.git" target="_blank" rel="noopener"><i class="bi bi-github"></i> Code</a>
-                            <a class="btn btn-sm btn-contrast-outline" href="https://www.esiea.fr/muwd-meet-up-with-diabetics-developper-un-site-web-pour-lassociation-diablandes" target="_blank" rel="noopener"><i class="bi bi-link-45deg"></i> Article</a>
+                            <a class="btn btn-sm btn-contrast disabled" aria-disabled="true"><i
+                                    class="bi bi-exclamation-circle"></i> Indisponible</a>
+                            <a class="btn btn-sm btn-contrast-outline"
+                                href="https://github.com/wladimirbigand/CentreJeanPouzet.github.io.git" target="_blank"
+                                rel="noopener"><i class="bi bi-github"></i> Code</a>
+                            <a class="btn btn-sm btn-contrast-outline"
+                                href="https://www.esiea.fr/muwd-meet-up-with-diabetics-developper-un-site-web-pour-lassociation-diablandes"
+                                target="_blank" rel="noopener"><i class="bi bi-link-45deg"></i> Article</a>
                         </div>
                     </div>
                 </div>
@@ -204,7 +778,7 @@
 
     <section id="skills" class="bg-body-tertiary">
         <div class="container">
-            <h2 class="section-title h1 mb-4 text-center">Compétences</h2>
+            <h2 class="section-title h1 mb-4 justify text-center">Compétences</h2>
             <div class="row g-4">
                 <div class="col-md-4">
                     <div class="card glass h-100 hover-lift">
@@ -268,7 +842,8 @@
                     <div class="card glass h-100 hover-lift">
                         <div class="card-body">
                             <h5 class="card-title"><i class="bi bi-patch-check"></i> TOEIC</h5>
-                            <p class="text-body-secondary small mb-2"><strong>ETS</strong> — Score : <em>à définir</em> · Année : <em>2025</em></p>
+                            <p class="text-body-secondary small mb-2"><strong>ETS</strong> — Score : <em>à définir</em>
+                                · Année : <em>2025</em></p>
                             <div class="d-flex flex-wrap gap-2">
                                 <span class="badge rounded-pill tech-badge">Listening</span>
                                 <span class="badge rounded-pill tech-badge">Reading</span>
@@ -281,7 +856,8 @@
                     <div class="card glass h-100 hover-lift">
                         <div class="card-body">
                             <h5 class="card-title"><i class="bi bi-award"></i> Certificat Voltaire</h5>
-                            <p class="text-body-secondary small mb-2"><strong>Projet Voltaire</strong> — Score : <em>714 points</em> · Année : <em>2025</em></p>
+                            <p class="text-body-secondary small mb-2"><strong>Projet Voltaire</strong> — Score : <em>714
+                                    points</em> · Année : <em>2025</em></p>
                             <div class="d-flex flex-wrap gap-2">
                                 <span class="badge rounded-pill tech-badge">Orthographe</span>
                                 <span class="badge rounded-pill tech-badge">Expression</span>
@@ -294,7 +870,8 @@
                     <div class="card glass h-100 hover-lift">
                         <div class="card-body">
                             <h5 class="card-title"><i class="bi bi-shield-lock"></i> MOOC CNIL</h5>
-                            <p class="text-body-secondary small mb-2"><strong>CNIL</strong> — RGPD : les essentiels · Statut : <em>en cours</em></p>
+                            <p class="text-body-secondary small mb-2"><strong>CNIL</strong> — RGPD : les essentiels ·
+                                Statut : <em>en cours</em></p>
                             <div class="d-flex flex-wrap gap-2">
                                 <span class="badge rounded-pill tech-badge">RGPD</span>
                                 <span class="badge rounded-pill tech-badge">Protection des données</span>
@@ -307,7 +884,8 @@
                     <div class="card glass h-100 border-dashed hover-lift" style="border-style:dashed;">
                         <div class="card-body">
                             <h5 class="card-title"><i class="bi bi-hourglass-split"></i> À venir</h5>
-                            <p class="text-body-secondary small mb-0">D’autres certifications sont prévues (réseau / sécurité / cloud). Restez connectés !</p>
+                            <p class="text-body-secondary small mb-0">D’autres certifications sont prévues (réseau /
+                                sécurité / cloud). Restez connectés !</p>
                         </div>
                     </div>
                 </div>
@@ -316,58 +894,20 @@
         </div>
     </section>
 
-    <section id="timeline" class="bg-body-tertiary">
-        <div class="container">
-            <h2 class="section-title h1 mb-4">Parcours</h2>
-            <ol class="timeline list-unstyled m-0">
-                <li class="mb-4">
-                    <span class="dot"></span>
-                    <strong>BTS SIO (SISR)</strong> — 2025 - MAINTENANT · Réseau, systèmes, sécurité
-                    <div class="text-body-secondary small ms-4">Bientôt <i class="bi bi-hourglass"></i></div>
-                </li>
-                <li class="mb-4">
-                    <span class="dot"></span>
-                    <strong>ESIEA (Campus Numérique 47) – Agen</strong> — 2023 – 2025 · Étudiant Informatique
-                    <div class="text-body-secondary small ms-4">
-                        <u>Projets informatiques</u> :
-                        <ul class="mt-2 mb-2">
-                            <li><strong>Accorderie Agenaise</strong> – Site web statique (HTML, CSS, JS)</li>
-                            <li><strong>Diab’Landes</strong> – Site web dynamique (HTML, CSS, JS, PHP, SQL)</li>
-                            <li><strong>Centre Jean Pouzet</strong> – Site web statique + admin (HTML, CSS, JS)</li>
-                        </ul>
-                        <u>Projets de formations humaines</u> :
-                        <ul class="mt-2 mb-2">
-                            <li>BATUC’FANFAR’ BRASS-BAND – Création print</li>
-                            <li>Philippides – Communication visuelle</li>
-                            <li>EVAD – Communication print</li>
-                        </ul>
-                        <u>Certifications</u> : TOEIC, Voltaire.
-                    </div>
-                </li>
-                <li class="mb-4">
-                    <span class="dot"></span>
-                    <strong>Institution Sainte-Catherine – Villeneuve-sur-Lot</strong> — 2021 – 2023
-                    <div class="text-body-secondary small ms-4">Baccalauréat Technologique – Énergie & Environnement.</div>
-                </li>
-                <li class="mb-2">
-                    <span class="dot"></span>
-                    <strong>Collège La Fontaine des Prés – Senlis</strong> — 2019 – 2021
-                    <div class="text-body-secondary small ms-4">Brevet des collèges – Mention Très Bien.</div>
-                </li>
-            </ol>
-        </div>
-    </section>
-
     <section id="contact">
         <div class="container">
             <div class="row justify-content-center text-center">
                 <div class="col-lg-8">
                     <h2 class="section-title h1 mb-3">Contact</h2>
-                    <p class="text-body-secondary">Intéressé par un échange, un stage ou une alternance ? Écrivez-moi !</p>
+                    <p class="text-body-secondary">Intéressé par un échange, un stage ou une alternance ? Écrivez-moi !
+                    </p>
                     <div class="d-flex flex-wrap justify-content-center gap-3">
-                        <a class="btn btn-contrast" href="mailto:wladimir.bigand@gmail.com"><i class="bi bi-envelope"></i> Envoyer un email</a>
-                        <a class="btn btn-contrast-outline" href="https://www.linkedin.com/in/wladimir-bigand-12a38930b" target="_blank" rel="noopener"><i class="bi bi-linkedin"></i> LinkedIn</a>
-                        <a class="btn btn-contrast-outline" href="https://github.com/wladimirbigand" target="_blank" rel="noopener"><i class="bi bi-github"></i> GitHub</a>
+                        <a class="btn btn-contrast" href="mailto:wladimir.bigand@gmail.com"><i
+                                class="bi bi-envelope"></i> Envoyer un email</a>
+                        <a class="btn btn-contrast-outline" href="https://www.linkedin.com/in/wladimir-bigand-12a38930b"
+                            target="_blank" rel="noopener"><i class="bi bi-linkedin"></i> LinkedIn</a>
+                        <a class="btn btn-contrast-outline" href="https://github.com/wladimirbigand" target="_blank"
+                            rel="noopener"><i class="bi bi-github"></i> GitHub</a>
                     </div>
                 </div>
             </div>
@@ -382,19 +922,21 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        document.getElementById("year").textContent=new Date().getFullYear();
-        const themeBtn=document.getElementById("themeBtn");
-        const nav=document.getElementById("navbar");
-        const storedTheme=localStorage.getItem("theme");
-        const setTheme=(theme)=>{document.documentElement.setAttribute("data-bs-theme",theme);localStorage.setItem("theme",theme);themeBtn.innerHTML=theme==="dark"?'<i class="bi bi-moon-stars"></i>':'<i class="bi bi-sun"></i>';nav.classList.toggle("navbar-dark",theme==="dark");nav.classList.toggle("navbar-light",theme==="light")};
-        setTheme(storedTheme||"dark");
-        themeBtn.addEventListener("click",()=>{const current=document.documentElement.getAttribute("data-bs-theme");setTheme(current==="dark"?"light":"dark")});
-        const scrollSpy=new bootstrap.ScrollSpy(document.body,{target:"#navbar",offset:100});
+        document.getElementById("year").textContent = new Date().getFullYear();
+        const themeBtn = document.getElementById("themeBtn");
+        const nav = document.getElementById("navbar");
+        const storedTheme = localStorage.getItem("theme");
+        const setTheme = (theme) => { document.documentElement.setAttribute("data-bs-theme", theme); localStorage.setItem("theme", theme); themeBtn.innerHTML = theme === "dark" ? '<i class="bi bi-moon-stars"></i>' : '<i class="bi bi-sun"></i>'; nav.classList.toggle("navbar-dark", theme === "dark"); nav.classList.toggle("navbar-light", theme === "light") };
+        setTheme(storedTheme || "dark");
+        themeBtn.addEventListener("click", () => { const current = document.documentElement.getAttribute("data-bs-theme"); setTheme(current === "dark" ? "light" : "dark") });
+        const scrollSpy = new bootstrap.ScrollSpy(document.body, { target: "#navbar", offset: 100 });
     </script>
 
-    <div id="cc-overlay" class="position-fixed start-0 top-0 w-100 h-100" style="background:rgba(0,0,0,.35);backdrop-filter:blur(3px);z-index:1100;display:none;"></div>
+    <div id="cc-overlay" class="position-fixed start-0 top-0 w-100 h-100"
+        style="background:rgba(0,0,0,.35);backdrop-filter:blur(3px);z-index:1100;display:none;"></div>
 
-    <div id="cookie-banner" class="position-fixed bottom-0 start-50 translate-middle-x w-100" style="max-width:1100px; z-index:1110; display:none; padding:1rem;">
+    <div id="cookie-banner" class="position-fixed bottom-0 start-50 translate-middle-x w-100"
+        style="max-width:1100px; z-index:1110; display:none; padding:1rem;">
         <div class="card shadow-lg border rounded-4 cc-card">
             <div class="cc-accent"></div>
             <div class="card-body d-flex gap-3 align-items-start p-4 p-lg-5">
@@ -402,12 +944,16 @@
                 <div class="flex-grow-1">
                     <h5 class="mb-2 fw-semibold">Utilisation des cookies</h5>
                     <p class="mb-3 small text-body-secondary">
-                        J’utilise une mesure d’audience <strong>sans cookies</strong> (Plausible) pour relever le nombre de visiteurs sur ce site.
-                        Vous pouvez accepter ou refuser. <a class="link-contrast" href="/politique-confidentialite.html">En savoir plus</a>.
+                        J’utilise une mesure d’audience <strong>sans cookies</strong> (Plausible) pour relever le nombre
+                        de visiteurs sur ce site.
+                        Vous pouvez accepter ou refuser. <a class="link-contrast"
+                            href="/politique-confidentialite.html">En savoir plus</a>.
                     </p>
                     <div class="d-flex flex-wrap gap-2">
-                        <button id="cookie-accept" class="btn btn-accent btn-sm px-3 py-2"><i class="bi bi-check-circle me-1"></i> Accepter</button>
-                        <button id="cookie-decline" class="btn btn-soft btn-sm px-3 py-2"><i class="bi bi-x-circle me-1"></i> Refuser</button>
+                        <button id="cookie-accept" class="btn btn-accent btn-sm px-3 py-2"><i
+                                class="bi bi-check-circle me-1"></i> Accepter</button>
+                        <button id="cookie-decline" class="btn btn-soft btn-sm px-3 py-2"><i
+                                class="bi bi-x-circle me-1"></i> Refuser</button>
                     </div>
                 </div>
             </div>
@@ -415,7 +961,8 @@
     </div>
 
     <script>
-        (()=>{const KEY='cookie_consent_v2';const DOMAIN='wladimirbigand.fr';const banner=document.getElementById('cookie-banner');const overlay=document.getElementById('cc-overlay');const accept=document.getElementById('cookie-accept');const decline=document.getElementById('cookie-decline');const get=()=>localStorage.getItem(KEY);const set=v=>localStorage.setItem(KEY,v);function show(){overlay.style.display='block';banner.style.display='block';requestAnimationFrame(()=>banner.classList.add('show'))}function hide(){banner.classList.remove('show');overlay.style.display='none';setTimeout(()=>{banner.style.display='none'},220)}function loadPlausible(){if(document.querySelector('script[src*="plausible.io/js/script"]'))return;const s=document.createElement('script');s.defer=true;s.src='https://plausible.io/js/script.js';s.setAttribute('data-domain',DOMAIN);document.head.appendChild(s)}const saved=get();if(!saved)show();if(saved==='accepted')loadPlausible();accept.addEventListener('click',()=>{set('accepted');hide();loadPlausible()});decline.addEventListener('click',()=>{set('declined');hide()});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&banner.style.display==='block')hide()})})();
+        (() => { const KEY = 'cookie_consent_v2'; const DOMAIN = 'wladimirbigand.fr'; const banner = document.getElementById('cookie-banner'); const overlay = document.getElementById('cc-overlay'); const accept = document.getElementById('cookie-accept'); const decline = document.getElementById('cookie-decline'); const get = () => localStorage.getItem(KEY); const set = v => localStorage.setItem(KEY, v); function show() { overlay.style.display = 'block'; banner.style.display = 'block'; requestAnimationFrame(() => banner.classList.add('show')) } function hide() { banner.classList.remove('show'); overlay.style.display = 'none'; setTimeout(() => { banner.style.display = 'none' }, 220) } function loadPlausible() { if (document.querySelector('script[src*="plausible.io/js/script"]')) return; const s = document.createElement('script'); s.defer = true; s.src = 'https://plausible.io/js/script.js'; s.setAttribute('data-domain', DOMAIN); document.head.appendChild(s) } const saved = get(); if (!saved) show(); if (saved === 'accepted') loadPlausible(); accept.addEventListener('click', () => { set('accepted'); hide(); loadPlausible() }); decline.addEventListener('click', () => { set('declined'); hide() }); document.addEventListener('keydown', e => { if (e.key === 'Escape' && banner.style.display === 'block') hide() }) })();
     </script>
 </body>
+
 </html>

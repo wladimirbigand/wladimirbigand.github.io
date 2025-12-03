@@ -580,12 +580,14 @@
                                 mise en œuvre des services informatiques.
                             </p>
                             <div class="mt-auto d-flex justify-content-center gap-2">
-                                <a href="Assets/Epreuve_E5.pdf" class="btn btn-sm btn-contrast">
+                                <a href="Assets/Fiche_E5.pdf" class="btn btn-sm btn-contrast">
                                     <i class="bi bi-download"></i> Télécharger
                                 </a>
-                                <a href="#" class="btn btn-sm btn-contrast-outline">
+                                <a href="#" class="btn btn-sm btn-contrast-outline" data-bs-toggle="modal"
+                                    data-bs-target="#modalE5">
                                     <i class="bi bi-eye"></i> Aperçu
                                 </a>
+
                             </div>
                         </div>
                     </div>
@@ -902,6 +904,23 @@
     <script>
         (() => { const KEY = 'cookie_consent_v2'; const DOMAIN = 'wladimirbigand.fr'; const banner = document.getElementById('cookie-banner'); const overlay = document.getElementById('cc-overlay'); const accept = document.getElementById('cookie-accept'); const decline = document.getElementById('cookie-decline'); const get = () => localStorage.getItem(KEY); const set = v => localStorage.setItem(KEY, v); function show() { overlay.style.display = 'block'; banner.style.display = 'block'; requestAnimationFrame(() => banner.classList.add('show')) } function hide() { banner.classList.remove('show'); overlay.style.display = 'none'; setTimeout(() => { banner.style.display = 'none' }, 220) } function loadPlausible() { if (document.querySelector('script[src*="plausible.io/js/script"]')) return; const s = document.createElement('script'); s.defer = true; s.src = 'https://plausible.io/js/script.js'; s.setAttribute('data-domain', DOMAIN); document.head.appendChild(s) } const saved = get(); if (!saved) show(); if (saved === 'accepted') loadPlausible(); accept.addEventListener('click', () => { set('accepted'); hide(); loadPlausible() }); decline.addEventListener('click', () => { set('declined'); hide() }); document.addEventListener('keydown', e => { if (e.key === 'Escape' && banner.style.display === 'block') hide() }) })();
     </script>
+
+    <!-- Modal Fiche E5 -->
+    <div class="modal fade" id="modalE5" tabindex="-1" aria-labelledby="modalE5Label" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalE5Label">Fiche E5 – Administration des systèmes et réseaux</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+                </div>
+                <div class="modal-body p-0" style="height:80vh;">
+                    <iframe src="Assets/Fiche_E5.pdf#view=FitH" class="w-100 h-100 border-0" loading="lazy">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </body>
 
 </html>

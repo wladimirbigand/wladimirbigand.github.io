@@ -361,6 +361,7 @@
                     <li class="nav-item"><a class="nav-link" href="#projects">Projets</a></li>
                     <li class="nav-item"><a class="nav-link" href="#skills">Compétences</a></li>
                     <li class="nav-item"><a class="nav-link" href="#certifications">Certifications</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#veille">Veille</a></li>
                     <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
                 </ul>
                 <div class="d-flex gap-2 ms-lg-3">
@@ -927,6 +928,29 @@
         </div>
     </section>
 
+    <section id="veille" class="bg-body-tertiary" data-animate="fade-up">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-end mb-4">
+                <h2 class="section-title h1 m-0">Veille informatique</h2>
+                <span class="text-body-secondary small">
+                    Cartographie de ma veille : incidents, vulnérabilités, DevSecOps, réseau.
+                </span>
+            </div>
+
+            <!-- Grille dynamique remplie en JS -->
+            <div id="veille-grid" class="row g-4">
+                <!-- Cartes générées en JavaScript -->
+            </div>
+
+            <p id="veille-empty" class="small text-body-secondary mt-3 d-none">
+                Aucune entrée de veille n’est disponible pour le moment.
+            </p>
+        </div>
+    </section>
+
+
+
+
     <section id="contact" data-animate="fade-up">
         <div class="container">
             <div class="row justify-content-center text-center">
@@ -1061,6 +1085,80 @@
             elements.forEach(el => observer.observe(el));
         })();
     </script>
+
+    <script>
+        (function () {
+            const grid = document.getElementById('veille-grid');
+            const emptyMsg = document.getElementById('veille-empty');
+            if (!grid) return;
+
+            fetch('Assets/veille.json')
+                .then(res => {
+                    if (!res.ok) throw new Error('HTTP ' + res.status);
+                    return res.json();
+                })
+                .then(items => {
+                    if (!Array.isArray(items) || !items.length) {
+                        emptyMsg?.classList.remove('d-none');
+                        return;
+                    }
+
+                    // Option : trier du plus récent au plus ancien
+                    items.sort((a, b) => (b.date || '').localeCompare(a.date || ''));
+
+                    // Limiter par ex. aux 6 derniers
+                    items.slice(0, 6).forEach(item => {
+                        const col = document.createElement('div');
+                        col.className = 'col-md-6 col-lg-4';
+
+                        const tagsHtml = (item.tags || [])
+                            .map(t => `<span class="badge rounded-pill tech-badge me-1 mb-1">${t}</span>`)
+                            .join('');
+
+                        const safeDesc = (item.description || '').slice(0, 160) +
+                            (item.description && item.description.length > 160 ? '…' : '');
+
+                        col.innerHTML = `
+                        <div class="card glass h-100 hover-lift">
+                            ${item.image ? `
+                            <img src="${item.image}" class="card-img-top" alt="${item.title || 'Illustration veille'}"
+                                 loading="lazy" style="object-fit:cover; max-height:170px;">
+                            ` : ''}
+                            <div class="card-body d-flex flex-column">
+                                <div class="small text-body-secondary mb-1">
+                                    ${item.date ? `<strong>${item.date}</strong> · ` : ''}
+                                    ${item.source ? item.source : ''}
+                                </div>
+                                <h5 class="card-title mb-2">${item.title || 'Article de veille'}</h5>
+                                <p class="card-text small text-body-secondary flex-grow-1">
+                                    ${safeDesc}
+                                </p>
+                                <div class="mt-2 mb-2">
+                                    ${tagsHtml}
+                                </div>
+                                ${item.link ? `
+                                <a href="${item.link}" target="_blank" rel="noopener"
+                                   class="btn btn-sm btn-contrast-outline align-self-start">
+                                    <i class="bi bi-box-arrow-up-right"></i> Lire l’article
+                                </a>` : ''}
+                            </div>
+                        </div>
+                    `;
+
+                        grid.appendChild(col);
+                    });
+                })
+                .catch(err => {
+                    console.error('Erreur chargement veille.json', err);
+                    if (emptyMsg) {
+                        emptyMsg.textContent =
+                            "Impossible de charger la veille pour le moment (veille.json introuvable ou invalide).";
+                        emptyMsg.classList.remove('d-none');
+                    }
+                });
+        })();
+    </script>
+
 
 </body>
 

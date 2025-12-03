@@ -1,0 +1,56 @@
+[
+  {
+    "date": "2025-12-03",
+    "title": "Leroy Merlin reconnaît avoir été victime d’une cyber attaque et annonce que des centaines de milliers de clients sont concernés",
+    "source": "bfmtv.com - Sylvain Trinel",
+    "tags": ["Cybersécurité", "Vulnérabilité"],
+    "image": "https://ic-cdn.flipboard.com/bfmtv.com/8e734f77c3aaef5097fb0960aaf515bcc88fbddf/_medium.webp",
+    "description": "L'enseigne de bricolage annonce avoir été victime d'un acte de cybermalveillance. Il a abouti à une fuite importante de données clients.",
+    "link": "https://www.bfmtv.com/tech/cybersecurite/leroy-merlin-reconnait-avoir-ete-victime-d-une-cyber-attaque-et-annonce-que-des-centaines-de-milliers-de-clients-sont-concernes_AN-202512030877.html?utm_source=flipboard&utm_content=topic%2Ffr-cybercriminalité"
+  },
+  {
+    "date": "2025-12-03",
+    "title": "Alerte aux arnaques utilisant le nom de Serafe",
+    "source": "lematin.ch",
+    "tags": ["Arnaque", "Cybersécurité"],
+    "image": "https://ic-cdn.flipboard.com/lematin.ch/49e1eed45fac4d11c34b9167e8d138fcb405e7b3/_medium.webp",
+    "description": "Les tentatives d’hameçonnage débutent par un message venant soi-disant de l’organe suisse de perception de la redevance.",
+    "link": "https://www.lematin.ch/story/cybersecurite-alerte-aux-arnaques-utilisant-le-nom-de-serafe-103462918?utm_source=flipboard&utm_content=topic%2Ffr-cybercriminalité"
+  },
+  {
+    "date": "2025-12-03",
+    "title": "« Pas de phishing. Pas d’ingénierie sociale», cette cyberattaque a mijoté 6 ans avant de lancer son assaut final",
+    "source": "numerama.com - Amine Baba Aissa",
+    "tags": ["Phishing", "Ingénierie sociale"],
+    "image": "https://c0.lestechnophiles.com/www.numerama.com/wp-content/uploads/2025/12/design-sans-titre-2025-12-03t120404472.jpg?resize=1600,900&key=b07f07ab&watermark",
+    "description": "Dans un rapport publié le 1ᵉʳ décembre 2025, les chercheurs de l’entreprise de cybersécurité Koi reviennent sur une vaste campagne cybercriminelle …",
+    "link": "https://www.numerama.com/cyberguerre/2133913-pas-de-phishing-pas-dingenierie-sociale-cette-cyberattaque-a-mijote-6-ans-avant-de-lancer-son-assaut-final.html?utm_medium=distibuted&utm_source=flipboard&utm_content=directlink&utm_campaign=2133913"
+  },
+  {
+    "date": "2025-12-03",
+    "title": "Norton lance Neo, un navigateur gratuit qui anticipe vos actions et protège vos données",
+    "source": "siecledigital.fr - Frédéric Olivieri",
+    "tags": ["Antivirus", "Cybersécurité"],
+    "image": "https://siecledigital.fr/wp-content/uploads/2025/12/norton-1.jpg",
+    "description": "Naviguer plus sereinement dans un web saturé… Lancé officiellement dans le monde entier et désormais accessible gratuitement, Norton Neo marque une …",
+    "link": "https://siecledigital.fr/2025/12/03/norton-lance-neo-un-navigateur-gratuit-qui-anticipe-vos-actions-et-protege-vos-donnees/?utm_source=flipboard&utm_content=topic%2Ffr-informatique"
+  },
+  {
+    "date": "2025-12-03",
+    "title": "Salaires IT : cybersécurité, data, infra… les métiers qui montent vraiment en 2025",
+    "source": "siecledigital.fr - Frédéric Olivieri",
+    "tags": ["Arnaque", "Cybersécurité"],
+    "image": "https://siecledigital.fr/wp-content/uploads/2025/11/salaires-it.jpg",
+    "description": "Une étude qui bouscule le marché… Le cabinet Fed IT vient de dévoiler son étude de rémunérations 2025, un document très attendu dans l’IT où les …",
+    "link": "https://siecledigital.fr/2025/12/03/salaires-it-cybersecurite-data-infra-les-metiers-qui-montent-vraiment-en-2025/?utm_source=flipboard&utm_content=topic%2Ffr-cybersécurité"
+  },
+  {
+    "date": "2025-12-03",
+    "title": "Cette immense armée de bots a manqué l’un des plus gros coups cyber de tous les temps",
+    "source": "numerama.com - Amine Baba Aissa",
+    "tags": ["Bot", "Cyberattaque"],
+    "image": "https://c0.lestechnophiles.com/www.numerama.com/wp-content/uploads/2025/12/design-sans-titre-2025-12-03t161422998.jpg?resize=1600,900&key=d47d7881&watermark",
+    "description": "Le 3 décembre 2025, Cloudflare a publié son rapport trimestriel sur les menaces liées aux attaques DDoS. L’occasion pour l’entreprise américaine de …",
+    "link": "https://www.numerama.com/cyberguerre/2134229-cette-immense-armee-de-bots-a-manque-lun-des-plus-gros-coups-cyber-de-tous-les-temps.html?utm_medium=distibuted&utm_source=flipboard&utm_content=directlink&utm_campaign=2134229"
+  }
+]

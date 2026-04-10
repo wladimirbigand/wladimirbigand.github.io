@@ -65,6 +65,10 @@
             --color-primary: 18 19 19; /* #121313 */
             --color-secondary: 255 96 68; /* #FF6044 */
         }
+        [data-theme="blossom"] {
+            --color-primary: 255 227 227; /* #ffe3e3 */
+            --color-secondary: 194 101 109; /* #c2656d */
+        }
 
         /* Masquer la Scrollbar globale et celle du conteneur tout en gardant le scroll */
         .hide-scrollbar {
@@ -98,6 +102,7 @@
                 <button onclick="setTheme('arctic')" data-theme-btn="arctic" class="theme-btn w-5 h-5 rounded-full border border-[#191970]/50 transition-transform duration-300 hover:scale-110" style="background-color: #ECEFF1;" title="Arctic Blue"></button>
                 <button onclick="setTheme('electric')" data-theme-btn="electric" class="theme-btn w-5 h-5 rounded-full border border-[#FF4747]/50 transition-transform duration-300 hover:scale-110" style="background-color: #F7E998;" title="Electric Sun"></button>
                 <button onclick="setTheme('midnight')" data-theme-btn="midnight" class="theme-btn w-5 h-5 rounded-full border border-[#FF6044]/50 transition-transform duration-300 hover:scale-110" style="background-color: #121313;" title="Midnight Orange"></button>
+                <button onclick="setTheme('blossom')" data-theme-btn="blossom" class="theme-btn w-5 h-5 rounded-full border border-[#c2656d]/50 transition-transform duration-300 hover:scale-110" style="background-color: #ffe3e3;" title="Cherry Blossom"></button>
             </div>
 
             <!-- Navigation Double -->
@@ -208,7 +213,7 @@
                 <span class="tag absolute top-6 px-3 py-1 text-[10px] font-bold uppercase tracking-wider border border-secondary/30 group-hover:border-secondary/60 rounded-full mb-4 transition-colors duration-500 bg-secondary/5">Outils Interactifs</span>
                 <!-- Animation : Les dés qui "roulent" -->
                 <div class="w-16 h-16 mt-6 mb-4 opacity-80 group-hover:opacity-100 group-hover:scale-110 group-hover:rotate-[360deg] transition-all duration-700 text-secondary">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-ship-wheel-icon lucide-ship-wheel"><circle cx="12" cy="12" r="8"/><path d="M12 2v7.5"/><path d="m19 5-5.23 5.23"/><path d="M22 12h-7.5"/><path d="m19 19-5.23-5.23"/><path d="M12 14.5V22"/><path d="M10.23 13.77 5 19"/><path d="M9.5 12H2"/><path d="M10.23 10.23 5 5"/><circle cx="12" cy="12" r="2.5"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-full h-full"><rect width="12" height="12" x="2" y="10" rx="2" ry="2"/><path d="m17.92 14 3.5-3.5a2.24 2.24 0 0 0 0-3l-5-4.92a2.24 2.24 0 0 0-3 0L10 6"/><path d="M6 18h.01"/><path d="M10 14h.01"/><path d="M15 6h.01"/><path d="M18 9h.01"/></svg>                
                 </div>
                 <h2 class="title text-xl font-bold text-center mb-1 group-hover:-translate-y-0.5 transition-transform duration-500">PickItUp</h2>
                 <p class="description text-xs opacity-80 text-center px-2">Générateur aléatoire : tournez la roue et laissez le hasard décider.</p>

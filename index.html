@@ -80,10 +80,10 @@
 
         /* --- STABILISATION DU LAYOUT (Wrapper Fixe) --- */
         #header-wrapper {
-            height: 270px;
+            height: 330px; /* Ajusté pour libérer de l'espace sur mobile */
         }
         @media (min-width: 768px) {
-            #header-wrapper { height: 320px; }
+            #header-wrapper { height: 380px; } /* Ajusté pour libérer de l'espace sur bureau */
         }
 
         /* --- LOGIQUE DU HEADER COLLAPSIBLE (Transition ultra-fluide) --- */
@@ -169,7 +169,7 @@
 
         /* --- RESPONSIVENESS VERTICAL : Écrans courts (Laptops 13/14", Paysage) --- */
         @media (max-height: 750px) {
-            #header-wrapper { height: 240px; }
+            #header-wrapper { height: 280px; } /* Ajusté pour les petits écrans d'ordinateur */
             #header-inner { padding-top: 0.75rem !important; }
             #header-top-row { margin-bottom: 0.5rem !important; }
             #header-avatar { width: 4rem !important; height: 4rem !important; margin-bottom: 0.5rem !important; }

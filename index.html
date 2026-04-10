@@ -71,6 +71,27 @@
             --color-primary: 255 227 227; /* #ffe3e3 */
             --color-secondary: 194 101 109; /* #c2656d */
         }
+        /* NOUVEAUX THÈMES */
+        [data-theme="sunset"] {
+            --color-primary: 242 204 143; /* #F2CC8F */
+            --color-secondary: 140 28 19; /* #8C1C13 */
+        }
+        [data-theme="navy"] {
+            --color-primary: 20 33 61; /* #14213D */
+            --color-secondary: 205 127 50; /* #CD7F32 */
+        }
+        [data-theme="obsidian"] {
+            --color-primary: 17 17 17; /* #111111 */
+            --color-secondary: 212 175 55; /* #D4AF37 */
+        }
+        [data-theme="dusty"] {
+            --color-primary: 212 165 165; /* #D4A5A5 */
+            --color-secondary: 43 10 30; /* #2B0A1E */
+        }
+        [data-theme="earth"] {
+            --color-primary: 127 85 57; /* #7F5539 */
+            --color-secondary: 255 107 53; /* #FF6B35 */
+        }
 
         /* Masquer la Scrollbar globale et celle du conteneur tout en gardant le scroll */
         .hide-scrollbar {
@@ -196,14 +217,61 @@
             <!-- Ligne Supérieure : Thèmes & Actions -->
             <div id="header-top-row" class="flex justify-between items-start w-full mb-4">
                 
-                <!-- Sélecteur de Thèmes -->
-                <div class="flex gap-2 p-1.5 bg-primary/80 backdrop-blur-md rounded-full border border-secondary/30 shadow-sm transition-colors duration-500">
-                    <button onclick="setTheme('forest')" data-theme-btn="forest" class="theme-btn w-5 h-5 rounded-full border border-[#102C26]/50 hover:scale-110" style="background-color: #F7E7CE;" title="Forest Champagne"></button>
-                    <button onclick="setTheme('warm')" data-theme-btn="warm" class="theme-btn w-5 h-5 rounded-full border border-[#A79277]/50 hover:scale-110" style="background-color: #FFF2E1;" title="Warm Sand"></button>
-                    <button onclick="setTheme('arctic')" data-theme-btn="arctic" class="theme-btn w-5 h-5 rounded-full border border-[#191970]/50 hover:scale-110" style="background-color: #ECEFF1;" title="Arctic Blue"></button>
-                    <button onclick="setTheme('electric')" data-theme-btn="electric" class="theme-btn w-5 h-5 rounded-full border border-[#FF4747]/50 hover:scale-110" style="background-color: #F7E998;" title="Electric Sun"></button>
-                    <button onclick="setTheme('midnight')" data-theme-btn="midnight" class="theme-btn w-5 h-5 rounded-full border border-[#FF6044]/50 hover:scale-110" style="background-color: #121313;" title="Midnight Orange"></button>
-                    <button onclick="setTheme('blossom')" data-theme-btn="blossom" class="theme-btn w-5 h-5 rounded-full border border-[#c2656d]/50 hover:scale-110" style="background-color: #ffe3e3;" title="Cherry Blossom"></button>
+                <!-- Menu Déroulant des Thèmes -->
+                <div class="relative">
+                    <button id="themeDropdownBtn" class="flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-full border border-secondary/30 bg-primary/80 backdrop-blur-md text-secondary shadow-sm hover:bg-secondary/10 transition-all duration-300 font-medium text-xs md:text-sm">
+                        <i class="fa-solid fa-palette"></i>
+                        <span class="hidden sm:inline">Thèmes</span>
+                        <i class="fa-solid fa-chevron-down text-[10px] transition-transform duration-300" id="themeDropdownIcon"></i>
+                    </button>
+                    
+                    <!-- Liste des thèmes (Dropdown) -->
+                    <div id="themeDropdownMenu" class="absolute top-full left-0 mt-2 w-56 bg-primary border border-secondary/20 rounded-2xl shadow-soft-hover opacity-0 pointer-events-none transform -translate-y-2 transition-all duration-300 z-50 overflow-hidden flex flex-col max-h-64 overflow-y-auto hide-scrollbar">
+                        <button onclick="setTheme('forest')" data-theme-btn="forest" class="theme-btn w-full flex items-center gap-3 px-4 py-2.5 hover:bg-secondary/10 transition-colors text-left text-xs md:text-sm font-medium text-secondary">
+                            <span class="w-4 h-4 rounded-full border border-secondary/30 shrink-0" style="background: linear-gradient(135deg, #F7E7CE 50%, #102C26 50%);"></span>
+                            Forest Champagne
+                        </button>
+                        <button onclick="setTheme('warm')" data-theme-btn="warm" class="theme-btn w-full flex items-center gap-3 px-4 py-2.5 hover:bg-secondary/10 transition-colors text-left text-xs md:text-sm font-medium text-secondary">
+                            <span class="w-4 h-4 rounded-full border border-secondary/30 shrink-0" style="background: linear-gradient(135deg, #FFF2E1 50%, #A79277 50%);"></span>
+                            Warm Sand
+                        </button>
+                        <button onclick="setTheme('arctic')" data-theme-btn="arctic" class="theme-btn w-full flex items-center gap-3 px-4 py-2.5 hover:bg-secondary/10 transition-colors text-left text-xs md:text-sm font-medium text-secondary">
+                            <span class="w-4 h-4 rounded-full border border-secondary/30 shrink-0" style="background: linear-gradient(135deg, #ECEFF1 50%, #191970 50%);"></span>
+                            Arctic Blue
+                        </button>
+                        <button onclick="setTheme('electric')" data-theme-btn="electric" class="theme-btn w-full flex items-center gap-3 px-4 py-2.5 hover:bg-secondary/10 transition-colors text-left text-xs md:text-sm font-medium text-secondary">
+                            <span class="w-4 h-4 rounded-full border border-secondary/30 shrink-0" style="background: linear-gradient(135deg, #F7E998 50%, #FF4747 50%);"></span>
+                            Electric Sun
+                        </button>
+                        <button onclick="setTheme('midnight')" data-theme-btn="midnight" class="theme-btn w-full flex items-center gap-3 px-4 py-2.5 hover:bg-secondary/10 transition-colors text-left text-xs md:text-sm font-medium text-secondary">
+                            <span class="w-4 h-4 rounded-full border border-secondary/30 shrink-0" style="background: linear-gradient(135deg, #121313 50%, #FF6044 50%);"></span>
+                            Midnight Orange
+                        </button>
+                        <button onclick="setTheme('blossom')" data-theme-btn="blossom" class="theme-btn w-full flex items-center gap-3 px-4 py-2.5 hover:bg-secondary/10 transition-colors text-left text-xs md:text-sm font-medium text-secondary">
+                            <span class="w-4 h-4 rounded-full border border-secondary/30 shrink-0" style="background: linear-gradient(135deg, #ffe3e3 50%, #c2656d 50%);"></span>
+                            Cherry Blossom
+                        </button>
+                        <button onclick="setTheme('sunset')" data-theme-btn="sunset" class="theme-btn w-full flex items-center gap-3 px-4 py-2.5 hover:bg-secondary/10 transition-colors text-left text-xs md:text-sm font-medium text-secondary">
+                            <span class="w-4 h-4 rounded-full border border-secondary/30 shrink-0" style="background: linear-gradient(135deg, #F2CC8F 50%, #8C1C13 50%);"></span>
+                            Sunset Rust
+                        </button>
+                        <button onclick="setTheme('navy')" data-theme-btn="navy" class="theme-btn w-full flex items-center gap-3 px-4 py-2.5 hover:bg-secondary/10 transition-colors text-left text-xs md:text-sm font-medium text-secondary">
+                            <span class="w-4 h-4 rounded-full border border-secondary/30 shrink-0" style="background: linear-gradient(135deg, #14213D 50%, #CD7F32 50%);"></span>
+                            Navy Bronze
+                        </button>
+                        <button onclick="setTheme('obsidian')" data-theme-btn="obsidian" class="theme-btn w-full flex items-center gap-3 px-4 py-2.5 hover:bg-secondary/10 transition-colors text-left text-xs md:text-sm font-medium text-secondary">
+                            <span class="w-4 h-4 rounded-full border border-secondary/30 shrink-0" style="background: linear-gradient(135deg, #111111 50%, #D4AF37 50%);"></span>
+                            Obsidian Gold
+                        </button>
+                        <button onclick="setTheme('dusty')" data-theme-btn="dusty" class="theme-btn w-full flex items-center gap-3 px-4 py-2.5 hover:bg-secondary/10 transition-colors text-left text-xs md:text-sm font-medium text-secondary">
+                            <span class="w-4 h-4 rounded-full border border-secondary/30 shrink-0" style="background: linear-gradient(135deg, #D4A5A5 50%, #2B0A1E 50%);"></span>
+                            Dusty Rose
+                        </button>
+                        <button onclick="setTheme('earth')" data-theme-btn="earth" class="theme-btn w-full flex items-center gap-3 px-4 py-2.5 hover:bg-secondary/10 transition-colors text-left text-xs md:text-sm font-medium text-secondary">
+                            <span class="w-4 h-4 rounded-full border border-secondary/30 shrink-0" style="background: linear-gradient(135deg, #7F5539 50%, #FF6B35 50%);"></span>
+                            Earth & Fire
+                        </button>
+                    </div>
                 </div>
 
                 <!-- Navigation Double -->
@@ -537,18 +605,58 @@
             });
         }
 
+        // --- GESTION DU MENU DÉROULANT DES THÈMES ---
+        const themeDropdownBtn = document.getElementById('themeDropdownBtn');
+        const themeDropdownMenu = document.getElementById('themeDropdownMenu');
+        const themeDropdownIcon = document.getElementById('themeDropdownIcon');
+
+        function openThemeDropdown() {
+            themeDropdownMenu.classList.remove('opacity-0', 'pointer-events-none', '-translate-y-2');
+            themeDropdownMenu.classList.add('opacity-100', 'translate-y-0');
+            themeDropdownIcon.classList.add('rotate-180');
+        }
+
+        function closeThemeDropdown() {
+            themeDropdownMenu.classList.add('opacity-0', 'pointer-events-none', '-translate-y-2');
+            themeDropdownMenu.classList.remove('opacity-100', 'translate-y-0');
+            themeDropdownIcon.classList.remove('rotate-180');
+        }
+
+        themeDropdownBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (themeDropdownMenu.classList.contains('opacity-100')) {
+                closeThemeDropdown();
+            } else {
+                openThemeDropdown();
+            }
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!themeDropdownMenu.contains(e.target)) {
+                closeThemeDropdown();
+            }
+        });
+
         // --- GESTION DES THÈMES ---
         function setTheme(themeName) {
             document.documentElement.setAttribute('data-theme', themeName);
             localStorage.setItem('theme', themeName);
             
+            // Mise à jour visuelle dans le menu déroulant
             document.querySelectorAll('.theme-btn').forEach(btn => {
+                // Nettoyer l'ancienne sélection
+                const checkIcon = btn.querySelector('.fa-check');
+                if(checkIcon) checkIcon.remove();
+                
                 if(btn.dataset.themeBtn === themeName) {
-                    btn.classList.add('ring-2', 'ring-secondary', 'ring-offset-1', 'ring-offset-primary');
+                    btn.classList.add('bg-secondary/10');
+                    btn.insertAdjacentHTML('beforeend', '<i class="fa-solid fa-check ml-auto text-secondary text-xs"></i>');
                 } else {
-                    btn.classList.remove('ring-2', 'ring-secondary', 'ring-offset-1', 'ring-offset-primary');
+                    btn.classList.remove('bg-secondary/10');
                 }
             });
+            
+            closeThemeDropdown(); // Fermer le menu après la sélection
         }
         setTheme(localStorage.getItem('theme') || 'forest');
 

@@ -44,7 +44,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="Assets/favicon-32x32.png">
 
     <style>
-        /* Définition des Thèmes (Valeurs RGB pures pour compatibilité avec l'opacité Tailwind) */
+        /* Définition des Thèmes */
         :root, [data-theme="forest"] {
             --color-primary: 247 231 206; /* #F7E7CE */
             --color-secondary: 16 44 38; /* #102C26 */
@@ -72,15 +72,85 @@
 
         /* Masquer la Scrollbar globale et celle du conteneur tout en gardant le scroll */
         .hide-scrollbar {
-            -ms-overflow-style: none;  /* IE and Edge */
-            scrollbar-width: none;  /* Firefox */
+            -ms-overflow-style: none;
+            scrollbar-width: none;
         }
         .hide-scrollbar::-webkit-scrollbar {
-            display: none; /* Chrome, Safari and Opera */
+            display: none;
+        }
+
+        /* --- LOGIQUE DU HEADER COLLAPSIBLE (Transition globale de 0.4s) --- */
+        #main-header, #main-header * {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Padding minimal quand le header est réduit */
+        #main-header.header-collapsed { 
+            padding-top: 0.5rem !important; 
+        }
+        #main-header.header-collapsed #header-top-row { 
+            margin-bottom: 0.25rem !important; 
+        }
+        
+        /* Disparition complète de l'Avatar */
+        #main-header.header-collapsed #header-avatar {
+            width: 0 !important;
+            height: 0 !important;
+            margin: 0 !important;
+            opacity: 0 !important;
+            border-width: 0 !important;
+            transform: scale(0) !important;
+        }
+        
+        /* Réduction discrète du Titre */
+        #main-header.header-collapsed #header-title {
+            font-size: 1.25rem !important; /* text-xl */
+            margin-bottom: 0.25rem !important;
+        }
+        
+        /* Effacement de la Tagline */
+        #header-tagline {
+            max-height: 50px;
+            overflow: hidden;
+        }
+        #main-header.header-collapsed #header-tagline {
+            max-height: 0 !important;
+            opacity: 0 !important;
+            margin: 0 !important;
+        }
+        
+        /* Affinage de la Barre de Recherche */
+        #main-header.header-collapsed #header-search-container {
+            margin-bottom: 0.25rem !important;
+        }
+        #main-header.header-collapsed #searchInput {
+            padding-top: 0.375rem !important; /* Rendu plus fin (py-1.5 environ) */
+            padding-bottom: 0.375rem !important;
+        }
+
+        /* --- RESPONSIVENESS VERTICAL : Écrans courts (Laptops 13/14", Paysage) --- */
+        @media (max-height: 750px) {
+            #main-header {
+                padding-top: 0.75rem !important;
+            }
+            #header-top-row {
+                margin-bottom: 0.5rem !important;
+            }
+            #header-avatar {
+                width: 4rem !important; /* w-16 au lieu de w-24 */
+                height: 4rem !important; /* h-16 */
+                margin-bottom: 0.5rem !important;
+            }
+            #header-title {
+                font-size: 1.5rem !important; /* text-2xl au lieu de 4xl */
+            }
+            #header-tagline {
+                font-size: 0.75rem !important; /* text-xs */
+                margin-bottom: 0.5rem !important;
+            }
         }
     </style>
 </head>
-<!-- h-[100dvh] et overflow-hidden bloquent le scroll global -->
 <body class="bg-primary text-secondary font-sans antialiased h-[100dvh] w-full flex flex-col relative overflow-hidden transition-colors duration-500 selection:bg-secondary selection:text-primary">
 
     <!-- Effet Blobs subtils -->
@@ -90,31 +160,29 @@
     </div>
 
     <!-- ZONE FIXE HAUTE : HEADER & RECHERCHE -->
-    <header class="flex-shrink-0 w-full max-w-5xl mx-auto pt-4 px-4 md:px-8 flex flex-col relative z-20 transition-colors duration-500">
+    <header id="main-header" class="flex-shrink-0 w-full max-w-5xl mx-auto pt-4 px-4 md:px-8 flex flex-col relative z-20">
         
         <!-- Ligne Supérieure : Thèmes & Actions -->
-        <div class="flex justify-between items-start w-full mb-4">
+        <div id="header-top-row" class="flex justify-between items-start w-full mb-4">
             
             <!-- Sélecteur de Thèmes -->
             <div class="flex gap-2 p-1.5 bg-primary/80 backdrop-blur-md rounded-full border border-secondary/30 shadow-sm transition-colors duration-500">
-                <button onclick="setTheme('forest')" data-theme-btn="forest" class="theme-btn w-5 h-5 rounded-full border border-[#102C26]/50 transition-transform duration-300 hover:scale-110" style="background-color: #F7E7CE;" title="Forest Champagne"></button>
-                <button onclick="setTheme('warm')" data-theme-btn="warm" class="theme-btn w-5 h-5 rounded-full border border-[#A79277]/50 transition-transform duration-300 hover:scale-110" style="background-color: #FFF2E1;" title="Warm Sand"></button>
-                <button onclick="setTheme('arctic')" data-theme-btn="arctic" class="theme-btn w-5 h-5 rounded-full border border-[#191970]/50 transition-transform duration-300 hover:scale-110" style="background-color: #ECEFF1;" title="Arctic Blue"></button>
-                <button onclick="setTheme('electric')" data-theme-btn="electric" class="theme-btn w-5 h-5 rounded-full border border-[#FF4747]/50 transition-transform duration-300 hover:scale-110" style="background-color: #F7E998;" title="Electric Sun"></button>
-                <button onclick="setTheme('midnight')" data-theme-btn="midnight" class="theme-btn w-5 h-5 rounded-full border border-[#FF6044]/50 transition-transform duration-300 hover:scale-110" style="background-color: #121313;" title="Midnight Orange"></button>
-                <button onclick="setTheme('blossom')" data-theme-btn="blossom" class="theme-btn w-5 h-5 rounded-full border border-[#c2656d]/50 transition-transform duration-300 hover:scale-110" style="background-color: #ffe3e3;" title="Cherry Blossom"></button>
+                <button onclick="setTheme('forest')" data-theme-btn="forest" class="theme-btn w-5 h-5 rounded-full border border-[#102C26]/50 hover:scale-110" style="background-color: #F7E7CE;" title="Forest Champagne"></button>
+                <button onclick="setTheme('warm')" data-theme-btn="warm" class="theme-btn w-5 h-5 rounded-full border border-[#A79277]/50 hover:scale-110" style="background-color: #FFF2E1;" title="Warm Sand"></button>
+                <button onclick="setTheme('arctic')" data-theme-btn="arctic" class="theme-btn w-5 h-5 rounded-full border border-[#191970]/50 hover:scale-110" style="background-color: #ECEFF1;" title="Arctic Blue"></button>
+                <button onclick="setTheme('electric')" data-theme-btn="electric" class="theme-btn w-5 h-5 rounded-full border border-[#FF4747]/50 hover:scale-110" style="background-color: #F7E998;" title="Electric Sun"></button>
+                <button onclick="setTheme('midnight')" data-theme-btn="midnight" class="theme-btn w-5 h-5 rounded-full border border-[#FF6044]/50 hover:scale-110" style="background-color: #121313;" title="Midnight Orange"></button>
+                <button onclick="setTheme('blossom')" data-theme-btn="blossom" class="theme-btn w-5 h-5 rounded-full border border-[#c2656d]/50 hover:scale-110" style="background-color: #ffe3e3;" title="Cherry Blossom"></button>
             </div>
 
             <!-- Navigation Double -->
             <div class="flex gap-2">
-                <!-- Bouton 1 : Portfolio -->
-                <a href="/Portfolio" class="flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-secondary text-primary shadow-soft hover:opacity-90 transition-all duration-500 font-medium text-xs md:text-sm">
+                <a href="/Portfolio" class="flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-secondary text-primary shadow-soft hover:opacity-90 font-medium text-xs md:text-sm">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5 md:w-4 md:h-4"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
                     <span class="hidden sm:inline">Portfolio</span>
                 </a>
-                <!-- Bouton 2 : GitHub Lab -->
-                <a href="https://github.com/wladimirbigand" target="_blank" class="flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-full border border-secondary bg-transparent hover:bg-secondary hover:text-primary transition-all duration-500 font-medium text-xs md:text-sm group">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5 md:w-4 md:h-4 transition-colors duration-500"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg>
+                <a href="https://github.com/wladimirbigand" target="_blank" class="flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-full border border-secondary bg-transparent hover:bg-secondary hover:text-primary font-medium text-xs md:text-sm group">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5 md:w-4 md:h-4"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg>
                     <span class="hidden sm:inline">GitHub Lab</span>
                 </a>
             </div>
@@ -122,161 +190,166 @@
 
         <!-- Identité (Avatar & Textes) -->
         <div class="flex flex-col items-center mb-6">
-            <div class="relative w-20 h-20 md:w-24 md:h-24 rounded-[2rem] border border-secondary bg-transparent shadow-soft flex items-center justify-center mb-3 overflow-hidden transform rotate-2 hover:-rotate-2 hover:scale-105 transition-all duration-500">
+            <div id="header-avatar" class="relative w-20 h-20 md:w-24 md:h-24 rounded-[2rem] border border-secondary bg-transparent shadow-soft flex items-center justify-center mb-3 overflow-hidden transform rotate-2 hover:-rotate-2 hover:scale-105">
                 <img src="https://github.com/wladimirbigand.png" alt="Wladimir Bigand" class="w-full h-full object-cover">
             </div>
-            <h1 class="text-2xl md:text-4xl font-extrabold tracking-tight mb-1">The Root Hub</h1>
-            <p class="text-sm md:text-base font-medium opacity-70 tracking-wide uppercase">Écosystème & Applications interactives</p>
+            <h1 id="header-title" class="text-2xl md:text-4xl font-extrabold tracking-tight mb-1">The Root Hub</h1>
+            <p id="header-tagline" class="text-sm md:text-base font-medium opacity-70 tracking-wide uppercase">Écosystème & Applications interactives</p>
         </div>
 
         <!-- Barre de recherche Fixe -->
-        <div class="w-full max-w-md mx-auto mb-4 relative z-20 group">
+        <div id="header-search-container" class="w-full max-w-md mx-auto mb-4 relative z-20 group">
             <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 md:h-5 md:w-5 text-secondary opacity-50 group-focus-within:opacity-100 transition-opacity duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 md:h-5 md:w-5 text-secondary opacity-50 group-focus-within:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
             </div>
-            <input type="text" id="searchInput" placeholder="Rechercher un module ou un tag..." class="w-full pl-11 pr-4 py-2.5 md:py-3 bg-primary/90 backdrop-blur-md border border-secondary/50 rounded-full text-secondary placeholder-secondary/50 focus:outline-none focus:ring-2 focus:ring-secondary/30 transition-all duration-300 font-medium text-sm shadow-sm hover:border-secondary">
+            <input type="text" id="searchInput" placeholder="Rechercher un module ou un tag..." class="w-full pl-11 pr-4 py-2.5 md:py-3 bg-primary/90 backdrop-blur-md border border-secondary/50 rounded-full text-secondary placeholder-secondary/50 focus:outline-none focus:ring-2 focus:ring-secondary/30 font-medium text-sm shadow-sm hover:border-secondary">
         </div>
     </header>
 
-    <!-- ZONE CENTRALE SCROLLABLE : GRILLE BENTO -->
-    <main class="flex-1 w-full max-w-5xl mx-auto overflow-y-auto hide-scrollbar px-4 md:px-8 pt-2 pb-24 z-10 relative">
-        <section id="appGrid" class="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6 w-full">
-            
-            <!-- Carte 1 : MemorIA (Format Large) -->
-            <a href="/MemorIA" class="project-card md:col-span-2 group relative overflow-hidden flex flex-col md:flex-row items-center justify-between p-7 md:p-8 bg-transparent rounded-[2.5rem] border border-secondary/50 shadow-soft hover:border-secondary hover:shadow-soft-hover hover:-translate-y-1 active:translate-y-0 transition-all duration-500 min-h-[220px]">
-                <div class="flex flex-col items-start text-left z-10 w-full md:w-2/3">
-                    <span class="tag px-3 py-1 text-[10px] md:text-xs font-bold uppercase tracking-wider border border-secondary/30 group-hover:border-secondary/60 rounded-full mb-4 transition-colors duration-500 bg-secondary/5">Intelligence Artificielle</span>
-                    <h2 class="title text-xl md:text-2xl font-bold mb-2 group-hover:translate-x-1 transition-transform duration-500">MemorIA</h2>
-                    <p class="description text-xs md:text-sm opacity-80 leading-relaxed pr-0 md:pr-4">Assistant de prise de notes intelligent, propulsé par l'IA générative pour sublimer votre productivité.</p>
-                </div>
-                <!-- Animation: Le cerveau palpite et s'élève -->
-                <div class="w-24 h-24 md:w-32 md:h-32 mt-6 md:mt-0 opacity-80 group-hover:opacity-100 group-hover:scale-110 group-hover:-translate-y-2 transition-all duration-700 flex-shrink-0 text-secondary">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="w-full h-full"><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"></path><path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"></path><path d="M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4"></path><path d="M17.599 6.5a3 3 0 0 0 .399-1.375"></path><path d="M6.002 5.125A3 3 0 0 0 6.401 6.5"></path><path d="M3.477 10.896a4 4 0 0 1 .585-.396"></path><path d="M19.938 10.5a4 4 0 0 1 .585.396"></path><path d="M6 18a4 4 0 0 1-1.967-.516"></path><path d="M19.967 17.484A4 4 0 0 1 18 18"></path></svg>
-                </div>
-            </a>
+    <!-- ZONE CENTRALE SCROLLABLE (Inclut la grille BENTO et le FOOTER) -->
+    <main id="main-scroll-area" class="flex-1 w-full mx-auto overflow-y-auto hide-scrollbar z-10 relative flex flex-col">
+        
+        <!-- Wrapper pour la grille avec espace -->
+        <div class="max-w-5xl mx-auto w-full px-4 md:px-8 pt-2 flex-1">
+            <section id="appGrid" class="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6 w-full mb-10">
+                
+                <!-- Carte 1 : MemorIA -->
+                <a href="/MemorIA" class="project-card md:col-span-2 group relative overflow-hidden flex flex-col md:flex-row items-center justify-between p-7 md:p-8 bg-transparent rounded-[2.5rem] border border-secondary/50 shadow-soft hover:border-secondary hover:shadow-soft-hover hover:-translate-y-1 active:translate-y-0 transition-all duration-500 min-h-[220px]">
+                    <div class="flex flex-col items-start text-left z-10 w-full md:w-2/3">
+                        <span class="tag px-3 py-1 text-[10px] md:text-xs font-bold uppercase tracking-wider border border-secondary/30 group-hover:border-secondary/60 rounded-full mb-4 bg-secondary/5 transition-colors duration-500">Intelligence Artificielle</span>
+                        <h2 class="title text-xl md:text-2xl font-bold mb-2 group-hover:translate-x-1 transition-transform duration-500">MemorIA</h2>
+                        <p class="description text-xs md:text-sm opacity-80 leading-relaxed pr-0 md:pr-4">Assistant de prise de notes intelligent, propulsé par l'IA générative pour sublimer votre productivité.</p>
+                    </div>
+                    <div class="w-24 h-24 md:w-32 md:h-32 mt-6 md:mt-0 opacity-80 group-hover:opacity-100 group-hover:scale-110 group-hover:-translate-y-2 transition-all duration-700 flex-shrink-0 text-secondary">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="w-full h-full"><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"></path><path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"></path><path d="M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4"></path><path d="M17.599 6.5a3 3 0 0 0 .399-1.375"></path><path d="M6.002 5.125A3 3 0 0 0 6.401 6.5"></path><path d="M3.477 10.896a4 4 0 0 1 .585-.396"></path><path d="M19.938 10.5a4 4 0 0 1 .585.396"></path><path d="M6 18a4 4 0 0 1-1.967-.516"></path><path d="M19.967 17.484A4 4 0 0 1 18 18"></path></svg>
+                    </div>
+                </a>
 
-            <!-- Carte 2 : React Launchpad (Format Carré) -->
-            <a href="/ReactLaunchpad" class="project-card md:col-span-1 group relative flex flex-col items-center justify-center p-6 bg-transparent rounded-[2.5rem] border border-secondary/50 shadow-soft hover:border-secondary hover:shadow-soft-hover hover:-translate-y-1 active:translate-y-0 transition-all duration-500 min-h-[220px]">
-                <span class="tag absolute top-6 px-3 py-1 text-[10px] font-bold uppercase tracking-wider border border-secondary/30 group-hover:border-secondary/60 rounded-full mb-4 transition-colors duration-500 bg-secondary/5">Frontend Tooling</span>
-                <!-- Animation: Rotation complète de l'atome -->
-                <div class="w-16 h-16 mt-6 mb-4 opacity-80 group-hover:opacity-100 group-hover:scale-110 group-hover:rotate-[360deg] transition-all duration-[1500ms] ease-out text-secondary">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-full h-full"><circle cx="12" cy="12" r="1"></circle><ellipse cx="12" cy="12" rx="11" ry="4" transform="rotate(45 12 12)"></ellipse><ellipse cx="12" cy="12" rx="11" ry="4" transform="rotate(-45 12 12)"></ellipse><ellipse cx="12" cy="12" rx="11" ry="4" transform="rotate(90 12 12)"></ellipse></svg>
-                </div>
-                <h2 class="title text-xl font-bold text-center mb-1 group-hover:-translate-y-0.5 transition-transform duration-500">React Launchpad</h2>
-                <p class="description text-xs opacity-80 text-center px-2">Guide et boilerplate ultime pour initialiser vos projets modernes.</p>
-            </a>
+                <!-- Carte 2 : React Launchpad -->
+                <a href="/ReactLaunchpad" class="project-card md:col-span-1 group relative flex flex-col items-center justify-center p-6 bg-transparent rounded-[2.5rem] border border-secondary/50 shadow-soft hover:border-secondary hover:shadow-soft-hover hover:-translate-y-1 active:translate-y-0 transition-all duration-500 min-h-[220px]">
+                    <span class="tag absolute top-6 px-3 py-1 text-[10px] font-bold uppercase tracking-wider border border-secondary/30 group-hover:border-secondary/60 rounded-full mb-4 bg-secondary/5 transition-colors duration-500">Frontend Tooling</span>
+                    <div class="w-16 h-16 mt-6 mb-4 opacity-80 group-hover:opacity-100 group-hover:scale-110 group-hover:rotate-[360deg] transition-all duration-[1500ms] ease-out text-secondary">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-full h-full"><circle cx="12" cy="12" r="1"></circle><ellipse cx="12" cy="12" rx="11" ry="4" transform="rotate(45 12 12)"></ellipse><ellipse cx="12" cy="12" rx="11" ry="4" transform="rotate(-45 12 12)"></ellipse><ellipse cx="12" cy="12" rx="11" ry="4" transform="rotate(90 12 12)"></ellipse></svg>
+                    </div>
+                    <h2 class="title text-xl font-bold text-center mb-1 group-hover:-translate-y-0.5 transition-transform duration-500">React Launchpad</h2>
+                    <p class="description text-xs opacity-80 text-center px-2">Guide et boilerplate ultime pour initialiser vos projets modernes.</p>
+                </a>
 
-            <!-- Carte 3 : GLPI (Format Carré) -->
-            <a href="/TP_GLPI_3TIERS" class="project-card md:col-span-1 group relative flex flex-col items-center justify-center p-6 bg-transparent rounded-[2.5rem] border border-secondary/50 shadow-soft hover:border-secondary hover:shadow-soft-hover hover:-translate-y-1 active:translate-y-0 transition-all duration-500 min-h-[220px]">
-                <span class="tag absolute top-6 px-3 py-1 text-[10px] font-bold uppercase tracking-wider border border-secondary/30 group-hover:border-secondary/60 rounded-full mb-4 transition-colors duration-500 bg-secondary/5">SysAdmin & Réseaux</span>
-                <!-- Animation: Le serveur monte légèrement -->
-                <div class="w-16 h-16 mt-8 mb-4 opacity-80 group-hover:opacity-100 group-hover:scale-110 group-hover:-translate-y-1.5 transition-all duration-500 text-secondary">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-full h-full"><rect width="20" height="8" x="2" y="2" rx="2" ry="2"></rect><rect width="20" height="8" x="2" y="14" rx="2" ry="2"></rect><line x1="6" x2="6.01" y1="6" y2="6"></line><line x1="6" x2="6.01" y1="18" y2="18"></line></svg>
-                </div>
-                <h2 class="title text-xl font-bold text-center mb-1 group-hover:-translate-y-0.5 transition-transform duration-500">TP GLPI 3 TIERS</h2>
-                <p class="description text-xs opacity-80 text-center px-2">Guide technique de déploiement d'un environnement GLPI sous Debian.</p>
-            </a>
+                <!-- Carte 3 : GLPI -->
+                <a href="/TP_GLPI_3TIERS" class="project-card md:col-span-1 group relative flex flex-col items-center justify-center p-6 bg-transparent rounded-[2.5rem] border border-secondary/50 shadow-soft hover:border-secondary hover:shadow-soft-hover hover:-translate-y-1 active:translate-y-0 transition-all duration-500 min-h-[220px]">
+                    <span class="tag absolute top-6 px-3 py-1 text-[10px] font-bold uppercase tracking-wider border border-secondary/30 group-hover:border-secondary/60 rounded-full mb-4 bg-secondary/5 transition-colors duration-500">SysAdmin & Réseaux</span>
+                    <div class="w-16 h-16 mt-8 mb-4 opacity-80 group-hover:opacity-100 group-hover:scale-110 group-hover:-translate-y-1.5 transition-all duration-500 text-secondary">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-full h-full"><rect width="20" height="8" x="2" y="2" rx="2" ry="2"></rect><rect width="20" height="8" x="2" y="14" rx="2" ry="2"></rect><line x1="6" x2="6.01" y1="6" y2="6"></line><line x1="6" x2="6.01" y1="18" y2="18"></line></svg>
+                    </div>
+                    <h2 class="title text-xl font-bold text-center mb-1 group-hover:-translate-y-0.5 transition-transform duration-500">TP GLPI 3 TIERS</h2>
+                    <p class="description text-xs opacity-80 text-center px-2">Guide technique de déploiement d'un environnement GLPI sous Debian.</p>
+                </a>
 
-            <!-- Carte 4 : Movizer (Format Large) -->
-            <a href="/Movizer" class="project-card md:col-span-2 group relative overflow-hidden flex flex-col md:flex-row-reverse items-center justify-between p-7 md:p-8 bg-transparent rounded-[2.5rem] border border-secondary/50 shadow-soft hover:border-secondary hover:shadow-soft-hover hover:-translate-y-1 active:translate-y-0 transition-all duration-500 min-h-[220px]">
-                <div class="flex flex-col items-end text-right z-10 w-full md:w-2/3">
-                    <span class="tag px-3 py-1 text-[10px] md:text-xs font-bold uppercase tracking-wider border border-secondary/30 group-hover:border-secondary/60 rounded-full mb-4 transition-colors duration-500 bg-secondary/5">API & Cinéma</span>
-                    <h2 class="title text-xl md:text-2xl font-bold mb-2 group-hover:-translate-x-1 transition-transform duration-500">Movizer</h2>
-                    <p class="description text-xs md:text-sm opacity-80 leading-relaxed pl-0 md:pl-4">Explorateur cinématographique interactif connecté à l'API The Movie DataBase.</p>
-                </div>
-                <!-- Animation: La bobine de film se déroule (rotation inversée) -->
-                <div class="w-24 h-24 md:w-32 md:h-32 mt-6 md:mt-0 opacity-80 group-hover:opacity-100 group-hover:scale-110 group-hover:-rotate-6 transition-all duration-700 flex-shrink-0 text-secondary">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="w-full h-full"><rect width="18" height="18" x="3" y="3" rx="2"></rect><path d="M7 3v18"></path><path d="M3 7.5h4"></path><path d="M3 12h18"></path><path d="M3 16.5h4"></path><path d="M17 3v18"></path><path d="M17 7.5h4"></path><path d="M17 16.5h4"></path></svg>
-                </div>
-            </a>
+                <!-- Carte 4 : Movizer -->
+                <a href="/Movizer" class="project-card md:col-span-2 group relative overflow-hidden flex flex-col md:flex-row-reverse items-center justify-between p-7 md:p-8 bg-transparent rounded-[2.5rem] border border-secondary/50 shadow-soft hover:border-secondary hover:shadow-soft-hover hover:-translate-y-1 active:translate-y-0 transition-all duration-500 min-h-[220px]">
+                    <div class="flex flex-col items-end text-right z-10 w-full md:w-2/3">
+                        <span class="tag px-3 py-1 text-[10px] md:text-xs font-bold uppercase tracking-wider border border-secondary/30 group-hover:border-secondary/60 rounded-full mb-4 bg-secondary/5 transition-colors duration-500">API & Cinéma</span>
+                        <h2 class="title text-xl md:text-2xl font-bold mb-2 group-hover:-translate-x-1 transition-transform duration-500">Movizer</h2>
+                        <p class="description text-xs md:text-sm opacity-80 leading-relaxed pl-0 md:pl-4">Explorateur cinématographique interactif connecté à l'API The Movie DataBase.</p>
+                    </div>
+                    <div class="w-24 h-24 md:w-32 md:h-32 mt-6 md:mt-0 opacity-80 group-hover:opacity-100 group-hover:scale-110 group-hover:-rotate-6 transition-all duration-700 flex-shrink-0 text-secondary">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="w-full h-full"><rect width="18" height="18" x="3" y="3" rx="2"></rect><path d="M7 3v18"></path><path d="M3 7.5h4"></path><path d="M3 12h18"></path><path d="M3 16.5h4"></path><path d="M17 3v18"></path><path d="M17 7.5h4"></path><path d="M17 16.5h4"></path></svg>
+                    </div>
+                </a>
 
-            <!-- Carte 5 : Blackjack (Format Large) -->
-            <a href="/Blackjack" class="project-card md:col-span-2 group relative overflow-hidden flex flex-col md:flex-row items-center justify-between p-7 md:p-8 bg-transparent rounded-[2.5rem] border border-secondary/50 shadow-soft hover:border-secondary hover:shadow-soft-hover hover:-translate-y-1 active:translate-y-0 transition-all duration-500 min-h-[220px]">
-                <div class="flex flex-col items-start text-left z-10 w-full md:w-2/3">
-                    <span class="tag px-3 py-1 text-[10px] md:text-xs font-bold uppercase tracking-wider border border-secondary/30 group-hover:border-secondary/60 rounded-full mb-4 transition-colors duration-500 bg-secondary/5">Game Development</span>
-                    <h2 class="title text-xl md:text-2xl font-bold mb-2 group-hover:translate-x-1 transition-transform duration-500">Blackjack</h2>
-                    <p class="description text-xs md:text-sm opacity-80 leading-relaxed pr-0 md:pr-4">Simulation interactive de Blackjack de casino avec système de mises virtuelles.</p>
-                </div>
-                <!-- NOUVELLE ICÔNE CARTES : Animation d'étalement des cartes -->
-                <div class="w-24 h-24 md:w-32 md:h-32 mt-6 md:mt-0 opacity-80 group-hover:opacity-100 group-hover:scale-110 group-hover:rotate-12 group-hover:translate-x-2 transition-all duration-700 flex-shrink-0 text-secondary">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" class="w-full h-full">
-                        <rect width="12" height="16" x="2" y="6" rx="2" ry="2"></rect>
-                        <path d="M10 6V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-2"></path>
-                    </svg>
-                </div>
-            </a>
+                <!-- Carte 5 : Blackjack -->
+                <a href="/Blackjack" class="project-card md:col-span-2 group relative overflow-hidden flex flex-col md:flex-row items-center justify-between p-7 md:p-8 bg-transparent rounded-[2.5rem] border border-secondary/50 shadow-soft hover:border-secondary hover:shadow-soft-hover hover:-translate-y-1 active:translate-y-0 transition-all duration-500 min-h-[220px]">
+                    <div class="flex flex-col items-start text-left z-10 w-full md:w-2/3">
+                        <span class="tag px-3 py-1 text-[10px] md:text-xs font-bold uppercase tracking-wider border border-secondary/30 group-hover:border-secondary/60 rounded-full mb-4 bg-secondary/5 transition-colors duration-500">Game Development</span>
+                        <h2 class="title text-xl md:text-2xl font-bold mb-2 group-hover:translate-x-1 transition-transform duration-500">Blackjack</h2>
+                        <p class="description text-xs md:text-sm opacity-80 leading-relaxed pr-0 md:pr-4">Simulation interactive de Blackjack de casino avec système de mises virtuelles.</p>
+                    </div>
+                    <div class="w-24 h-24 md:w-32 md:h-32 mt-6 md:mt-0 opacity-80 group-hover:opacity-100 group-hover:scale-110 group-hover:rotate-12 group-hover:translate-x-2 transition-all duration-700 flex-shrink-0 text-secondary">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" class="w-full h-full"><rect width="12" height="16" x="2" y="6" rx="2" ry="2"></rect><path d="M10 6V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-2"></path></svg>
+                    </div>
+                </a>
 
-            <!-- Carte 6 : PickItUp (Format Carré) -->
-            <a href="/PickItUp" class="project-card md:col-span-1 group relative flex flex-col items-center justify-center p-6 bg-transparent rounded-[2.5rem] border border-secondary/50 shadow-soft hover:border-secondary hover:shadow-soft-hover hover:-translate-y-1 active:translate-y-0 transition-all duration-500 min-h-[220px]">
-                <span class="tag absolute top-6 px-3 py-1 text-[10px] font-bold uppercase tracking-wider border border-secondary/30 group-hover:border-secondary/60 rounded-full mb-4 transition-colors duration-500 bg-secondary/5">Outils Interactifs</span>
-                <!-- Animation : Les dés qui "roulent" -->
-                <div class="w-16 h-16 mt-6 mb-4 opacity-80 group-hover:opacity-100 group-hover:scale-110 group-hover:rotate-[360deg] transition-all duration-700 text-secondary">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-full h-full"><rect width="12" height="12" x="2" y="10" rx="2" ry="2"/><path d="m17.92 14 3.5-3.5a2.24 2.24 0 0 0 0-3l-5-4.92a2.24 2.24 0 0 0-3 0L10 6"/><path d="M6 18h.01"/><path d="M10 14h.01"/><path d="M15 6h.01"/><path d="M18 9h.01"/></svg>                
-                </div>
-                <h2 class="title text-xl font-bold text-center mb-1 group-hover:-translate-y-0.5 transition-transform duration-500">PickItUp</h2>
-                <p class="description text-xs opacity-80 text-center px-2">Générateur aléatoire : tournez la roue et laissez le hasard décider.</p>
-            </a>
+                <!-- Carte 6 : PickItUp -->
+                <a href="/PickItUp" class="project-card md:col-span-1 group relative flex flex-col items-center justify-center p-6 bg-transparent rounded-[2.5rem] border border-secondary/50 shadow-soft hover:border-secondary hover:shadow-soft-hover hover:-translate-y-1 active:translate-y-0 transition-all duration-500 min-h-[220px]">
+                    <span class="tag absolute top-6 px-3 py-1 text-[10px] font-bold uppercase tracking-wider border border-secondary/30 group-hover:border-secondary/60 rounded-full mb-4 bg-secondary/5 transition-colors duration-500">Outils Interactifs</span>
+                    <div class="w-16 h-16 mt-6 mb-4 opacity-80 group-hover:opacity-100 group-hover:scale-110 group-hover:rotate-[360deg] transition-all duration-700 text-secondary">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-full h-full"><rect width="12" height="12" x="2" y="10" rx="2" ry="2"/><path d="m17.92 14 3.5-3.5a2.24 2.24 0 0 0 0-3l-5-4.92a2.24 2.24 0 0 0-3 0L10 6"/><path d="M6 18h.01"/><path d="M10 14h.01"/><path d="M15 6h.01"/><path d="M18 9h.01"/></svg>                
+                    </div>
+                    <h2 class="title text-xl font-bold text-center mb-1 group-hover:-translate-y-0.5 transition-transform duration-500">PickItUp</h2>
+                    <p class="description text-xs opacity-80 text-center px-2">Générateur aléatoire : tournez la roue et laissez le hasard décider.</p>
+                </a>
 
-            <!-- Carte 7 : Documentations (Format Carré) -->
-            <a href="/Documentations" class="project-card md:col-span-1 group relative flex flex-col items-center justify-center p-6 bg-transparent rounded-[2.5rem] border border-secondary/50 shadow-soft hover:border-secondary hover:shadow-soft-hover hover:-translate-y-1 active:translate-y-0 transition-all duration-500 min-h-[220px]">
-                <span class="tag absolute top-6 px-3 py-1 text-[10px] font-bold uppercase tracking-wider border border-secondary/30 group-hover:border-secondary/60 rounded-full mb-4 transition-colors duration-500 bg-secondary/5">Wiki Personnel</span>
-                <!-- Animation: Le livre lévite et penche légèrement -->
-                <div class="w-16 h-16 mt-8 mb-4 opacity-80 group-hover:opacity-100 group-hover:scale-110 group-hover:-translate-y-2 group-hover:-rotate-3 transition-all duration-500 text-secondary">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-full h-full"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20"/></svg>                
-                </div>
-                <h2 class="title text-xl font-bold text-center mb-1 group-hover:-translate-y-0.5 transition-transform duration-500">Documentations</h2>
-                <p class="description text-xs opacity-80 text-center px-2">Base de connaissances et vitrine textuelle de mon univers.</p>
-            </a>
+                <!-- Carte 7 : Documentations -->
+                <a href="/Documentations" class="project-card md:col-span-1 group relative flex flex-col items-center justify-center p-6 bg-transparent rounded-[2.5rem] border border-secondary/50 shadow-soft hover:border-secondary hover:shadow-soft-hover hover:-translate-y-1 active:translate-y-0 transition-all duration-500 min-h-[220px]">
+                    <span class="tag absolute top-6 px-3 py-1 text-[10px] font-bold uppercase tracking-wider border border-secondary/30 group-hover:border-secondary/60 rounded-full mb-4 bg-secondary/5 transition-colors duration-500">Wiki Personnel</span>
+                    <div class="w-16 h-16 mt-8 mb-4 opacity-80 group-hover:opacity-100 group-hover:scale-110 group-hover:-translate-y-2 group-hover:-rotate-3 transition-all duration-500 text-secondary">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-full h-full"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20"/></svg>                
+                    </div>
+                    <h2 class="title text-xl font-bold text-center mb-1 group-hover:-translate-y-0.5 transition-transform duration-500">Documentations</h2>
+                    <p class="description text-xs opacity-80 text-center px-2">Base de connaissances et vitrine textuelle de mon univers.</p>
+                </a>
 
-            <!-- Carte 8 : BarberShop (Format Large) -->
-            <a href="/BarberShop" class="project-card md:col-span-2 group relative overflow-hidden flex flex-col md:flex-row-reverse items-center justify-between p-7 md:p-8 bg-transparent rounded-[2.5rem] border border-secondary/50 shadow-soft hover:border-secondary hover:shadow-soft-hover hover:-translate-y-1 active:translate-y-0 transition-all duration-500 min-h-[220px]">
-                <div class="flex flex-col items-end text-right z-10 w-full md:w-2/3">
-                    <span class="tag px-3 py-1 text-[10px] md:text-xs font-bold uppercase tracking-wider border border-secondary/30 group-hover:border-secondary/60 rounded-full mb-4 transition-colors duration-500 bg-secondary/5">Web Design</span>
-                    <h2 class="title text-xl md:text-2xl font-bold mb-2 group-hover:-translate-x-1 transition-transform duration-500">BarberShop</h2>
-                    <p class="description text-xs md:text-sm opacity-80 leading-relaxed pl-0 md:pl-4">Vitrine digitale premium et élégante conçue sur-mesure pour un salon de coiffure.</p>
-                </div>
-                <!-- Animation: Ciseaux qui donnent l'impression de s'ouvrir/se positionner -->
-                <div class="w-24 h-24 md:w-32 md:h-32 mt-6 md:mt-0 opacity-80 group-hover:opacity-100 group-hover:scale-110 group-hover:-rotate-45 transition-all duration-700 flex-shrink-0 text-secondary">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" class="w-full h-full"><circle cx="6" cy="6" r="3"/><path d="M8.12 8.12 12 12"/><path d="M20 4 8.12 15.88"/><circle cx="6" cy="18" r="3"/><path d="M14.8 14.8 20 20"/></svg>                
-                </div>
-            </a>
+                <!-- Carte 8 : BarberShop -->
+                <a href="/BarberShop" class="project-card md:col-span-2 group relative overflow-hidden flex flex-col md:flex-row-reverse items-center justify-between p-7 md:p-8 bg-transparent rounded-[2.5rem] border border-secondary/50 shadow-soft hover:border-secondary hover:shadow-soft-hover hover:-translate-y-1 active:translate-y-0 transition-all duration-500 min-h-[220px]">
+                    <div class="flex flex-col items-end text-right z-10 w-full md:w-2/3">
+                        <span class="tag px-3 py-1 text-[10px] md:text-xs font-bold uppercase tracking-wider border border-secondary/30 group-hover:border-secondary/60 rounded-full mb-4 bg-secondary/5 transition-colors duration-500">Web Design</span>
+                        <h2 class="title text-xl md:text-2xl font-bold mb-2 group-hover:-translate-x-1 transition-transform duration-500">BarberShop</h2>
+                        <p class="description text-xs md:text-sm opacity-80 leading-relaxed pl-0 md:pl-4">Vitrine digitale premium et élégante conçue sur-mesure pour un salon de coiffure.</p>
+                    </div>
+                    <div class="w-24 h-24 md:w-32 md:h-32 mt-6 md:mt-0 opacity-80 group-hover:opacity-100 group-hover:scale-110 group-hover:-rotate-45 transition-all duration-700 flex-shrink-0 text-secondary">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" class="w-full h-full"><circle cx="6" cy="6" r="3"/><path d="M8.12 8.12 12 12"/><path d="M20 4 8.12 15.88"/><circle cx="6" cy="18" r="3"/><path d="M14.8 14.8 20 20"/></svg>                
+                    </div>
+                </a>
 
-        </section>
-    </main>
-
-    <!-- ZONE FIXE BASSE : FOOTER -->
-    <footer class="flex-shrink-0 w-full pt-4 pb-4 md:pb-6 border-t border-secondary/20 z-20 flex flex-col items-center bg-primary transition-colors duration-500">
-        <div class="flex gap-6 mb-3">
-            <a href="#" class="text-secondary hover:opacity-70 hover:scale-110 transition-all duration-300">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 md:w-5 md:h-5 transition-colors duration-500"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg>
-            </a>
-            <a href="#" class="text-secondary hover:opacity-70 hover:scale-110 transition-all duration-300">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 md:w-5 md:h-5 transition-colors duration-500"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line></svg>
-            </a>
-            <a href="https://github.com/wladimirbigand" target="_blank" class="text-secondary hover:opacity-70 hover:scale-110 transition-all duration-300">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 md:w-5 md:h-5 transition-colors duration-500"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg>
-            </a>
-            <a href="#" class="text-secondary hover:opacity-70 hover:scale-110 transition-all duration-300">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 md:w-5 md:h-5 transition-colors duration-500"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
-            </a>
+            </section>
         </div>
-        <p class="text-[10px] md:text-xs font-bold tracking-widest opacity-60 uppercase">
-            © 2026 Wladimir.B
-        </p>
-    </footer>
+
+        <!-- FOOTER INTÉGRÉ AU SCROLL (mt-auto le pousse en bas si le contenu est court) -->
+        <footer class="w-full pt-8 pb-8 border-t border-secondary/20 flex flex-col items-center bg-transparent mt-auto transition-colors duration-500">
+            <div class="flex gap-6 mb-3">
+                <a href="#" class="text-secondary hover:opacity-70 hover:scale-110 transition-all duration-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 md:w-5 md:h-5"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg>
+                </a>
+                <a href="#" class="text-secondary hover:opacity-70 hover:scale-110 transition-all duration-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 md:w-5 md:h-5"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line></svg>
+                </a>
+                <a href="https://github.com/wladimirbigand" target="_blank" class="text-secondary hover:opacity-70 hover:scale-110 transition-all duration-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 md:w-5 md:h-5"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg>
+                </a>
+                <a href="#" class="text-secondary hover:opacity-70 hover:scale-110 transition-all duration-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 md:w-5 md:h-5"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
+                </a>
+            </div>
+            <p class="text-[10px] md:text-xs font-bold tracking-widest opacity-60 uppercase">
+                © 2026 Wladimir.B
+            </p>
+        </footer>
+
+    </main>
 
     <!-- SCRIPTS MOTEUR : THEMES ET RECHERCHE -->
     <script>
+        // --- GESTION DU HEADER COLLAPSIBLE ---
+        const mainScrollArea = document.getElementById('main-scroll-area');
+        const mainHeader = document.getElementById('main-header');
+
+        if (mainScrollArea && mainHeader) {
+            mainScrollArea.addEventListener('scroll', () => {
+                if (mainScrollArea.scrollTop > 20) { // Seuil réduit à 20px
+                    mainHeader.classList.add('header-collapsed');
+                } else if (mainScrollArea.scrollTop < 10) {
+                    mainHeader.classList.remove('header-collapsed');
+                }
+            });
+        }
+
         // --- GESTION DES THÈMES ---
         function setTheme(themeName) {
-            // Appliquer le thème au DOM
             document.documentElement.setAttribute('data-theme', themeName);
-            // Sauvegarde dans le navigateur
             localStorage.setItem('theme', themeName);
             
-            // Mise à jour visuelle des boutons (anneau actif)
             document.querySelectorAll('.theme-btn').forEach(btn => {
                 if(btn.dataset.themeBtn === themeName) {
                     btn.classList.add('ring-2', 'ring-secondary', 'ring-offset-1', 'ring-offset-primary');
@@ -285,7 +358,6 @@
                 }
             });
         }
-        // Initialiser l'état actif des boutons au chargement
         setTheme(localStorage.getItem('theme') || 'forest');
 
         // --- GESTION DE LA RECHERCHE ---

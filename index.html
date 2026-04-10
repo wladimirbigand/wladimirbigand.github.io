@@ -79,7 +79,15 @@
             display: none;
         }
 
-        /* --- LOGIQUE DU HEADER COLLAPSIBLE (Transition globale de 0.4s) --- */
+        /* --- STABILISATION DU LAYOUT (Wrapper Fixe) --- */
+        #header-wrapper {
+            height: 270px;
+        }
+        @media (min-width: 768px) {
+            #header-wrapper { height: 320px; }
+        }
+
+        /* --- LOGIQUE DU HEADER COLLAPSIBLE (Transition ultra-fluide) --- */
         #main-header {
             will-change: transform, padding, height, opacity;
         }
@@ -87,7 +95,7 @@
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        /* Padding minimal quand le header est réduit */
+        /* Rétractation du padding */
         #main-header.header-collapsed #header-inner { 
             padding-top: 0.5rem !important; 
             padding-bottom: 0.25rem !important;
@@ -152,41 +160,22 @@
 
         /* --- ANIMATIONS "JUICY" (Entrée & Cascade) --- */
         @keyframes fadeInUp {
-            0% {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
         .project-card {
-            opacity: 0; /* Masqué au chargement pour l'animation */
-            /* Animation fluide avec un léger effet de ressort à la fin (cubic-bezier) */
+            opacity: 0; 
             animation: fadeInUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; 
         }
 
         /* --- RESPONSIVENESS VERTICAL : Écrans courts (Laptops 13/14", Paysage) --- */
         @media (max-height: 750px) {
-            #header-inner {
-                padding-top: 0.75rem !important;
-            }
-            #header-top-row {
-                margin-bottom: 0.5rem !important;
-            }
-            #header-avatar {
-                width: 4rem !important; 
-                height: 4rem !important; 
-                margin-bottom: 0.5rem !important;
-            }
-            #header-title {
-                font-size: 1.5rem !important; 
-            }
-            #header-tagline {
-                font-size: 0.75rem !important; 
-                margin-bottom: 0.5rem !important;
-            }
+            #header-wrapper { height: 240px; }
+            #header-inner { padding-top: 0.75rem !important; }
+            #header-top-row { margin-bottom: 0.5rem !important; }
+            #header-avatar { width: 4rem !important; height: 4rem !important; margin-bottom: 0.5rem !important; }
+            #header-title { font-size: 1.5rem !important; }
+            #header-tagline { font-size: 0.75rem !important; margin-bottom: 0.5rem !important; }
         }
     </style>
 </head>
@@ -198,72 +187,75 @@
         <div class="absolute bottom-[-10%] right-[-10%] w-[40rem] h-[40rem] bg-secondary/5 rounded-full blur-[100px] transition-colors duration-500"></div>
     </div>
 
+    <!-- HEADER RÉEL (FIXED) : Hors du flux de scroll pour stabiliser le layout -->
+    <header id="main-header" class="fixed top-0 left-0 w-full z-50 bg-primary/80 backdrop-blur-md border-b border-transparent transition-all duration-400 ease-in-out">
+        <div id="header-inner" class="max-w-5xl mx-auto pt-4 px-4 md:px-8 pb-2 flex flex-col relative z-20">
+            
+            <!-- Ligne Supérieure : Thèmes & Actions -->
+            <div id="header-top-row" class="flex justify-between items-start w-full mb-4">
+                
+                <!-- Sélecteur de Thèmes -->
+                <div class="flex gap-2 p-1.5 bg-primary/80 backdrop-blur-md rounded-full border border-secondary/30 shadow-sm transition-colors duration-500">
+                    <button onclick="setTheme('forest')" data-theme-btn="forest" class="theme-btn w-5 h-5 rounded-full border border-[#102C26]/50 hover:scale-110" style="background-color: #F7E7CE;" title="Forest Champagne"></button>
+                    <button onclick="setTheme('warm')" data-theme-btn="warm" class="theme-btn w-5 h-5 rounded-full border border-[#A79277]/50 hover:scale-110" style="background-color: #FFF2E1;" title="Warm Sand"></button>
+                    <button onclick="setTheme('arctic')" data-theme-btn="arctic" class="theme-btn w-5 h-5 rounded-full border border-[#191970]/50 hover:scale-110" style="background-color: #ECEFF1;" title="Arctic Blue"></button>
+                    <button onclick="setTheme('electric')" data-theme-btn="electric" class="theme-btn w-5 h-5 rounded-full border border-[#FF4747]/50 hover:scale-110" style="background-color: #F7E998;" title="Electric Sun"></button>
+                    <button onclick="setTheme('midnight')" data-theme-btn="midnight" class="theme-btn w-5 h-5 rounded-full border border-[#FF6044]/50 hover:scale-110" style="background-color: #121313;" title="Midnight Orange"></button>
+                    <button onclick="setTheme('blossom')" data-theme-btn="blossom" class="theme-btn w-5 h-5 rounded-full border border-[#c2656d]/50 hover:scale-110" style="background-color: #ffe3e3;" title="Cherry Blossom"></button>
+                </div>
+
+                <!-- Navigation Double -->
+                <div class="flex gap-2">
+                    <a href="/Portfolio" class="flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-secondary text-primary shadow-soft hover:opacity-90 font-medium text-xs md:text-sm">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5 md:w-4 md:h-4"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+                        <span class="hidden sm:inline">Portfolio</span>
+                    </a>
+                    <a href="https://github.com/wladimirbigand" target="_blank" class="flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-full border border-secondary bg-transparent hover:bg-secondary hover:text-primary font-medium text-xs md:text-sm group">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5 md:w-4 md:h-4"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg>
+                        <span class="hidden sm:inline">GitHub Lab</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Identité (Avatar & Textes) -->
+            <div id="identity-container" class="flex flex-col items-center mb-6">
+                <div id="header-avatar" class="relative w-20 h-20 md:w-24 md:h-24 rounded-[2rem] border border-secondary bg-transparent shadow-soft flex items-center justify-center mb-3 overflow-hidden transform rotate-2 hover:-rotate-2 hover:scale-105">
+                    <img src="https://github.com/wladimirbigand.png" alt="Wladimir Bigand" class="w-full h-full object-cover">
+                </div>
+                <h1 id="header-title" class="text-2xl md:text-4xl font-extrabold tracking-tight mb-1">The Root Hub</h1>
+                <p id="header-tagline" class="text-sm md:text-base font-medium opacity-70 tracking-wide uppercase">Écosystème & Applications interactives</p>
+            </div>
+
+            <!-- Barre de recherche -->
+            <div id="header-search-container" class="w-full max-w-md mx-auto mb-4 relative z-20 group">
+                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 md:h-5 md:w-5 text-secondary opacity-50 group-focus-within:opacity-100 transition-opacity duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                </div>
+                <input type="text" id="searchInput" placeholder="Rechercher un module ou un tag..." class="w-full pl-11 pr-14 py-2.5 md:py-3 bg-primary/40 backdrop-blur-md border border-secondary/50 rounded-full text-secondary placeholder-secondary/50 focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary focus:shadow-lg transition-all duration-400 ease-in-out font-medium text-sm shadow-sm hover:border-secondary">
+                
+                <!-- Indication du raccourci clavier -->
+                <div class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none">
+                    <kbd class="hidden sm:inline-block px-2 py-1 text-[10px] font-bold text-secondary/60 bg-secondary/10 border border-secondary/20 rounded-md group-focus-within:opacity-0 transition-opacity duration-300">⌘K</kbd>
+                </div>
+            </div>
+        </div>
+        
+        <!-- BARRE DE PROGRESSION DE LECTURE -->
+        <div id="scroll-progress" class="absolute bottom-0 left-0 h-[2px] bg-secondary w-0 transition-[width] duration-150 ease-out z-50"></div>
+    </header>
+
     <!-- ZONE CENTRALE SCROLLABLE -->
     <main id="main-scroll-area" class="flex-1 w-full mx-auto overflow-y-auto hide-scrollbar z-10 relative flex flex-col">
         
-        <!-- SENTINELLE INVISIBLE POUR L'OBSERVER -->
-        <div id="scroll-sentinel" class="w-full h-[1px] pointer-events-none opacity-0 shrink-0"></div>
+        <!-- LA SENTINELLE : Détection binaire absolue (Ne bouge jamais) -->
+        <div id="scroll-anchor" class="absolute top-0 left-0 w-[1px] h-[80px] pointer-events-none z-0"></div>
         
-        <!-- ZONE FIXE HAUTE : HEADER & RECHERCHE (Devenu Sticky et Liquide) -->
-        <header id="main-header" class="sticky top-0 w-full z-50 bg-primary/80 backdrop-blur-md border-b border-transparent transition-all duration-400 ease-in-out">
-            <div id="header-inner" class="max-w-5xl mx-auto pt-4 px-4 md:px-8 pb-2 flex flex-col relative z-20">
-                
-                <!-- Ligne Supérieure : Thèmes & Actions -->
-                <div id="header-top-row" class="flex justify-between items-start w-full mb-4">
-                    
-                    <!-- Sélecteur de Thèmes -->
-                    <div class="flex gap-2 p-1.5 bg-primary/80 backdrop-blur-md rounded-full border border-secondary/30 shadow-sm transition-colors duration-500">
-                        <button onclick="setTheme('forest')" data-theme-btn="forest" class="theme-btn w-5 h-5 rounded-full border border-[#102C26]/50 hover:scale-110" style="background-color: #F7E7CE;" title="Forest Champagne"></button>
-                        <button onclick="setTheme('warm')" data-theme-btn="warm" class="theme-btn w-5 h-5 rounded-full border border-[#A79277]/50 hover:scale-110" style="background-color: #FFF2E1;" title="Warm Sand"></button>
-                        <button onclick="setTheme('arctic')" data-theme-btn="arctic" class="theme-btn w-5 h-5 rounded-full border border-[#191970]/50 hover:scale-110" style="background-color: #ECEFF1;" title="Arctic Blue"></button>
-                        <button onclick="setTheme('electric')" data-theme-btn="electric" class="theme-btn w-5 h-5 rounded-full border border-[#FF4747]/50 hover:scale-110" style="background-color: #F7E998;" title="Electric Sun"></button>
-                        <button onclick="setTheme('midnight')" data-theme-btn="midnight" class="theme-btn w-5 h-5 rounded-full border border-[#FF6044]/50 hover:scale-110" style="background-color: #121313;" title="Midnight Orange"></button>
-                        <button onclick="setTheme('blossom')" data-theme-btn="blossom" class="theme-btn w-5 h-5 rounded-full border border-[#c2656d]/50 hover:scale-110" style="background-color: #ffe3e3;" title="Cherry Blossom"></button>
-                    </div>
+        <!-- WRAPPER FIXE : Maintient l'espace pour éviter le saut du layout -->
+        <div id="header-wrapper" class="w-full shrink-0"></div>
 
-                    <!-- Navigation Double -->
-                    <div class="flex gap-2">
-                        <a href="/Portfolio" class="flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-secondary text-primary shadow-soft hover:opacity-90 font-medium text-xs md:text-sm">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5 md:w-4 md:h-4"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
-                            <span class="hidden sm:inline">Portfolio</span>
-                        </a>
-                        <a href="https://github.com/wladimirbigand" target="_blank" class="flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-full border border-secondary bg-transparent hover:bg-secondary hover:text-primary font-medium text-xs md:text-sm group">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5 md:w-4 md:h-4"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg>
-                            <span class="hidden sm:inline">GitHub Lab</span>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Identité (Avatar & Textes) -->
-                <div id="identity-container" class="flex flex-col items-center mb-6">
-                    <div id="header-avatar" class="relative w-20 h-20 md:w-24 md:h-24 rounded-[2rem] border border-secondary bg-transparent shadow-soft flex items-center justify-center mb-3 overflow-hidden transform rotate-2 hover:-rotate-2 hover:scale-105">
-                        <img src="https://github.com/wladimirbigand.png" alt="Wladimir Bigand" class="w-full h-full object-cover">
-                    </div>
-                    <h1 id="header-title" class="text-2xl md:text-4xl font-extrabold tracking-tight mb-1">The Root Hub</h1>
-                    <p id="header-tagline" class="text-sm md:text-base font-medium opacity-70 tracking-wide uppercase">Écosystème & Applications interactives</p>
-                </div>
-
-                <!-- Barre de recherche Fixe avec Raccourci Visuel et Focus Amélioré -->
-                <div id="header-search-container" class="w-full max-w-md mx-auto mb-4 relative z-20 group">
-                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 md:h-5 md:w-5 text-secondary opacity-50 group-focus-within:opacity-100 transition-opacity duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                        </svg>
-                    </div>
-                    <input type="text" id="searchInput" placeholder="Rechercher un module ou un tag..." class="w-full pl-11 pr-14 py-2.5 md:py-3 bg-primary/40 backdrop-blur-md border border-secondary/50 rounded-full text-secondary placeholder-secondary/50 focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary focus:shadow-lg transition-all duration-400 ease-in-out font-medium text-sm shadow-sm hover:border-secondary">
-                    
-                    <!-- Indication du raccourci clavier (Visible sur desktop) -->
-                    <div class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none">
-                        <kbd class="hidden sm:inline-block px-2 py-1 text-[10px] font-bold text-secondary/60 bg-secondary/10 border border-secondary/20 rounded-md group-focus-within:opacity-0 transition-opacity duration-300">⌘K</kbd>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- BARRE DE PROGRESSION DE LECTURE -->
-            <div id="scroll-progress" class="absolute bottom-0 left-0 h-[2px] bg-secondary w-0 transition-[width] duration-150 ease-out z-50"></div>
-        </header>
-
-        <!-- Wrapper pour la grille avec espace -->
+        <!-- Grille Bento avec espace -->
         <div class="max-w-5xl mx-auto w-full px-4 md:px-8 pt-4 flex-1">
             <section id="appGrid" class="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6 w-full mb-10 relative">
                 
@@ -271,12 +263,12 @@
                 <a href="/MemorIA" class="project-card md:col-span-2 group relative overflow-hidden flex flex-col md:flex-row items-center justify-between p-7 md:p-8 bg-transparent rounded-[2.5rem] border border-secondary/50 shadow-soft hover:border-secondary hover:shadow-soft-hover hover:-translate-y-1 active:scale-95 active:shadow-inner transition-all duration-500 min-h-[220px]">
                     <div class="flex flex-col items-start text-left z-10 w-full md:w-2/3 h-full self-stretch justify-between">
                         
-                        <!-- Zone Swap Tag/Tooltip -->
-                        <div class="relative w-full h-8 flex items-center justify-start mb-4 shrink-0">
-                            <!-- Le Tag -->
-                            <span class="tag absolute left-0 px-3 py-1 text-[10px] md:text-xs font-bold uppercase tracking-wider border border-secondary/30 group-hover:border-secondary/60 rounded-full bg-secondary/5 transition-all duration-400 opacity-100 group-hover:opacity-0 group-hover:-translate-y-1 origin-left">Intelligence Artificielle</span>
-                            <!-- Le Tooltip -->
-                            <span class="absolute left-0 w-full opacity-0 group-hover:opacity-100 transition-all duration-400 translate-y-1 group-hover:translate-y-0 text-[9px] md:text-[10px] font-semibold tracking-widest text-secondary/60 uppercase truncate origin-left">React • OpenAI API • Tailwind</span>
+                        <!-- Zone Swap Tag/Tooltip sécurisée par un z-index -->
+                        <div class="relative w-full h-8 flex items-center justify-start mb-4 shrink-0 z-20">
+                            <!-- Tag -->
+                            <span class="tag absolute left-0 px-3 py-1 text-[10px] md:text-xs font-bold uppercase tracking-wider border border-secondary/30 group-hover:border-secondary/60 rounded-full bg-secondary/5 transition-all duration-400 opacity-100 group-hover:opacity-0 group-hover:-translate-y-2 pointer-events-none">Intelligence Artificielle</span>
+                            <!-- Tooltip -->
+                            <span class="absolute left-0 w-full opacity-0 group-hover:opacity-100 transition-all duration-400 translate-y-2 group-hover:translate-y-0 text-[9px] md:text-[10px] font-semibold tracking-widest text-secondary/80 uppercase truncate pointer-events-none">React • OpenAI API • Tailwind</span>
                         </div>
                         
                         <!-- Zone Texte -->
@@ -285,8 +277,8 @@
                             <p class="description text-xs md:text-sm opacity-80 leading-relaxed pr-0 md:pr-4">Assistant de prise de notes intelligent, propulsé par l'IA générative pour sublimer votre productivité.</p>
                         </div>
                     </div>
-                    <!-- Zone Icône (No man's land garanti par justify-between) -->
-                    <div class="w-24 h-24 md:w-32 md:h-32 mt-6 md:mt-0 opacity-80 group-hover:opacity-100 group-hover:scale-110 group-hover:-translate-y-2 transition-all duration-700 flex-shrink-0 text-secondary">
+                    <!-- Zone Icône -->
+                    <div class="w-24 h-24 md:w-32 md:h-32 mt-6 md:mt-0 opacity-80 group-hover:opacity-100 group-hover:scale-110 group-hover:-translate-y-2 transition-all duration-700 flex-shrink-0 text-secondary z-10">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="w-full h-full"><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"></path><path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"></path><path d="M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4"></path><path d="M17.599 6.5a3 3 0 0 0 .399-1.375"></path><path d="M6.002 5.125A3 3 0 0 0 6.401 6.5"></path><path d="M3.477 10.896a4 4 0 0 1 .585-.396"></path><path d="M19.938 10.5a4 4 0 0 1 .585.396"></path><path d="M6 18a4 4 0 0 1-1.967-.516"></path><path d="M19.967 17.484A4 4 0 0 1 18 18"></path></svg>
                     </div>
                 </a>
@@ -294,18 +286,15 @@
                 <!-- Carte 2 : React Launchpad (Format Carré, Centré) -->
                 <a href="/ReactLaunchpad" class="project-card md:col-span-1 group relative flex flex-col items-center justify-between p-6 bg-transparent rounded-[2.5rem] border border-secondary/50 shadow-soft hover:border-secondary hover:shadow-soft-hover hover:-translate-y-1 active:scale-95 active:shadow-inner transition-all duration-500 min-h-[220px]">
                     
-                    <!-- Zone Swap Tag/Tooltip -->
-                    <div class="relative w-full h-8 flex items-center justify-center mb-4 shrink-0">
-                        <span class="tag absolute px-3 py-1 text-[10px] font-bold uppercase tracking-wider border border-secondary/30 group-hover:border-secondary/60 rounded-full bg-secondary/5 transition-all duration-400 opacity-100 group-hover:opacity-0 group-hover:-translate-y-1">Frontend Tooling</span>
-                        <span class="absolute w-full text-center opacity-0 group-hover:opacity-100 transition-all duration-400 translate-y-1 group-hover:translate-y-0 text-[9px] font-semibold tracking-widest text-secondary/60 uppercase truncate px-2">React • Vite • Tailwind</span>
+                    <div class="relative w-full h-8 flex items-center justify-center mb-4 shrink-0 z-20">
+                        <span class="tag absolute px-3 py-1 text-[10px] font-bold uppercase tracking-wider border border-secondary/30 group-hover:border-secondary/60 rounded-full bg-secondary/5 transition-all duration-400 opacity-100 group-hover:opacity-0 group-hover:-translate-y-2 pointer-events-none">Frontend Tooling</span>
+                        <span class="absolute w-full text-center opacity-0 group-hover:opacity-100 transition-all duration-400 translate-y-2 group-hover:translate-y-0 text-[9px] font-semibold tracking-widest text-secondary/80 uppercase truncate px-2 pointer-events-none">React • Vite • Tailwind</span>
                     </div>
 
-                    <!-- Zone Icône centrée -->
-                    <div class="w-16 h-16 my-auto opacity-80 group-hover:opacity-100 group-hover:scale-110 group-hover:rotate-[360deg] transition-all duration-[1500ms] ease-out text-secondary shrink-0">
+                    <div class="w-16 h-16 my-auto opacity-80 group-hover:opacity-100 group-hover:scale-110 group-hover:rotate-[360deg] transition-all duration-[1500ms] ease-out text-secondary shrink-0 z-10">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-full h-full"><circle cx="12" cy="12" r="1"></circle><ellipse cx="12" cy="12" rx="11" ry="4" transform="rotate(45 12 12)"></ellipse><ellipse cx="12" cy="12" rx="11" ry="4" transform="rotate(-45 12 12)"></ellipse><ellipse cx="12" cy="12" rx="11" ry="4" transform="rotate(90 12 12)"></ellipse></svg>
                     </div>
                     
-                    <!-- Zone Texte -->
                     <div class="mt-4 flex flex-col items-center shrink-0 w-full">
                         <h2 class="title text-xl font-bold text-center mb-1 group-hover:-translate-y-0.5 transition-transform duration-500">React Launchpad</h2>
                         <p class="description text-xs opacity-80 text-center px-2 line-clamp-2">Guide et boilerplate ultime pour initialiser vos projets modernes.</p>
@@ -315,12 +304,12 @@
                 <!-- Carte 3 : GLPI (Format Carré) -->
                 <a href="/TP_GLPI_3TIERS" class="project-card md:col-span-1 group relative flex flex-col items-center justify-between p-6 bg-transparent rounded-[2.5rem] border border-secondary/50 shadow-soft hover:border-secondary hover:shadow-soft-hover hover:-translate-y-1 active:scale-95 active:shadow-inner transition-all duration-500 min-h-[220px]">
                     
-                    <div class="relative w-full h-8 flex items-center justify-center mb-4 shrink-0">
-                        <span class="tag absolute px-3 py-1 text-[10px] font-bold uppercase tracking-wider border border-secondary/30 group-hover:border-secondary/60 rounded-full bg-secondary/5 transition-all duration-400 opacity-100 group-hover:opacity-0 group-hover:-translate-y-1">SysAdmin & Réseaux</span>
-                        <span class="absolute w-full text-center opacity-0 group-hover:opacity-100 transition-all duration-400 translate-y-1 group-hover:translate-y-0 text-[9px] font-semibold tracking-widest text-secondary/60 uppercase truncate px-2">Debian • Apache • PHP</span>
+                    <div class="relative w-full h-8 flex items-center justify-center mb-4 shrink-0 z-20">
+                        <span class="tag absolute px-3 py-1 text-[10px] font-bold uppercase tracking-wider border border-secondary/30 group-hover:border-secondary/60 rounded-full bg-secondary/5 transition-all duration-400 opacity-100 group-hover:opacity-0 group-hover:-translate-y-2 pointer-events-none">SysAdmin & Réseaux</span>
+                        <span class="absolute w-full text-center opacity-0 group-hover:opacity-100 transition-all duration-400 translate-y-2 group-hover:translate-y-0 text-[9px] font-semibold tracking-widest text-secondary/80 uppercase truncate px-2 pointer-events-none">Debian • Apache • PHP</span>
                     </div>
 
-                    <div class="w-16 h-16 my-auto opacity-80 group-hover:opacity-100 group-hover:scale-110 group-hover:-translate-y-1.5 transition-all duration-500 text-secondary shrink-0">
+                    <div class="w-16 h-16 my-auto opacity-80 group-hover:opacity-100 group-hover:scale-110 group-hover:-translate-y-1.5 transition-all duration-500 text-secondary shrink-0 z-10">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-full h-full"><rect width="20" height="8" x="2" y="2" rx="2" ry="2"></rect><rect width="20" height="8" x="2" y="14" rx="2" ry="2"></rect><line x1="6" x2="6.01" y1="6" y2="6"></line><line x1="6" x2="6.01" y1="18" y2="18"></line></svg>
                     </div>
                     
@@ -334,10 +323,9 @@
                 <a href="/Movizer" class="project-card md:col-span-2 group relative overflow-hidden flex flex-col md:flex-row-reverse items-center justify-between p-7 md:p-8 bg-transparent rounded-[2.5rem] border border-secondary/50 shadow-soft hover:border-secondary hover:shadow-soft-hover hover:-translate-y-1 active:scale-95 active:shadow-inner transition-all duration-500 min-h-[220px]">
                     <div class="flex flex-col items-end text-right z-10 w-full md:w-2/3 h-full self-stretch justify-between">
                         
-                        <!-- Zone Swap Tag/Tooltip -->
-                        <div class="relative w-full h-8 flex items-center justify-end mb-4 shrink-0">
-                            <span class="tag absolute right-0 px-3 py-1 text-[10px] md:text-xs font-bold uppercase tracking-wider border border-secondary/30 group-hover:border-secondary/60 rounded-full bg-secondary/5 transition-all duration-400 opacity-100 group-hover:opacity-0 group-hover:-translate-y-1 origin-right">API & Cinéma</span>
-                            <span class="absolute right-0 w-full opacity-0 group-hover:opacity-100 transition-all duration-400 translate-y-1 group-hover:translate-y-0 text-[9px] md:text-[10px] font-semibold tracking-widest text-secondary/60 uppercase truncate origin-right">React • TMDB API • Tailwind</span>
+                        <div class="relative w-full h-8 flex items-center justify-end mb-4 shrink-0 z-20">
+                            <span class="tag absolute right-0 px-3 py-1 text-[10px] md:text-xs font-bold uppercase tracking-wider border border-secondary/30 group-hover:border-secondary/60 rounded-full bg-secondary/5 transition-all duration-400 opacity-100 group-hover:opacity-0 group-hover:-translate-y-2 origin-right pointer-events-none">API & Cinéma</span>
+                            <span class="absolute right-0 w-full opacity-0 group-hover:opacity-100 transition-all duration-400 translate-y-2 group-hover:translate-y-0 text-[9px] md:text-[10px] font-semibold tracking-widest text-secondary/80 uppercase truncate origin-right pointer-events-none">React • TMDB API • Tailwind</span>
                         </div>
                         
                         <div class="mt-auto">
@@ -346,7 +334,7 @@
                         </div>
                     </div>
                     
-                    <div class="w-24 h-24 md:w-32 md:h-32 mt-6 md:mt-0 opacity-80 group-hover:opacity-100 group-hover:scale-110 group-hover:-rotate-6 transition-all duration-700 flex-shrink-0 text-secondary">
+                    <div class="w-24 h-24 md:w-32 md:h-32 mt-6 md:mt-0 opacity-80 group-hover:opacity-100 group-hover:scale-110 group-hover:-rotate-6 transition-all duration-700 flex-shrink-0 text-secondary z-10">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="w-full h-full"><rect width="18" height="18" x="3" y="3" rx="2"></rect><path d="M7 3v18"></path><path d="M3 7.5h4"></path><path d="M3 12h18"></path><path d="M3 16.5h4"></path><path d="M17 3v18"></path><path d="M17 7.5h4"></path><path d="M17 16.5h4"></path></svg>
                     </div>
                 </a>
@@ -355,9 +343,9 @@
                 <a href="/Blackjack" class="project-card md:col-span-2 group relative overflow-hidden flex flex-col md:flex-row items-center justify-between p-7 md:p-8 bg-transparent rounded-[2.5rem] border border-secondary/50 shadow-soft hover:border-secondary hover:shadow-soft-hover hover:-translate-y-1 active:scale-95 active:shadow-inner transition-all duration-500 min-h-[220px]">
                     <div class="flex flex-col items-start text-left z-10 w-full md:w-2/3 h-full self-stretch justify-between">
                         
-                        <div class="relative w-full h-8 flex items-center justify-start mb-4 shrink-0">
-                            <span class="tag absolute left-0 px-3 py-1 text-[10px] md:text-xs font-bold uppercase tracking-wider border border-secondary/30 group-hover:border-secondary/60 rounded-full bg-secondary/5 transition-all duration-400 opacity-100 group-hover:opacity-0 group-hover:-translate-y-1 origin-left">Game Development</span>
-                            <span class="absolute left-0 w-full opacity-0 group-hover:opacity-100 transition-all duration-400 translate-y-1 group-hover:translate-y-0 text-[9px] md:text-[10px] font-semibold tracking-widest text-secondary/60 uppercase truncate origin-left">JavaScript • Logic • Maths</span>
+                        <div class="relative w-full h-8 flex items-center justify-start mb-4 shrink-0 z-20">
+                            <span class="tag absolute left-0 px-3 py-1 text-[10px] md:text-xs font-bold uppercase tracking-wider border border-secondary/30 group-hover:border-secondary/60 rounded-full bg-secondary/5 transition-all duration-400 opacity-100 group-hover:opacity-0 group-hover:-translate-y-2 origin-left pointer-events-none">Game Development</span>
+                            <span class="absolute left-0 w-full opacity-0 group-hover:opacity-100 transition-all duration-400 translate-y-2 group-hover:translate-y-0 text-[9px] md:text-[10px] font-semibold tracking-widest text-secondary/80 uppercase truncate origin-left pointer-events-none">JavaScript • Logic • Maths</span>
                         </div>
                         
                         <div class="mt-auto">
@@ -365,7 +353,7 @@
                             <p class="description text-xs md:text-sm opacity-80 leading-relaxed pr-0 md:pr-4">Simulation interactive de Blackjack de casino avec système de mises virtuelles.</p>
                         </div>
                     </div>
-                    <div class="w-24 h-24 md:w-32 md:h-32 mt-6 md:mt-0 opacity-80 group-hover:opacity-100 group-hover:scale-110 group-hover:rotate-12 group-hover:translate-x-2 transition-all duration-700 flex-shrink-0 text-secondary">
+                    <div class="w-24 h-24 md:w-32 md:h-32 mt-6 md:mt-0 opacity-80 group-hover:opacity-100 group-hover:scale-110 group-hover:rotate-12 group-hover:translate-x-2 transition-all duration-700 flex-shrink-0 text-secondary z-10">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" class="w-full h-full"><rect width="12" height="16" x="2" y="6" rx="2" ry="2"></rect><path d="M10 6V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-2"></path></svg>
                     </div>
                 </a>
@@ -373,12 +361,12 @@
                 <!-- Carte 6 : PickItUp (Format Carré) -->
                 <a href="/PickItUp" class="project-card md:col-span-1 group relative flex flex-col items-center justify-between p-6 bg-transparent rounded-[2.5rem] border border-secondary/50 shadow-soft hover:border-secondary hover:shadow-soft-hover hover:-translate-y-1 active:scale-95 active:shadow-inner transition-all duration-500 min-h-[220px]">
                     
-                    <div class="relative w-full h-8 flex items-center justify-center mb-4 shrink-0">
-                        <span class="tag absolute px-3 py-1 text-[10px] font-bold uppercase tracking-wider border border-secondary/30 group-hover:border-secondary/60 rounded-full bg-secondary/5 transition-all duration-400 opacity-100 group-hover:opacity-0 group-hover:-translate-y-1">Outils Interactifs</span>
-                        <span class="absolute w-full text-center opacity-0 group-hover:opacity-100 transition-all duration-400 translate-y-1 group-hover:translate-y-0 text-[9px] font-semibold tracking-widest text-secondary/60 uppercase truncate px-2">Vanilla JS • RNG • CSS Anim</span>
+                    <div class="relative w-full h-8 flex items-center justify-center mb-4 shrink-0 z-20">
+                        <span class="tag absolute px-3 py-1 text-[10px] font-bold uppercase tracking-wider border border-secondary/30 group-hover:border-secondary/60 rounded-full bg-secondary/5 transition-all duration-400 opacity-100 group-hover:opacity-0 group-hover:-translate-y-2 pointer-events-none">Outils Interactifs</span>
+                        <span class="absolute w-full text-center opacity-0 group-hover:opacity-100 transition-all duration-400 translate-y-2 group-hover:translate-y-0 text-[9px] font-semibold tracking-widest text-secondary/80 uppercase truncate px-2 pointer-events-none">Vanilla JS • RNG • CSS Anim</span>
                     </div>
 
-                    <div class="w-16 h-16 my-auto opacity-80 group-hover:opacity-100 group-hover:scale-110 group-hover:rotate-[360deg] transition-all duration-700 text-secondary shrink-0">
+                    <div class="w-16 h-16 my-auto opacity-80 group-hover:opacity-100 group-hover:scale-110 group-hover:rotate-[360deg] transition-all duration-700 text-secondary shrink-0 z-10">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-full h-full"><rect width="12" height="12" x="2" y="10" rx="2" ry="2"/><path d="m17.92 14 3.5-3.5a2.24 2.24 0 0 0 0-3l-5-4.92a2.24 2.24 0 0 0-3 0L10 6"/><path d="M6 18h.01"/><path d="M10 14h.01"/><path d="M15 6h.01"/><path d="M18 9h.01"/></svg>                
                     </div>
                     
@@ -391,12 +379,12 @@
                 <!-- Carte 7 : Documentations (Format Carré) -->
                 <a href="/Documentations" class="project-card md:col-span-1 group relative flex flex-col items-center justify-between p-6 bg-transparent rounded-[2.5rem] border border-secondary/50 shadow-soft hover:border-secondary hover:shadow-soft-hover hover:-translate-y-1 active:scale-95 active:shadow-inner transition-all duration-500 min-h-[220px]">
                     
-                    <div class="relative w-full h-8 flex items-center justify-center mb-4 shrink-0">
-                        <span class="tag absolute px-3 py-1 text-[10px] font-bold uppercase tracking-wider border border-secondary/30 group-hover:border-secondary/60 rounded-full bg-secondary/5 transition-all duration-400 opacity-100 group-hover:opacity-0 group-hover:-translate-y-1">Wiki Personnel</span>
-                        <span class="absolute w-full text-center opacity-0 group-hover:opacity-100 transition-all duration-400 translate-y-1 group-hover:translate-y-0 text-[9px] font-semibold tracking-widest text-secondary/60 uppercase truncate px-2">Markdown • SSG • UI</span>
+                    <div class="relative w-full h-8 flex items-center justify-center mb-4 shrink-0 z-20">
+                        <span class="tag absolute px-3 py-1 text-[10px] font-bold uppercase tracking-wider border border-secondary/30 group-hover:border-secondary/60 rounded-full bg-secondary/5 transition-all duration-400 opacity-100 group-hover:opacity-0 group-hover:-translate-y-2 pointer-events-none">Wiki Personnel</span>
+                        <span class="absolute w-full text-center opacity-0 group-hover:opacity-100 transition-all duration-400 translate-y-2 group-hover:translate-y-0 text-[9px] font-semibold tracking-widest text-secondary/80 uppercase truncate px-2 pointer-events-none">Markdown • SSG • UI</span>
                     </div>
 
-                    <div class="w-16 h-16 my-auto opacity-80 group-hover:opacity-100 group-hover:scale-110 group-hover:-translate-y-2 group-hover:-rotate-3 transition-all duration-500 text-secondary shrink-0">
+                    <div class="w-16 h-16 my-auto opacity-80 group-hover:opacity-100 group-hover:scale-110 group-hover:-translate-y-2 group-hover:-rotate-3 transition-all duration-500 text-secondary shrink-0 z-10">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-full h-full"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20"/></svg>                
                     </div>
                     
@@ -410,9 +398,9 @@
                 <a href="/BarberShop" class="project-card md:col-span-2 group relative overflow-hidden flex flex-col md:flex-row-reverse items-center justify-between p-7 md:p-8 bg-transparent rounded-[2.5rem] border border-secondary/50 shadow-soft hover:border-secondary hover:shadow-soft-hover hover:-translate-y-1 active:scale-95 active:shadow-inner transition-all duration-500 min-h-[220px]">
                     <div class="flex flex-col items-end text-right z-10 w-full md:w-2/3 h-full self-stretch justify-between">
                         
-                        <div class="relative w-full h-8 flex items-center justify-end mb-4 shrink-0">
-                            <span class="tag absolute right-0 px-3 py-1 text-[10px] md:text-xs font-bold uppercase tracking-wider border border-secondary/30 group-hover:border-secondary/60 rounded-full bg-secondary/5 transition-all duration-400 opacity-100 group-hover:opacity-0 group-hover:-translate-y-1 origin-right">Web Design</span>
-                            <span class="absolute right-0 w-full opacity-0 group-hover:opacity-100 transition-all duration-400 translate-y-1 group-hover:translate-y-0 text-[9px] md:text-[10px] font-semibold tracking-widest text-secondary/60 uppercase truncate origin-right">HTML5 • TailwindCSS • JS</span>
+                        <div class="relative w-full h-8 flex items-center justify-end mb-4 shrink-0 z-20">
+                            <span class="tag absolute right-0 px-3 py-1 text-[10px] md:text-xs font-bold uppercase tracking-wider border border-secondary/30 group-hover:border-secondary/60 rounded-full bg-secondary/5 transition-all duration-400 opacity-100 group-hover:opacity-0 group-hover:-translate-y-2 origin-right pointer-events-none">Web Design</span>
+                            <span class="absolute right-0 w-full opacity-0 group-hover:opacity-100 transition-all duration-400 translate-y-2 group-hover:translate-y-0 text-[9px] md:text-[10px] font-semibold tracking-widest text-secondary/80 uppercase truncate origin-right pointer-events-none">HTML5 • TailwindCSS • JS</span>
                         </div>
                         
                         <div class="mt-auto">
@@ -420,12 +408,12 @@
                             <p class="description text-xs md:text-sm opacity-80 leading-relaxed pl-0 md:pl-4">Vitrine digitale premium et élégante conçue sur-mesure pour un salon de coiffure.</p>
                         </div>
                     </div>
-                    <div class="w-24 h-24 md:w-32 md:h-32 mt-6 md:mt-0 opacity-80 group-hover:opacity-100 group-hover:scale-110 group-hover:-rotate-45 transition-all duration-700 flex-shrink-0 text-secondary">
+                    <div class="w-24 h-24 md:w-32 md:h-32 mt-6 md:mt-0 opacity-80 group-hover:opacity-100 group-hover:scale-110 group-hover:-rotate-45 transition-all duration-700 flex-shrink-0 text-secondary z-10">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" class="w-full h-full"><circle cx="6" cy="6" r="3"/><path d="M8.12 8.12 12 12"/><path d="M20 4 8.12 15.88"/><circle cx="6" cy="18" r="3"/><path d="M14.8 14.8 20 20"/></svg>                
                     </div>
                 </a>
 
-                <!-- EMPTY STATE (Caché par défaut) -->
+                <!-- EMPTY STATE -->
                 <div id="noResult" class="hidden col-span-1 md:col-span-3 flex-col items-center justify-center py-16 text-center animate-[fadeInUp_0.4s_ease-out]">
                     <div class="w-16 h-16 mb-4 opacity-40 text-secondary">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
@@ -465,23 +453,24 @@
 
     <!-- SCRIPTS MOTEUR : THEMES ET RECHERCHE -->
     <script>
-        // --- GESTION DU HEADER COLLAPSIBLE (MÉTHODE SENTINELLE) & PROGRESSION ---
         const mainScrollArea = document.getElementById('main-scroll-area');
         const mainHeader = document.getElementById('main-header');
         const scrollProgress = document.getElementById('scroll-progress');
-        const scrollSentinel = document.getElementById('scroll-sentinel');
+        const scrollSentinel = document.getElementById('scroll-anchor');
 
-        // 1. Intersection Observer pour le Header
+        // 1. Intersection Observer pour le Header (Anti-Rafale avec Debounce)
         if (scrollSentinel && mainHeader && mainScrollArea) {
+            let debounceTimer;
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
-                    // Si la sentinelle sort de l'écran par le haut -> on réduit le header
-                    if (!entry.isIntersecting) {
-                        mainHeader.classList.add('header-collapsed');
-                    } else {
-                        // Si la sentinelle revient à l'écran -> on restaure le header
-                        mainHeader.classList.remove('header-collapsed');
-                    }
+                    clearTimeout(debounceTimer);
+                    debounceTimer = setTimeout(() => {
+                        if (!entry.isIntersecting) {
+                            mainHeader.classList.add('header-collapsed');
+                        } else {
+                            mainHeader.classList.remove('header-collapsed');
+                        }
+                    }, 30); // 30ms debounce protège des micro-variations
                 });
             }, {
                 root: mainScrollArea,
@@ -491,12 +480,11 @@
             observer.observe(scrollSentinel);
         }
 
-        // 2. Écouteur de Scroll classique uniquement pour la barre de progression
+        // 2. Calcul de la barre de progression
         if (mainScrollArea) {
             mainScrollArea.addEventListener('scroll', () => {
                 if (scrollProgress) {
                     const scrollHeight = mainScrollArea.scrollHeight - mainScrollArea.clientHeight;
-                    // Évite la division par zéro si pas de scroll possible
                     const scrollPercentage = scrollHeight > 0 ? (mainScrollArea.scrollTop / scrollHeight) * 100 : 0;
                     scrollProgress.style.width = `${scrollPercentage}%`;
                 }
@@ -524,7 +512,7 @@
             const projectCards = document.querySelectorAll('.project-card');
             const noResultBlock = document.getElementById('noResult');
 
-            // --- RACCOURCI CLAVIER (Focus sur la barre de recherche) ---
+            // Raccourci Clavier
             document.addEventListener('keydown', (e) => {
                 if (document.activeElement === searchInput) return;
                 if (e.key === '/' || (e.key.toLowerCase() === 'k' && (e.metaKey || e.ctrlKey))) {
@@ -533,17 +521,17 @@
                 }
             });
 
-            // --- ANIMATION EN CASCADE (STAGGERED) ---
+            // Cascade d'entrée
             projectCards.forEach((card, index) => {
                 card.style.animationDelay = `${index * 0.1}s`;
             });
 
+            // Logique de filtrage
             searchInput.addEventListener('input', function(e) {
                 const searchTerm = e.target.value.toLowerCase().trim();
                 let visibleCount = 0;
 
                 projectCards.forEach(card => {
-                    // La Tech Stack (le tooltip) a été ajoutée à la recherche via le tag et le textContent générique
                     const textContent = card.textContent.toLowerCase();
                     
                     if (textContent.includes(searchTerm)) {
@@ -554,7 +542,6 @@
                     }
                 });
 
-                // --- LOGIQUE DE L'EMPTY STATE ---
                 if (visibleCount === 0) {
                     noResultBlock.classList.remove('hidden');
                     noResultBlock.classList.add('flex');
